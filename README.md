@@ -35,11 +35,23 @@ The main task of our visualization attempts will be to show conceptual similarit
 
 Dataset 1 : World Atlas Of Language Structures
 
-The WALS dataset contains 2679 languages and dialects grouped into 256 Language Families. 
+The WALS dataset contains 2679 languages and dialects grouped into 256 Language Families. The languages are grouped into 6 geographical regions with Eurasia containing the most documented languages and Australia the least:
+
+![language_geographical_area_distribution](./figures/language_geographical_area_distribution.png)
+
+Overall, a set of 202 available features provides a rich multifaceted description for each language. These language features can be grouped into 9 categories, each describing a different aspect of the language:
+
+![feature_distribution](./figures/feature_distribution.png)
+
+Interestingly, not all languages have been documented to the scame extend. The distribution of available features per language is presented below: 
+
+![language_feature_distribution](./figures/language_feature_distribution.png)
 
 Dataset 2 : Countries Info
-> Pre-processing of the data set you chose
-> - Show some basic statistics and get insights about the data
+
+This dataset contains information from 250 countries and regions. Specifically we are interested in the main languages spoken in each country. In most cases only the prominent language is only one, however nearly a quarter of the countries have two:
+
+![number_of_languages_spoken](./figures/number_of_languages_spoken.png)
 
 ### Related work
 
