@@ -221,21 +221,6 @@ body {
     text-align: center;
 }
 
-#i650tj {
-    color: black;
-    border-top-left-radius: 35px;
-    border-top-right-radius: 35px;
-    border-bottom-right-radius: 35px;
-    border-bottom-left-radius: 35px;
-    max-width: 100%;
-    margin-top: 38px;
-    margin-right: 38px;
-    margin-bottom: 38px;
-    margin-left: 38px;
-    width: 656px;
-    height: 445px;
-}
-
 #vowel-col {
     max-width: 1200px;
     align-items: center;
@@ -279,22 +264,6 @@ body {
     margin-bottom: 25px;
     text-align: center;
 }
-
-#idmwza {
-    color: black;
-    border-top-left-radius: 35px;
-    border-top-right-radius: 35px;
-    border-bottom-right-radius: 35px;
-    border-bottom-left-radius: 35px;
-    max-width: 100%;
-    margin-top: 38px;
-    margin-right: 38px;
-    margin-bottom: 38px;
-    margin-left: 38px;
-    width: 656px;
-    height: 445px;
-}
-
 #cluster-col {
     max-width: 1200px;
     align-items: center;
