@@ -52,7 +52,7 @@ body {
 }
 
 #officiallang-col {
-    max-width: 1200px;
+    /* max-width: 1200px; */
     align-items: center;
     display: flex;
     flex-direction: column;
