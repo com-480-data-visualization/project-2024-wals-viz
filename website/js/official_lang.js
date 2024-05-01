@@ -1,88 +1,123 @@
-//Width and height
-var w = 500;
-var h = 300;
-
-//Define map projection
-var projection = d3.geoMercator()
-    .translate([0, 0]);
-
-//Define path generator
-var path = d3.geoPath()
-    .projection(projection);
-
-//Define quantize scale to sort data values into buckets of color
-var color = d3.scaleQuantize()
-    .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
-//Colors taken from colorbrewer.js, included in the D3 download
-
-//Number formatting for population values
-var formatAsThousands = d3.format(",");  //e.g. converts 123456 to "123,456"
-
-//Create SVG element
-var svg = d3.select("officiallang-col")
-    .append("svg")
-    .attr("width", w)
-    .attr("height", h);
-
-//Define what to do when panning or zooming
-var zooming = function (d) {
-
-    //Log out d3.event.transform, so you can see all the goodies inside
-    //console.log(d3.event.transform);
-
-    //New offset array
-    var offset = [d3.event.transform.x, d3.event.transform.y];
-
-    //Calculate new scale
-    var newScale = d3.event.transform.k * 2000;
-
-    //Update projection with new offset and scale
-    projection.translate(offset)
-        .scale(newScale);
-
-    //Update all paths and circles
-    svg.selectAll("path")
-        .attr("d", path);
+// Run the action when we are sure the DOM has been loaded
+function whenDocumentLoaded(action) {
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", action);
+    } else {
+        // `DOMContentLoaded` already fired
+        action();
+    }
 }
 
-//Then define the zoom behavior
-var zoom = d3.zoom()
-    .on("zoom", zooming);
+function drawMap() {
 
-//The center of the country, roughly
-var center = projection([-97.0, 39.0]);
+    //Width and height
+    // var w = 500;
+    // var h = 300;
 
-console.log("I'm heeeereee");
+    var parentDiv = document.getElementById('officiallang-col');
+    var w = parentDiv.clientWidth;
+    var h = parentDiv.clientHeight;
 
-//Create a container in which all zoom-able elements will live
-var map = svg.append("g")
-    .attr("id", "map")
-    .call(zoom)  //Bind the zoom behavior
-    .call(zoom.transform, d3.zoomIdentity  //Then apply the initial transform
-        .translate(w / 2, h / 2)
-        .scale(0.25)
-        .translate(-center[0], -center[1]));
+    //Define map projection
+    var projection = d3.geoMercator()
+        .translate([w/2, h/2])
+        .rotate([0, 0])
+        .center([0, 0])
+        .scale(w/8);
 
-//Create a new, invisible background rect to catch zoom events
-map.append("rect")
-    .attr("x", 0)
-    .attr("y", 0)
-    .attr("width", w)
-    .attr("height", h)
-    .attr("opacity", 0);
+    //Define path generator
+    var path = d3.geoPath()
+        .projection(projection);
 
-//Load in GeoJSON data
-d3.json("geojson/processed_world-administrative-boundaries.geojson", function (json) {
+    //Define quantize scale to sort data values into buckets of color
+    var color = d3.scaleQuantize()
+        .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
+    //Colors taken from colorbrewer.js, included in the D3 download
 
-    //Bind data and create one path per GeoJSON feature
-    map.selectAll("path")
-        .data(json.features)
-        .enter()
-        .append("path")
-        .attr("d", path)
-        .style("fill", "steelblue");
+    //Number formatting for population values
+    var formatAsThousands = d3.format(",");  //e.g. converts 123456 to "123,456"
 
-    createPanButtons();
+    //Create SVG element
+    var svg = d3.select(parentDiv)
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
+    // //Define what to do when panning or zooming
+    // var zooming = function (d) {
+
+    //     //Log out d3.event.transform, so you can see all the goodies inside
+    //     //console.log(d3.event.transform);
+
+    //     //New offset array
+    //     var offset = [d3.event.transform.x, d3.event.transform.y];
+
+    //     //Calculate new scale
+    //     var newScale = d3.event.transform.k * 2000;
+
+    //     //Update projection with new offset and scale
+    //     projection.translate(offset)
+    //         .scale(newScale);
+
+    //     //Update all paths and circles
+    //     svg.selectAll("path")
+    //         .attr("d", path);
+    // }
+
+    // function zooming(e) {
+    //     d3.select(map)
+    //         .attr("transform", e.transform);
+    // }
+
+    // //Then define the zoom behavior
+    // var zoom = d3.zoom()
+    //     .on("zoom", zooming);
+
+    // //The center of the country, roughly
+    // var center = projection([-97.0, 39.0]);
+
+    //Create a container in which all zoom-able elements will live
+    // var map = svg.append("g")
+    //     .attr("id", "map")
+    //     .call(zoom)  //Bind the zoom behavior
+    //     .call(zoom.transform, d3.zoomIdentity  //Then apply the initial transform
+    //         .translate(w / 2, h / 2)
+    //         .scale(0.25)
+    //         .translate(-center[0], -center[1]));
+
+    // //Create a new, invisible background rect to catch zoom events
+    // map.append("rect")
+    //     .attr("x", 0)
+    //     .attr("y", 0)
+    //     .attr("width", w)
+    //     .attr("height", h)
+    //     .attr("opacity", 0);
+    
+    //Load in GeoJSON data
+    // d3.json("geojson/world-administrative-boundaries.geojson").then(function(json) {
+    d3.json("geojson/processed_world-administrative-boundaries.json").then(function(json) {
+    // d3.json("geojson/countries-110m.json").then(function(json) {    // This needs topojson
+        console.log("GeoJSON loaded!");
+        console.log(json);
+
+        //Bind data and create one path per GeoJSON feature
+        svg.selectAll("path")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", path)
+            .style("fill", "steelblue");
+
+        // createPanButtons();
+    });
+
+    console.log("Map loaded!");
+}
+
+whenDocumentLoaded(() => {
+    console.log('loaded!');
+    // prepare the map here
+    drawMap();
 });
 
 // //Load in cities data
@@ -204,124 +239,124 @@ d3.json("geojson/processed_world-administrative-boundaries.geojson", function (j
 
 // });
 
-//Create panning buttons
-var createPanButtons = function () {
+// //Create panning buttons
+// var createPanButtons = function () {
 
-    //Create the clickable groups
+//     //Create the clickable groups
 
-    //North
-    var north = svg.append("g")
-        .attr("class", "pan")	//All share the 'pan' class
-        .attr("id", "north");	//The ID will tell us which direction to head
+//     //North
+//     var north = svg.append("g")
+//         .attr("class", "pan")	//All share the 'pan' class
+//         .attr("id", "north");	//The ID will tell us which direction to head
 
-    north.append("rect")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", w)
-        .attr("height", 30);
+//     north.append("rect")
+//         .attr("x", 0)
+//         .attr("y", 0)
+//         .attr("width", w)
+//         .attr("height", 30);
 
-    north.append("text")
-        .attr("x", w / 2)
-        .attr("y", 20)
-        .html("&uarr;");
+//     north.append("text")
+//         .attr("x", w / 2)
+//         .attr("y", 20)
+//         .html("&uarr;");
 
-    //South
-    var south = svg.append("g")
-        .attr("class", "pan")
-        .attr("id", "south");
+//     //South
+//     var south = svg.append("g")
+//         .attr("class", "pan")
+//         .attr("id", "south");
 
-    south.append("rect")
-        .attr("x", 0)
-        .attr("y", h - 30)
-        .attr("width", w)
-        .attr("height", 30);
+//     south.append("rect")
+//         .attr("x", 0)
+//         .attr("y", h - 30)
+//         .attr("width", w)
+//         .attr("height", 30);
 
-    south.append("text")
-        .attr("x", w / 2)
-        .attr("y", h - 10)
-        .html("&darr;");
+//     south.append("text")
+//         .attr("x", w / 2)
+//         .attr("y", h - 10)
+//         .html("&darr;");
 
-    //West
-    var west = svg.append("g")
-        .attr("class", "pan")
-        .attr("id", "west");
+//     //West
+//     var west = svg.append("g")
+//         .attr("class", "pan")
+//         .attr("id", "west");
 
-    west.append("rect")
-        .attr("x", 0)
-        .attr("y", 30)
-        .attr("width", 30)
-        .attr("height", h - 60);
+//     west.append("rect")
+//         .attr("x", 0)
+//         .attr("y", 30)
+//         .attr("width", 30)
+//         .attr("height", h - 60);
 
-    west.append("text")
-        .attr("x", 15)
-        .attr("y", h / 2)
-        .html("&larr;");
+//     west.append("text")
+//         .attr("x", 15)
+//         .attr("y", h / 2)
+//         .html("&larr;");
 
-    //East
-    var east = svg.append("g")
-        .attr("class", "pan")
-        .attr("id", "east");
+//     //East
+//     var east = svg.append("g")
+//         .attr("class", "pan")
+//         .attr("id", "east");
 
-    east.append("rect")
-        .attr("x", w - 30)
-        .attr("y", 30)
-        .attr("width", 30)
-        .attr("height", h - 60);
+//     east.append("rect")
+//         .attr("x", w - 30)
+//         .attr("y", 30)
+//         .attr("width", 30)
+//         .attr("height", h - 60);
 
-    east.append("text")
-        .attr("x", w - 15)
-        .attr("y", h / 2)
-        .html("&rarr;");
+//     east.append("text")
+//         .attr("x", w - 15)
+//         .attr("y", h / 2)
+//         .html("&rarr;");
 
-    //Panning interaction
+//     //Panning interaction
 
-    d3.selectAll(".pan")
-        .on("click", function () {
+//     d3.selectAll(".pan")
+//         .on("click", function () {
 
-            //Get current translation offset
-            var offset = projection.translate();
+//             //Get current translation offset
+//             var offset = projection.translate();
 
-            //Set how much to move on each click
-            var moveAmount = 50;
+//             //Set how much to move on each click
+//             var moveAmount = 50;
 
-            //Which way are we headed?
-            var direction = d3.select(this).attr("id");
+//             //Which way are we headed?
+//             var direction = d3.select(this).attr("id");
 
-            //Modify the offset, depending on the direction
-            switch (direction) {
-                case "north":
-                    offset[1] += moveAmount;  //Increase y offset
-                    break;
-                case "south":
-                    offset[1] -= moveAmount;  //Decrease y offset
-                    break;
-                case "west":
-                    offset[0] += moveAmount;  //Increase x offset
-                    break;
-                case "east":
-                    offset[0] -= moveAmount;  //Decrease x offset
-                    break;
-                default:
-                    break;
-            }
+//             //Modify the offset, depending on the direction
+//             switch (direction) {
+//                 case "north":
+//                     offset[1] += moveAmount;  //Increase y offset
+//                     break;
+//                 case "south":
+//                     offset[1] -= moveAmount;  //Decrease y offset
+//                     break;
+//                 case "west":
+//                     offset[0] += moveAmount;  //Increase x offset
+//                     break;
+//                 case "east":
+//                     offset[0] -= moveAmount;  //Decrease x offset
+//                     break;
+//                 default:
+//                     break;
+//             }
 
-            //Update projection with new offset
-            projection.translate(offset);
+//             //Update projection with new offset
+//             projection.translate(offset);
 
-            //Update all paths and circles
-            svg.selectAll("path")
-                .transition()
-                .attr("d", path);
+//             //Update all paths and circles
+//             svg.selectAll("path")
+//                 .transition()
+//                 .attr("d", path);
 
-            svg.selectAll("circle")
-                .transition()
-                .attr("cx", function (d) {
-                    return projection([d.lon, d.lat])[0];
-                })
-                .attr("cy", function (d) {
-                    return projection([d.lon, d.lat])[1];
-                });
+//             svg.selectAll("circle")
+//                 .transition()
+//                 .attr("cx", function (d) {
+//                     return projection([d.lon, d.lat])[0];
+//                 })
+//                 .attr("cy", function (d) {
+//                     return projection([d.lon, d.lat])[1];
+//                 });
 
-        });
+//         });
 
-};
+// };
