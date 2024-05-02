@@ -94,8 +94,8 @@ function drawMap() {
     //     .attr("opacity", 0);
     
     //Load in GeoJSON data
-    // d3.json("geojson/world-administrative-boundaries.geojson").then(function(json) {
-    d3.json("geojson/processed_world-administrative-boundaries.json").then(function(json) {
+    d3.json("geojson/world-administrative-boundaries.geojson").then(function(json) {
+    // d3.json("geojson/processed_world-administrative-boundaries.json").then(function(json) {
     // d3.json("geojson/countries-110m.json").then(function(json) {    // This needs topojson
         console.log("GeoJSON loaded!");
         console.log(json);
