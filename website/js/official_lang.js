@@ -19,11 +19,12 @@ function drawMap() {
     var h = parentDiv.clientHeight;
 
     //Define map projection
-    var projection = d3.geoMercator()
-        .translate([w/2, h/2])
+    var projection = d3.geoWinkel3()
+        // .fitSize([w, h], json.features);
+        .translate([w / 2, h / 2])
         .rotate([0, 0])
         .center([0, 0])
-        .scale(w/8);
+        .scale(w / 10);
 
     //Define path generator
     var path = d3.geoPath()
@@ -92,11 +93,11 @@ function drawMap() {
     //     .attr("width", w)
     //     .attr("height", h)
     //     .attr("opacity", 0);
-    
+
     //Load in GeoJSON data
-    d3.json("geojson/world-administrative-boundaries.geojson").then(function(json) {
-    // d3.json("geojson/processed_world-administrative-boundaries.json").then(function(json) {
-    // d3.json("geojson/countries-110m.json").then(function(json) {    // This needs topojson
+    d3.json("geojson/world-administrative-boundaries.geojson").then(function (json) {
+        // d3.json("geojson/processed_world-administrative-boundaries.json").then(function(json) {
+        // d3.json("geojson/countries-110m.json").then(function(json) {    // This needs topojson
         console.log("GeoJSON loaded!");
         console.log(json);
 
@@ -116,8 +117,21 @@ function drawMap() {
 
 whenDocumentLoaded(() => {
     console.log('loaded!');
+
+    // TODO To use in the final version
+    // d3.queue()
+    //     .defer(d3.json, "geodata.json")
+    //     .defer(d3.csv, "otherdata.csv")
+    //     .await(ready)
+
     // prepare the map here
     drawMap();
+
+    d3.json("geojson/world-highres3.topo.json").then(function (json) {
+        console.log("TopoJSON loaded!");
+        console.log(json)
+        console.log(topojson.feature(json, json.objects.default).features);
+    });
 });
 
 // //Load in cities data
