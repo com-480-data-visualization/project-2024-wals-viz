@@ -24,7 +24,7 @@ function drawMap() {
         .translate([w / 2, h / 2])
         .rotate([0, 0])
         .center([0, 0])
-        .scale(w / 10);
+        .scale(w / 8);
 
     //Define path generator
     var path = d3.geoPath()
@@ -43,6 +43,34 @@ function drawMap() {
         .append("svg")
         .attr("width", w)
         .attr("height", h);
+
+    //Load in GeoJSON data
+    d3.json("geojson/ne_50m_admin_0_countries.json").then(function (json) {
+        // d3.json("geojson/processed_world-administrative-boundaries.json").then(function(json) {
+        // d3.json("geojson/countries-110m.json").then(function(json) {    // This needs topojson
+        console.log("GeoJSON loaded!");
+        // countries = topojson.feature(json, json.objects.countries);
+        // console.log(countries);
+        // countrymesh = topojson.mesh(json, json.objects.countries, (a, b) => a !== b)
+        // console.log(countrymesh);
+
+        //Bind data and create one path per GeoJSON feature
+        svg.selectAll("path")
+            .data(json.features)
+            .join("path")
+            .attr("fill", "steelblue")
+            .style("stroke", "black")
+            .attr("d", path)
+        // .append("title")
+        //   .text(d => `${d.properties.name}\n${valuemap.get(d.properties.name)}`);
+        // .append("path")
+        // .attr("d", path)
+        // .style("fill", "steelblue");
+
+        // createPanButtons();
+
+        console.log("Map loaded!");
+    });
 
     // //Define what to do when panning or zooming
     // var zooming = function (d) {
@@ -93,26 +121,6 @@ function drawMap() {
     //     .attr("width", w)
     //     .attr("height", h)
     //     .attr("opacity", 0);
-
-    //Load in GeoJSON data
-    d3.json("geojson/world-administrative-boundaries.geojson").then(function (json) {
-        // d3.json("geojson/processed_world-administrative-boundaries.json").then(function(json) {
-        // d3.json("geojson/countries-110m.json").then(function(json) {    // This needs topojson
-        console.log("GeoJSON loaded!");
-        console.log(json);
-
-        //Bind data and create one path per GeoJSON feature
-        svg.selectAll("path")
-            .data(json.features)
-            .enter()
-            .append("path")
-            .attr("d", path)
-            .style("fill", "steelblue");
-
-        // createPanButtons();
-    });
-
-    console.log("Map loaded!");
 }
 
 whenDocumentLoaded(() => {
@@ -125,13 +133,12 @@ whenDocumentLoaded(() => {
     //     .await(ready)
 
     // prepare the map here
-    drawMap();
+    // drawMap();
+    var officiallang_map_gen = map()
+        .width(960)
+        .height(500);
 
-    d3.json("geojson/world-highres3.topo.json").then(function (json) {
-        console.log("TopoJSON loaded!");
-        console.log(json)
-        console.log(topojson.feature(json, json.objects.default).features);
-    });
+    officiallang_map = officiallang_map_gen();
 });
 
 // //Load in cities data
