@@ -189,8 +189,13 @@ whenDocumentLoaded(() => {
         var officiallang_countriesGroup = officiallang_map();
 
         generate_feature_clusters(svg, json_clusters, width, height);
-        // TODO we can use a function to update the country classes for coloring
 
-        console.log(officiallang_countriesGroup);
+        svg.append("foreignObject")
+           .attr('transform', 'translate(' + -width/2 + ',' + -height/2 + ')')
+           .attr("width", 750)
+           .attr("height", 500)
+           .append("xhtml:div")
+           .style("font", "64px 'Helvetica'")
+           .html("<p>Languages Beyond <b>Borders</b></p>");
     };
 });
