@@ -174,7 +174,7 @@ whenDocumentLoaded(() => {
            .attr("height", 500)
            .append("xhtml:div")
            .style("font", "64px 'Helvetica'")
-           .html("<p>Languages Beyond <b>Borders</b></p>");
+           .html("Languages Beyond <b>Borders</b>");
 
         // Create map object
         var officiallang_map = map()
