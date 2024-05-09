@@ -6,6 +6,9 @@ function map() {
         height = 500;
     var json = null;
     var svg = null;
+    var color_mapper = function (d) {
+        return "steelblue";
+    }
 
     function my() {
         // selection.each( function (data, i) {
@@ -24,7 +27,7 @@ function map() {
         var paths = svg.selectAll("path")
             .data(json.features)
             .join("path")
-            .attr("fill", "steelblue")
+            .attr("fill", color_mapper)
             .style("stroke", "black")
             .attr("d", path);
 
@@ -68,6 +71,12 @@ function map() {
         svg = value;
         return my;
     };
+
+    my.color_mapper = function (value) {
+        if (!arguments.length) return color_mapper;
+        color_mapper = value;
+        return my;
+    }
 
     return my;
 }

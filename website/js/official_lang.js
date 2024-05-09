@@ -33,7 +33,15 @@ whenDocumentLoaded(() => {
             .width(officiallang_div.clientWidth)
             .height(officiallang_div.clientHeight)
             .json(json)
-            .svg(svg);
+            .svg(svg)
+            .color_mapper(function (d) {
+                console.log(d);
+                if (d.properties.ISO_A2 == "US") {
+                    return "red";
+                } else {
+                    return "steelblue";
+                }
+            });
 
         var officiallang_map_wrapper = officiallang_map();
 
