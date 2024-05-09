@@ -1,29 +1,25 @@
 // Reusable d3.js map component
 function map() {
+    var x = 0,
+        y = 0;
     var width = 960,
         height = 500;
     var json = null;
-    var selector = null;
+    var svg = null;
 
     function my() {
         // selection.each( function (data, i) {
         //Define map projection
         var projection = d3.geoWinkel3()
-            .scale(width / 8)
-            .translate([width / 2, height / 2]);
+            .fitExtent([[x, y], [x + width, y + height]], json)
+            // .scale(width / 8)
+            // .translate([x + width / 2, y + height / 2]);
 
         //Define path generator
         var path = d3.geoPath()
             .projection(projection);
 
-        console.log("width: " + width);
-        console.log("height: " + height);
-
-        //Create SVG element
-        var svg = d3.select(selector)
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height);
+        console.log(svg);
 
         var paths = svg.selectAll("path")
             .data(json.features)
@@ -35,6 +31,18 @@ function map() {
         console.log("Map loaded!");
 
         return paths;
+    };
+
+    my.x = function (value) {
+        if (!arguments.length) return x;
+        x = value;
+        return my;
+    };
+
+    my.y = function (value) {
+        if (!arguments.length) return y;
+        y = value;
+        return my;
     };
 
     my.width = function (value) {
@@ -55,9 +63,9 @@ function map() {
         return my;
     };
 
-    my.selector = function (value) {
-        if (!arguments.length) return selector;
-        selector = value;
+    my.svg = function (value) {
+        if (!arguments.length) return svg;
+        svg = value;
         return my;
     };
 
@@ -142,6 +150,14 @@ function map() {
 //     createPanButtons();
 
 // });
+
+//     //Define quantize scale to sort data values into buckets of color
+//     var color = d3.scaleQuantize()
+//     .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
+// //Colors taken from colorbrewer.js, included in the D3 download
+
+// //Number formatting for population values
+// var formatAsThousands = d3.format(",");  //e.g. converts 123456 to "123,456"
 
 
 // //Load in agriculture data
