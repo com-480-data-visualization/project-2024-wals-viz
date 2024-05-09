@@ -41,6 +41,30 @@ whenDocumentLoaded(() => {
         //     .style("font-weight", "bold")
         //     .text("Official Languages of the World")
 
+        test_color = function (d) {
+            // color red if eng is an official language
+            // if (d.properties.ISO_A2 == "US") {
+            if (d.properties.languages.includes("eng")) {
+                return "orange";
+            } else {
+                return "steelblue";
+            }
+        };
+
+        highlightSameLang = function (d) {
+            d3.selectAll(".country").attr("fill", "steelblue");
+            let selectedLang = d3.select(this).datum().properties.languages;
+            console.log(selectedLang);
+            for (let i = 0; i < selectedLang.length; i++) {
+                d3.selectAll(".country")
+                    .filter(function (d) {
+                        return d.properties.languages.includes(selectedLang[i]);
+                    })
+                    .attr("fill", "orange");
+            }
+            d3.select(this).attr("fill", "red");
+        };
+
         // Create map object
         var officiallang_map = map()
             .x(0)
@@ -50,19 +74,8 @@ whenDocumentLoaded(() => {
             .json(json)
             .allCountries(csv)
             .svg(svg)
-            .color_mapper(function (d) {
-                // color red if eng is an official language
-                // if (d.properties.ISO_A2 == "US") {
-                if (d.properties.languages.includes("eng")) {
-                    return "red";
-                } else {
-                    return "steelblue";
-                }
-            })
-            .onClickBehavior(function (d, i) {
-                d3.selectAll(".country").attr("fill", "steelblue");
-                d3.select(this).attr("fill", "red");
-            });
+            .color_mapper(test_color)
+            .onClickBehavior(highlightSameLang);
 
         var officiallang_countriesGroup = officiallang_map();
 
