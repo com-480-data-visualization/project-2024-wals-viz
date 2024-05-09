@@ -9,15 +9,23 @@ function whenDocumentLoaded(action) {
 }
 
 whenDocumentLoaded(() => {
-    console.log('loaded!');
+    Promise.all([
+        d3.json("geojson/ne_50m_admin_0_countries.json"),
+        d3.csv("data/all_countries_info_alpha2.csv"),
+    ]).then(([json, csv]) => {
+        console.log("promise loaded");
+        ready(null, json, csv);
+    });
 
-    // TODO To use in the final version
-    // d3.queue()
-    //     .defer(d3.json, "geodata.json")
-    //     .defer(d3.csv, "otherdata.csv")
-    //     .await(ready)
+    function ready(error, json, csv) {
+        // Modifies csv, substituting the languages string with an array of languages
+        csv.forEach(function (d) {
+            d.Languages = d.Languages.split(",").map(function (lang) {
+                return lang.trim();
+            });
+        });
 
-    d3.json("geojson/ne_50m_admin_0_countries.json").then(function (json) {
+        console.log(csv);
 
         var officiallang_div = document.getElementById('officiallang-col');
 
@@ -35,7 +43,7 @@ whenDocumentLoaded(() => {
         //     .style("font-size", "2em")
         //     .style("font-weight", "bold")
         //     .text("Official Languages of the World")
-        
+
         // Create map object
         var officiallang_map = map()
             .x(0)
@@ -43,6 +51,7 @@ whenDocumentLoaded(() => {
             .width(officiallang_div.clientWidth)
             .height(officiallang_div.clientHeight)
             .json(json)
+            .allCountries(csv)
             .svg(svg)
             .color_mapper(function (d) {
                 if (d.properties.ISO_A2 == "US") {
@@ -61,7 +70,7 @@ whenDocumentLoaded(() => {
         // TODO we can use a function to update the country classes for coloring
 
         console.log(officiallang_countriesGroup);
-    });
+    };
 
     // prepare the map here
     // drawMap();

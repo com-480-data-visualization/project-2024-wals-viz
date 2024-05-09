@@ -5,6 +5,7 @@ function map() {
     var width = 960,
         height = 500;
     var json = null;
+    var allCountries = null;
     var svg = null;
     var color_mapper = function (d) {
         return "steelblue";
@@ -71,6 +72,12 @@ function map() {
     my.json = function (value) {
         if (!arguments.length) return json;
         json = value;
+        return my;
+    };
+
+    my.allCountries = function (value) {
+        if (!arguments.length) return allCountries;
+        allCountries = value;
         return my;
     };
 
