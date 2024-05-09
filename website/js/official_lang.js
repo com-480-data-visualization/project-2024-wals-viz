@@ -25,8 +25,18 @@ whenDocumentLoaded(() => {
         var svg = d3.select(officiallang_div)
             .append("svg")
             .attr("width", officiallang_div.clientWidth)
-            .attr("height", officiallang_div.clientWidth);
+            .attr("height", officiallang_div.clientHeight);
 
+        // Insert text in the top left corner of the svg, 
+        // TODO, maybe we do it as embedded HTML in the SVG
+        // svg.append("text")
+        //     .attr("x", officiallang_div.clientWidth/25)
+        //     .attr("y", officiallang_div.clientHeight/16)
+        //     .style("font-size", "2em")
+        //     .style("font-weight", "bold")
+        //     .text("Official Languages of the World")
+        
+        // Create map object
         var officiallang_map = map()
             .x(0)
             .y(0)
@@ -35,17 +45,22 @@ whenDocumentLoaded(() => {
             .json(json)
             .svg(svg)
             .color_mapper(function (d) {
-                console.log(d);
                 if (d.properties.ISO_A2 == "US") {
                     return "red";
                 } else {
                     return "steelblue";
                 }
+            })
+            .onClickBehavior(function (d, i) {
+                d3.selectAll(".country").classed("country-on", false);
+                d3.select(this).classed("country-on", true);
             });
 
-        var officiallang_map_wrapper = officiallang_map();
+        var officiallang_countriesGroup = officiallang_map();
 
-        console.log(officiallang_map_wrapper);
+        // TODO we can use a function to update the country classes for coloring
+
+        console.log(officiallang_countriesGroup);
     });
 
     // prepare the map here

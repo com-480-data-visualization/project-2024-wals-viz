@@ -9,6 +9,7 @@ function map() {
     var color_mapper = function (d) {
         return "steelblue";
     }
+    var onClickBehavior = function (d, i) {}
 
     function my() {
         // selection.each( function (data, i) {
@@ -24,16 +25,23 @@ function map() {
 
         console.log(svg);
 
-        var paths = svg.selectAll("path")
+        //Bind data and create one path per GeoJSON feature
+        var countriesGroup = svg.append("g")
+        var countries = countriesGroup.selectAll("path")
             .data(json.features)
             .join("path")
+            .attr("id", function(d, i) {
+              return "country" + d.properties.ISO_A2;
+            })
+            .attr("class", "country")
             .attr("fill", color_mapper)
             .style("stroke", "black")
-            .attr("d", path);
+            .attr("d", path)
+            .on("click", onClickBehavior);
 
         console.log("Map loaded!");
 
-        return paths;
+        return countriesGroup;
     };
 
     my.x = function (value) {
@@ -75,6 +83,12 @@ function map() {
     my.color_mapper = function (value) {
         if (!arguments.length) return color_mapper;
         color_mapper = value;
+        return my;
+    }
+
+    my.onClickBehavior = function (value) {
+        if (!arguments.length) return onClickBehavior;
+        onClickBehavior = value;
         return my;
     }
 
