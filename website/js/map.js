@@ -24,7 +24,45 @@ function map() {
         var path = d3.geoPath()
             .projection(projection);
 
-        console.log(svg);
+        // Merge the allCountries data and GeoJSON
+        for (var i = 0; i < allCountries.length; i++) {
+            var dataCountry = allCountries[i].iso_alpha2;
+            var dataLanguages = allCountries[i].Languages;
+            for (var j = 0; j < json.features.length; j++) {
+                var jsonCountry = json.features[j].properties.ISO_A2;
+                json.features[j].properties.languages = [];
+                if (dataCountry == jsonCountry) {
+                    json.features[j].properties.languages = dataLanguages;
+                    break;
+                }
+            }
+        }
+
+        console.log(json);
+
+//         //Merge the ag. data and GeoJSON
+//         //Loop through once for each ag. data value
+//         for (var i = 0; i < data.length; i++) {
+
+//             var dataState = data[i].state;				//Grab state name
+//             var dataValue = parseFloat(data[i].value);	//Grab data value, and convert from string to float
+
+//             //Find the corresponding state inside the GeoJSON
+//             for (var j = 0; j < json.features.length; j++) {
+
+//                 var jsonState = json.features[j].properties.name;
+
+//                 if (dataState == jsonState) {
+
+//                     //Copy the data value into the JSON
+//                     json.features[j].properties.value = dataValue;
+
+//                     //Stop looking through the JSON
+//                     break;
+
+//                 }
+//             }		
+//         }
 
         //Bind data and create one path per GeoJSON feature
         var countriesGroup = svg.append("g")

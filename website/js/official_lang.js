@@ -13,7 +13,6 @@ whenDocumentLoaded(() => {
         d3.json("geojson/ne_50m_admin_0_countries.json"),
         d3.csv("data/all_countries_info_alpha2.csv"),
     ]).then(([json, csv]) => {
-        console.log("promise loaded");
         ready(null, json, csv);
     });
 
@@ -24,8 +23,6 @@ whenDocumentLoaded(() => {
                 return lang.trim();
             });
         });
-
-        console.log(csv);
 
         var officiallang_div = document.getElementById('officiallang-col');
 
@@ -54,15 +51,17 @@ whenDocumentLoaded(() => {
             .allCountries(csv)
             .svg(svg)
             .color_mapper(function (d) {
-                if (d.properties.ISO_A2 == "US") {
+                // color red if eng is an official language
+                // if (d.properties.ISO_A2 == "US") {
+                if (d.properties.languages.includes("eng")) {
                     return "red";
                 } else {
                     return "steelblue";
                 }
             })
             .onClickBehavior(function (d, i) {
-                d3.selectAll(".country").classed("country-on", false);
-                d3.select(this).classed("country-on", true);
+                d3.selectAll(".country").attr("fill", "steelblue");
+                d3.select(this).attr("fill", "red");
             });
 
         var officiallang_countriesGroup = officiallang_map();
