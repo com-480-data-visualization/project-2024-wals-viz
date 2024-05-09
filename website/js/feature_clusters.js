@@ -38,14 +38,17 @@ function generate_feature_clusters(){
         //Initialize a simple force layout, using the nodes and edges in dataset        
         var force = d3.forceSimulation(dataset.nodes)
                     .force("link", d3.forceLink(dataset.edges).id(d => d.id))
-                    .force("charge", d3.forceManyBody())
+                    .force("charge", d3.forceManyBody().strength(-50))
                     .force("x", d3.forceX())
                     .force("y", d3.forceY());  
-                    // .force("charge", d3.forceManyBody())
-                    // .force("link", d3.forceLink(dataset.edges))
-                    // .force("center", d3.forceCenter().x(width/2).y(height/2));
 
-        var colors = d3.scaleOrdinal(d3.schemeCategory10);
+        var colors = d3.scaleOrdinal(["#102C57FF", 
+                                      "#7C9D96FF",
+                                      "#9C581CFF",
+                                      "#E9B384FF",
+                                      "#E9B384FF",
+                                      "#A1CCD1FF",
+                                      "#A1CCD1FF"]);
 
         //Create SVG element
         var svg = d3.select(parentDiv)
@@ -54,15 +57,13 @@ function generate_feature_clusters(){
                 .attr("height", height)
                 .attr("viewBox", [-width / 2, -height / 2, width, height])
                 .attr("style", "max-width: 100%; height: auto;");
-                // .attr("width", width)
-                // .attr("height", height);
 
         //Create edges as lines
         var edges = svg.selectAll("line")
                     .data(dataset.edges)
                     .enter()
                     .append("line")
-                    .style("stroke", "#ccc")
+                    .style("stroke", "#102C57FF")
                     .style("stroke-width", 1);
 
         //Create nodes as circles
@@ -70,7 +71,13 @@ function generate_feature_clusters(){
                     .data(dataset.nodes)
                     .enter()
                     .append("circle")
-                    .attr("r", 10)
+                    .attr("r", function(d, i){
+                        if (d.name.includes("Cluster")){
+                            return 10;
+                        } else {
+                            return 5;
+                        }
+                    }) //10
                     .style("fill", function(d, i) {
                     return colors(d.color);
                     }
