@@ -1,0 +1,251 @@
+,Country,Languages,Region,Population,Capital,Currencies,iso_alpha2
+0,Cyprus,"ell, tur",Europe,1207361,Nicosia,EUR,CY
+1,Eritrea,"ara, eng, tir",Africa,5352000,Asmara,ERN,ER
+2,Liberia,eng,Africa,5057677,Monrovia,LRD,LR
+3,Bermuda,eng,Americas,63903,Hamilton,BMD,BM
+4,Holy See (Vatican City State),"ita, lat",Europe,451,Vatican City,EUR,VA
+5,Cook Islands,"eng, rar",Oceania,18100,Avarua,"CKD, NZD",CK
+6,Somalia,"ara, som",Africa,15893219,Mogadishu,SOS,SO
+7,Zambia,eng,Africa,18383956,Lusaka,ZMW,ZM
+8,"Venezuela, Bolivarian Republic of",spa,Americas,28435943,Caracas,VES,VE
+9,Turkmenistan,"rus, tuk",Asia,6031187,Ashgabat,TMT,TM
+10,Albania,sqi,Europe,2837743,Tirana,ALL,AL
+11,Croatia,hrv,Europe,4047200,Zagreb,EUR,HR
+12,United Kingdom,eng,Europe,67215293,London,GBP,GB
+13,Sudan,"ara, eng",Africa,43849269,Khartoum,SDG,SD
+14,Timor-Leste,"por, tet",Asia,1318442,Dili,USD,TL
+15,Congo,"fra, kon, lin",Africa,5657000,Brazzaville,XAF,CG
+16,Azerbaijan,aze,Asia,10110116,Baku,AZN,AZ
+17,Kenya,"eng, swa",Africa,53771300,Nairobi,KES,KE
+18,American Samoa,"eng, smo",Oceania,55197,Pago Pago,USD,AS
+19,Côte d'Ivoire,fra,Africa,26378275,Yamoussoukro,XOF,CI
+20,Senegal,fra,Africa,16743930,Dakar,XOF,SN
+21,Viet Nam,vie,Asia,97338583,Hanoi,VND,VN
+22,El Salvador,spa,Americas,6486201,San Salvador,USD,SV
+23,Afghanistan,"prs, pus, tuk",Asia,40218234,Kabul,AFN,AF
+24,Saint Martin (French part),fra,Americas,38659,Marigot,EUR,MF
+25,Latvia,lav,Europe,1901548,Riga,EUR,LV
+26,Guatemala,spa,Americas,16858333,Guatemala City,GTQ,GT
+27,Kuwait,ara,Asia,4270563,Kuwait City,KWD,KW
+28,Sao Tome and Principe,por,Africa,219161,São Tomé,STN,ST
+29,Kyrgyzstan,"kir, rus",Asia,6591600,Bishkek,KGS,KG
+30,Poland,pol,Europe,37950802,Warsaw,PLN,PL
+31,Guam,"cha, eng, spa",Oceania,168783,Hagåtña,USD,GU
+32,Ghana,eng,Africa,31072945,Accra,GHS,GH
+33,Lithuania,lit,Europe,2794700,Vilnius,EUR,LT
+34,Armenia,hye,Asia,2963234,Yerevan,AMD,AM
+35,Jersey,"eng, fra, nrf",Europe,100800,Saint Helier,"GBP, JEP",JE
+36,Grenada,eng,Americas,112519,St. George's,XCD,GD
+37,Tajikistan,"rus, tgk",Asia,9537642,Dushanbe,TJS,TJ
+38,Ethiopia,amh,Africa,114963583,Addis Ababa,ETB,ET
+39,Western Sahara,"ber, mey, spa",Africa,510713,El Aaiún,"DZD, MAD, MRU",EH
+40,Morocco,"ara, ber",Africa,36910558,Rabat,MAD,MA
+41,Puerto Rico,"eng, spa",Americas,3194034,San Juan,USD,PR
+42,Christmas Island,eng,Oceania,2072,Flying Fish Cove,AUD,CX
+43,New Zealand,"eng, mri, nzs",Oceania,5084300,Wellington,NZD,NZ
+44,Brunei Darussalam,msa,Asia,437483,Bandar Seri Begawan,"BND, SGD",BN
+45,French Guiana,fra,Americas,254541,Cayenne,EUR,GF
+46,Niue,"eng, niu",Oceania,1470,Alofi,NZD,NU
+47,Romania,ron,Europe,19286123,Bucharest,RON,RO
+48,Svalbard and Jan Mayen,nor,Europe,2562,Longyearbyen,NOK,SJ
+49,Belarus,"bel, rus",Europe,9398861,Minsk,BYN,BY
+50,Panama,spa,Americas,4314768,Panama City,"PAB, USD",PA
+51,Cameroon,"eng, fra",Africa,26545864,Yaoundé,XAF,CM
+52,Czechia,"ces, slk",Europe,10698896,Prague,CZK,CZ
+53,Saint Barthélemy,fra,Americas,4255,Gustavia,EUR,BL
+54,Greece,ell,Europe,10715549,Athens,EUR,GR
+55,Mali,fra,Africa,20250834,Bamako,XOF,ML
+56,Martinique,fra,Americas,378243,Fort-de-France,EUR,MQ
+57,France,fra,Europe,67391582,Paris,EUR,FR
+58,Pakistan,"eng, urd",Asia,220892331,Islamabad,PKR,PK
+59,Peru,"aym, que, spa",Americas,32971846,Lima,PEN,PE
+60,Barbados,eng,Americas,287371,Bridgetown,BBD,BB
+61,Greenland,kal,Americas,56367,Nuuk,DKK,GL
+62,Saint Pierre and Miquelon,fra,Americas,6069,Saint-Pierre,EUR,PM
+63,Chad,"ara, fra",Africa,16425859,N'Djamena,XAF,TD
+64,Hungary,hun,Europe,9749763,Budapest,HUF,HU
+65,Comoros,"ara, fra, zdj",Africa,869595,Moroni,KMF,KM
+66,Bangladesh,ben,Asia,164689383,Dhaka,BDT,BD
+67,Tokelau,"eng, smo, tkl",Oceania,1411,Fakaofo,NZD,TK
+68,Fiji,"eng, fij, hif",Oceania,896444,Suva,FJD,FJ
+69,China,zho,Asia,1402112000,Beijing,CNY,CN
+70,Colombia,spa,Americas,50882884,Bogotá,COP,CO
+71,"Virgin Islands, British",eng,Americas,30237,Road Town,USD,VG
+72,Algeria,ara,Africa,44700000,Algiers,DZD,DZ
+73,Maldives,div,Asia,540542,Malé,MVR,MV
+74,Malaysia,"eng, msa",Asia,32365998,Kuala Lumpur,MYR,MY
+75,Cayman Islands,eng,Americas,65720,George Town,KYD,KY
+76,Spain,"spa, cat, eus, glc",Europe,47351567,Madrid,EUR,ES
+77,Ireland,"eng, gle",Europe,4994724,Dublin,EUR,IE
+78,Estonia,est,Europe,1331057,Tallinn,EUR,EE
+79,Paraguay,"grn, spa",Americas,7132530,Asunción,PYG,PY
+80,Uruguay,spa,Americas,3473727,Montevideo,UYU,UY
+81,South Africa,"afr, eng, nbl, nso, sot, ssw, tsn, tso, ven, xho, zul",Africa,59308690,Pretoria,ZAR,ZA
+82,Saint Lucia,eng,Americas,183629,Castries,XCD,LC
+83,Vanuatu,"bis, eng, fra",Oceania,307150,Port Vila,VUV,VU
+84,Finland,"fin, swe",Europe,5530719,Helsinki,EUR,FI
+85,Sweden,swe,Europe,10353442,Stockholm,SEK,SE
+86,British Indian Ocean Territory,eng,Africa,3000,Diego Garcia,USD,IO
+87,Lebanon,"ara, fra",Asia,6825442,Beirut,LBP,LB
+88,United States,eng,Americas,329484123,"Washington, D.C.",USD,US
+89,Chile,spa,Americas,19116209,Santiago,CLP,CL
+90,Norfolk Island,"eng, pih",Oceania,2302,Kingston,AUD,NF
+91,Montserrat,eng,Americas,4922,Plymouth,XCD,MS
+92,Australia,eng,Oceania,25687041,Canberra,AUD,AU
+93,Belize,"bjz, eng, spa",Americas,397621,Belmopan,BZD,BZ
+94,Guyana,eng,Americas,786559,Georgetown,GYD,GY
+95,Mongolia,mon,Asia,3278292,Ulan Bator,MNT,MN
+96,Tuvalu,"eng, tvl",Oceania,11792,Funafuti,"AUD, TVD",TV
+97,Dominican Republic,spa,Americas,10847904,Santo Domingo,DOP,DO
+98,Equatorial Guinea,"fra, por, spa",Africa,1402985,Malabo,XAF,GQ
+99,Saint Kitts and Nevis,eng,Americas,53192,Basseterre,XCD,KN
+100,"Bolivia, Plurinational State of","aym, grn, que, spa",Americas,11673029,Sucre,BOB,BO
+101,Nepal,nep,Asia,29136808,Kathmandu,NPR,NP
+102,French Southern Territories,fra,Antarctic,400,Port-aux-Français,EUR,TF
+103,"Taiwan, Province of China",zho,Asia,23503349,Taipei,TWD,TW
+104,Benin,fra,Africa,12123198,Porto-Novo,XOF,BJ
+105,Bulgaria,bul,Europe,6927288,Sofia,BGN,BG
+106,"Moldova, Republic of",ron,Europe,2617820,Chișinău,MDL,MD
+107,Isle of Man,"eng, glv",Europe,85032,Douglas,"GBP, IMP",IM
+108,Bhutan,dzo,Asia,771612,Thimphu,"BTN, INR",BT
+109,Cambodia,khm,Asia,16718971,Phnom Penh,"KHR, USD",KH
+110,Antigua and Barbuda,eng,Americas,97928,Saint John's,XCD,AG
+111,Haiti,"fra, hat",Americas,11402533,Port-au-Prince,HTG,HT
+112,Cabo Verde,por,Africa,555988,Praia,CVE,CV
+113,Georgia,kat,Asia,3714000,Tbilisi,GEL,GE
+114,Burundi,"fra, run",Africa,11890781,Gitega,BIF,BI
+115,Bahamas,eng,Americas,393248,Nassau,"BSD, USD",BS
+116,Mauritius,"eng, fra, mfe",Africa,1265740,Port Louis,MUR,MU
+117,Libya,ara,Africa,6871287,Tripoli,LYD,LY
+118,Malawi,"eng, nya",Africa,19129955,Lilongwe,MWK,MW
+119,Mexico,spa,Americas,128932753,Mexico City,MXN,MX
+120,Eswatini,"eng, ssw",Africa,1160164,Mbabane,"SZL, ZAR",SZ
+121,Papua New Guinea,"eng, hmo, tpi",Oceania,8947027,Port Moresby,PGK,PG
+122,Dominica,eng,Americas,71991,Roseau,XCD,DM
+123,Liechtenstein,deu,Europe,38137,Vaduz,CHF,LI
+124,Russian Federation,rus,Europe,144104080,Moscow,RUB,RU
+125,Israel,"ara, heb",Asia,9216900,Jerusalem,ILS,IL
+126,Singapore,"eng, zho, msa, tam",Asia,5685807,Singapore,SGD,SG
+127,Uganda,"eng, swa",Africa,45741000,Kampala,UGX,UG
+128,Slovakia,slk,Europe,5458827,Bratislava,EUR,SK
+129,Tonga,"eng, ton",Oceania,105697,Nuku'alofa,TOP,TO
+130,United Arab Emirates,ara,Asia,9890400,Abu Dhabi,AED,AE
+131,Mayotte,fra,Africa,226915,Mamoudzou,EUR,YT
+132,Suriname,nld,Americas,586634,Paramaribo,SRD,SR
+133,Uzbekistan,"rus, uzb",Asia,34232050,Tashkent,UZS,UZ
+134,Saudi Arabia,ara,Asia,34813867,Riyadh,SAR,SA
+135,Egypt,ara,Africa,102334403,Cairo,EGP,EG
+136,Italy,ita,Europe,59554023,Rome,EUR,IT
+137,Madagascar,"fra, mlg",Africa,27691019,Antananarivo,MGA,MG
+138,New Caledonia,fra,Oceania,271960,Nouméa,XPF,NC
+139,Canada,"eng, fra",Americas,38005238,Ottawa,CAD,CA
+140,"Virgin Islands, U.S.",eng,Americas,106290,Charlotte Amalie,USD,VI
+141,Marshall Islands,"eng, mah",Oceania,59194,Majuro,USD,MH
+142,Mauritania,ara,Africa,4649660,Nouakchott,MRU,MR
+143,Gambia,eng,Africa,2416664,Banjul,GMD,GM
+144,Trinidad and Tobago,eng,Americas,1399491,Port of Spain,TTD,TT
+145,Seychelles,"crs, eng, fra",Africa,98462,Victoria,SCR,SC
+146,Japan,jpn,Asia,125836021,Tokyo,JPY,JP
+147,Brazil,por,Americas,212559409,Brasília,BRL,BR
+148,Syrian Arab Republic,ara,Asia,17500657,Damascus,SYP,SY
+149,"Saint Helena, Ascension and Tristan da Cunha",eng,Africa,53192,Jamestown,"GBP, SHP",SH
+150,"Tanzania, United Republic of","eng, swa",Africa,59734213,Dodoma,TZS,TZ
+151,Andorra,cat,Europe,77265,Andorra la Vella,EUR,AD
+152,"Iran, Islamic Republic of",fas,Asia,83992953,Tehran,IRR,IR
+153,Togo,fra,Africa,8278737,Lomé,XOF,TG
+154,Malta,"eng, mlt",Europe,525285,Valletta,EUR,MT
+155,"Korea, Republic of",kor,Asia,51780579,Seoul,KRW,KR
+156,Samoa,"eng, smo",Oceania,198410,Apia,WST,WS
+157,Germany,deu,Europe,83240525,Berlin,EUR,DE
+158,Niger,fra,Africa,24206636,Niamey,XOF,NE
+159,Bouvet Island,nor,Antarctic,0,N,N/A,BV
+160,Jamaica,"eng, jam",Americas,2961161,Kingston,JMD,JM
+161,Nicaragua,spa,Americas,6624554,Managua,NIO,NI
+162,Guinea,fra,Africa,13132792,Conakry,GNF,GN
+163,Anguilla,eng,Americas,13452,The Valley,XCD,AI
+164,Åland Islands,swe,Europe,29458,Mariehamn,EUR,AX
+165,Belgium,"deu, fra, nld",Europe,11555997,Brussels,EUR,BE
+166,Portugal,por,Europe,10305564,Lisbon,EUR,PT
+167,Denmark,dan,Europe,5831404,Copenhagen,DKK,DK
+168,Philippines,"eng, fil",Asia,109581085,Manila,PHP,PH
+169,Wallis and Futuna,fra,Oceania,11750,Mata-Utu,XPF,WF
+170,Austria,de,Europe,8917205,Vienna,EUR,AT
+171,Guinea-Bissau,"por, pov",Africa,1967998,Bissau,XOF,GW
+172,Monaco,fra,Europe,39244,Monaco,EUR,MC
+173,Namibia,"afr, deu, eng, her, hgm, kwn, loz, ndo, tsn",Africa,2540916,Windhoek,"NAD, ZAR",NA
+174,United States Minor Outlying Islands,eng,Americas,300,Washington DC,USD,UM
+175,Costa Rica,spa,Americas,5094114,San José,CRC,CR
+176,Bosnia and Herzegovina,"bos, hrv, srp",Europe,3280815,Sarajevo,BAM,BA
+177,Macao,"por, zho",Asia,649342,N,MOP,MO
+178,Mozambique,por,Africa,31255435,Maputo,MZN,MZ
+179,Réunion,fra,Africa,840974,Saint-Denis,EUR,RE
+180,Montenegro,cnr,Europe,621718,Podgorica,EUR,ME
+181,"Korea, Democratic People's Republic of",kor,Asia,25778815,Pyongyang,KPW,KP
+182,Northern Mariana Islands,"cal, cha, eng",Oceania,57557,Saipan,USD,MP
+183,Ukraine,ukr,Europe,44134693,Kyiv,UAH,UA
+184,Iraq,"ara, arc, ckb",Asia,40222503,Baghdad,IQD,IQ
+185,South Georgia and the South Sandwich Islands,eng,Antarctic,30,King Edward Point,SHP,GS
+186,Angola,por,Africa,32866268,Luanda,AOA,AO
+187,Sierra Leone,eng,Africa,7976985,Freetown,SLL,SL
+188,"Micronesia, Federated States of",eng,Oceania,115021,Palikir,USD,FM
+189,Cuba,spa,Americas,11326616,Havana,"CUC, CUP",CU
+190,Turks and Caicos Islands,eng,Americas,38718,Cockburn Town,USD,TC
+191,Serbia,srp,Europe,6908224,Belgrade,RSD,RS
+192,Ecuador,spa,Americas,17643060,Quito,USD,EC
+193,Faroe Islands,"dan, fao",Europe,48865,Tórshavn,"DKK, FOK",FO
+194,Antarctica,N/A,Antarctic,1000,N,N/A,AQ
+195,"Palestine, State of",ara,Asia,4803269,Ramallah,"EGP, ILS, JOD",PS
+196,Türkiye,tur,Asia,84339067,Ankara,TRY,TR
+197,Kiribati,"eng, gil",Oceania,119446,South Tarawa,"AUD, KID",KI
+198,Kazakhstan,"kaz, rus",Asia,18754440,Nur-Sultan,KZT,KZ
+199,Gibraltar,eng,Europe,33691,Gibraltar,GIP,GI
+200,Iceland,isl,Europe,366425,Reykjavik,ISK,IS
+201,Palau,"eng, pau",Oceania,18092,Ngerulmud,USD,PW
+202,Qatar,ara,Asia,2881060,Doha,QAR,QA
+203,Switzerland,"fra, gsw, ita, roh",Europe,8654622,Bern,CHF,CH
+204,French Polynesia,fra,Oceania,280904,Papeetē,XPF,PF
+205,Pitcairn,eng,Oceania,56,Adamstown,NZD,PN
+206,Jordan,ara,Asia,10203140,Amman,JOD,JO
+207,Myanmar,mya,Asia,54409794,Naypyidaw,MMK,MM
+208,Thailand,tha,Asia,69799978,Bangkok,THB,TH
+209,"Bonaire, Sint Eustatius and Saba","eng, nld, pap",Americas,25987,Kralendijk,USD,BQ
+210,Aruba,"nld, pap",Americas,106766,Oranjestad,AWG,AW
+211,Guadeloupe,fra,Americas,400132,Basse-Terre,EUR,GP
+212,Nigeria,eng,Africa,206139587,Abuja,NGN,NG
+213,Bahrain,ara,Asia,1701583,Manama,BHD,BH
+214,Lao People's Democratic Republic,lao,Asia,7275556,Vientiane,LAK,LA
+215,Cocos (Keeling) Islands,eng,Oceania,544,West Island,AUD,CC
+216,Djibouti,"ara, fra",Africa,988002,Djibouti,DJF,DJ
+217,Solomon Islands,eng,Oceania,686878,Honiara,SBD,SB
+218,Heard Island and McDonald Islands,eng,Antarctic,0,N,N/A,HM
+219,India,"eng, hin, tam",Asia,1380004385,New Delhi,INR,IN
+220,San Marino,ita,Europe,33938,City of San Marino,EUR,SM
+221,Luxembourg,"deu, fra, ltz",Europe,632275,Luxembourg,EUR,LU
+222,Sint Maarten (Dutch part),"eng, fra, nld",Americas,40812,Philipsburg,ANG,SX
+223,Falkland Islands (Malvinas),eng,Americas,2563,Stanley,FKP,FK
+224,Central African Republic,"fra, sag",Africa,4829764,Bangui,XAF,CF
+225,Botswana,"eng, tsn",Africa,2351625,Gaborone,BWP,BW
+226,Curaçao,"eng, nld, pap",Americas,155014,Willemstad,ANG,CW
+227,Guernsey,"eng, fra, nfr",Europe,62999,St. Peter Port,"GBP, GGP",GG
+228,Norway,"nno, nob, smi",Europe,5379475,Oslo,NOK,NO
+229,Gabon,fra,Africa,2225728,Libreville,XAF,GA
+230,Zimbabwe,"bwg, eng, kck, khi, ndc, nde, nya, sna, sot, toi, tsn, tso, ven, xho, zib",Africa,14862927,Harare,ZWL,ZW
+231,Lesotho,"eng, sot",Africa,2142252,Maseru,"LSL, ZAR",LS
+232,Slovenia,slv,Europe,2100126,Ljubljana,EUR,SI
+233,Argentina,"grn, spa",Americas,45376763,Buenos Aires,ARS,AR
+234,Burkina Faso,fra,Africa,20903278,Ouagadougou,XOF,BF
+235,Yemen,ara,Asia,29825968,Sana'a,YER,YE
+236,"Congo, The Democratic Republic of the","fra, kon, lin, lua, swa",Africa,108407721,Kinshasa,CDF,CD
+237,Oman,ara,Asia,5106622,Muscat,OMR,OM
+238,Indonesia,ind,Asia,273523621,Jakarta,IDR,ID
+239,Nauru,"eng, nau",Oceania,10834,Yaren,AUD,NR
+240,Rwanda,"eng, fra, kin",Africa,12952209,Kigali,RWF,RW
+241,North Macedonia,mkd,Europe,2077132,Skopje,MKD,MK
+242,Kosovo,"sqi, srp",Europe,1775378,Pristina,EUR,XK
+243,Netherlands,nld,Europe,16655799,Amsterdam,EUR,NL
+244,Tunisia,ara,Africa,11818618,Tunis,TND,TN
+245,South Sudan,eng,Africa,11193729,Juba,SSP,SS
+246,Honduras,spa,Americas,9904608,Tegucigalpa,HNL,HN
+247,Saint Vincent and the Grenadines,eng,Americas,110947,Kingstown,XCD,VC
+248,Sri Lanka,"sin, tam",Asia,21919000,Sri Jayawardenepura Kotte,LKR,LK
+249,Hong Kong,"eng, zho",Asia,7500700,City of Victoria,HKD,HK
