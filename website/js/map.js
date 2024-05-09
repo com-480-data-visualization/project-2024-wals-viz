@@ -75,7 +75,6 @@ function map() {
             })
             .attr("class", "country")
             .attr("fill", color_mapper)
-            .style("stroke", "black")
             .attr("d", path)
             .on("click", onClickBehavior);
 

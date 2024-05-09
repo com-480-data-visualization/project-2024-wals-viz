@@ -54,7 +54,6 @@ whenDocumentLoaded(() => {
         highlightSameLang = function (d) {
             d3.selectAll(".country").attr("fill", "steelblue");
             let selectedLang = d3.select(this).datum().properties.languages;
-            console.log(selectedLang);
             for (let i = 0; i < selectedLang.length; i++) {
                 d3.selectAll(".country")
                     .filter(function (d) {
@@ -78,10 +77,6 @@ whenDocumentLoaded(() => {
             .onClickBehavior(highlightSameLang);
 
         var officiallang_countriesGroup = officiallang_map();
-
-        // TODO we can use a function to update the country classes for coloring
-
-        console.log(officiallang_countriesGroup);
     };
 
     // prepare the map here
