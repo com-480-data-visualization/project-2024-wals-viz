@@ -18,7 +18,8 @@ const colors = d3.scaleOrdinal(
      "#A1CCD1FF", // Papunesia
      "#A1CCD1FF"]); //Australia
 
-function generate_feature_clusters(svg, dataset, width, height){
+function generate_feature_clusters(svg, dataset, width, height,
+                                   x, y){
 
     console.log(width, height)
 
@@ -44,16 +45,8 @@ function generate_feature_clusters(svg, dataset, width, height){
     var force = d3.forceSimulation(dataset.nodes)
                 .force("link", d3.forceLink(dataset.edges).id(d => d.id))
                 .force("charge", d3.forceManyBody())
-                .force("x", d3.forceX(-width/4).strength(0.05))
-                .force("y", d3.forceY(height/8));  
-
-    //Create SVG element
-    // var svg = d3.select(parentDiv)
-    //         .append("svg")
-    //         .attr("width", width)
-    //         .attr("height", height)
-    //         .attr("viewBox", [-width / 2, -height / 2, width, height])
-    //         .attr("style", "max-width: 100%; height: auto;");
+                .force("x", d3.forceX(x).strength(0.05))
+                .force("y", d3.forceY(y));  
 
     //Create edges as lines
     var edges = svg.selectAll("line")
@@ -168,13 +161,23 @@ whenDocumentLoaded(() => {
         const map_y = -height / 2
         const map_x = width / 2 - map_width
 
+        const text_margin_x = 10
+
         svg.append("foreignObject")
-           .attr('transform', 'translate(' + -width/2 + ',' + -height/2 + ')')
+           .attr('transform', 'translate(' + (-width/2 + text_margin_x) + ',' + -height/2 + ')')
            .attr("width", 750)
-           .attr("height", 500)
+           .attr("height", 250)
            .append("xhtml:div")
            .style("font", "64px 'Helvetica'")
            .html("Languages Beyond <b>Borders</b>");
+
+        svg.append("foreignObject")
+           .attr('transform', 'translate(' + (-width/2 + text_margin_x) + ',' + (-height/2 + 200) + ')')
+           .attr("width", 300)
+           .attr("height", 250)
+           .append("xhtml:div")
+           .style("font", "22px 'Helvetica'")
+           .html("Language similarity based on their internal structure of words, <b>Morphology</b>.");
 
         // Create map object
         var officiallang_map = map()
@@ -196,7 +199,8 @@ whenDocumentLoaded(() => {
 
         var officiallang_countriesGroup = officiallang_map();
 
-        generate_feature_clusters(svg, json_clusters, width, height);
+        generate_feature_clusters(svg, json_clusters, width, 
+                                  height, -width/16, height/8);
 
     };
 });
