@@ -168,6 +168,14 @@ whenDocumentLoaded(() => {
         const map_y = -height / 2
         const map_x = width / 2 - map_width
 
+        svg.append("foreignObject")
+           .attr('transform', 'translate(' + -width/2 + ',' + -height/2 + ')')
+           .attr("width", 750)
+           .attr("height", 500)
+           .append("xhtml:div")
+           .style("font", "64px 'Helvetica'")
+           .html("<p>Languages Beyond <b>Borders</b></p>");
+
         // Create map object
         var officiallang_map = map()
             .x(map_x)
@@ -190,12 +198,5 @@ whenDocumentLoaded(() => {
 
         generate_feature_clusters(svg, json_clusters, width, height);
 
-        svg.append("foreignObject")
-           .attr('transform', 'translate(' + -width/2 + ',' + -height/2 + ')')
-           .attr("width", 750)
-           .attr("height", 500)
-           .append("xhtml:div")
-           .style("font", "64px 'Helvetica'")
-           .html("<p>Languages Beyond <b>Borders</b></p>");
     };
 });
