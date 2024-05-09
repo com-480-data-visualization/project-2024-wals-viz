@@ -43,7 +43,7 @@ body {
     color: rgba(29, 40, 55, 1);
 }
 
-#officiallang-row {
+/* #officiallang-row {
     justify-content: center;
     padding-top: 80px;
     padding-bottom: 80px;
@@ -52,7 +52,7 @@ body {
 }
 
 #officiallang-col {
-    /* max-width: 1200px; */
+    max-width: 1200px;
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -82,7 +82,7 @@ body {
     margin-right: 38px;
     margin-bottom: 38px;
     margin-left: 38px;
-}
+} */
 
 .text-main-content {
     line-height: 30px;
@@ -180,7 +180,7 @@ body {
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
-
+/* 
 #genealogy-head {
     font-size: 3rem;
     text-align: center;
@@ -325,7 +325,7 @@ body {
     padding-bottom: 80px;
     padding-left: 20px;
     padding-right: 20px;
-}
+} */
 
 @media (max-width: 992px) {
     .gjs-grid-row {

@@ -4,8 +4,8 @@ Clustering
 
 import pandas as pd
 from kmodes.kmodes import KModes 
-
 import numpy as np
+import json
 
 import matplotlib.pyplot as plt
 
@@ -37,13 +37,24 @@ def translate_dataframe_to_values(language, feature_names):
 
     return df_copy, feature_maps, inv_feature_maps
 
+def get_color_from_geoarea(geoarea):
+
+    color_codes = {'Africa' : 1,
+                   'Eurasia' : 2,
+                   'South America' : 3,
+                   'North America' : 4,
+                   'Papunesia' : 5,
+                   'Australia' : 6}
+
+    return color_codes[geoarea]
+
 basic_features = ['wals_code', 'iso_code', 'glottocode',
                   'Name', 'latitude', 'longitude', 'genus',
                   'family', 'macroarea', 'countrycodes',]
 
-filename = '../data/'
-
-language = pd.read_csv(filename + 'language.csv')
+data_folder = '../website/data/'
+output_json_file = '../website/data/feature_cluster_data_verbs.json'
+language = pd.read_csv(data_folder + 'language.csv')
 
 keep_features = [
 '65A Perfective/Imperfective Aspect',
@@ -59,37 +70,51 @@ keep_features_extended = basic_features + keep_features
 language_consonant_vowel = language[keep_features_extended]
 language_consonant_vowel = language_consonant_vowel.dropna()
 
-X_cons_vowel, feature_maps, inv_feature_maps = translate_dataframe_to_values(language_consonant_vowel, keep_features)
+X_features, feature_maps, inv_feature_maps = translate_dataframe_to_values(language_consonant_vowel, keep_features)
 
 
-X_cons_vowel = X_cons_vowel[keep_features].to_numpy()
+X_features = X_features[keep_features].to_numpy()
 
 cost = []
 K = range(2, 50) 
 for k in list(K): 
     kmode = KModes(n_clusters=k, init = "random", n_init = 5, verbose=1) 
-    kmode.fit_predict(X_cons_vowel) 
+    kmode.fit_predict(X_features) 
     cost.append(kmode.cost_) 
 plt.figure()
 plt.plot(K, cost, '-o')
 plt.show()
 
-kmodes = KModes(n_clusters = 10)
-y_pred = kmodes.fit_predict(X_cons_vowel)
+n_clusters = 5
 
+kmodes = KModes(n_clusters = n_clusters)
+y_pred = kmodes.fit_predict(X_features)
 
+nodes = []
+edges = []
+
+cur_node_id = -1
 for label in np.unique(kmodes.labels_):
+    cur_node_id += 1
     print("Cluster " + str(int(label)))
+    cur_cluster_name = 'Cluster ' + str(int(label))
+    nodes.append({"name":cur_cluster_name, 
+                  "color":0,
+                  "id" : cur_node_id})
     cluster_languages = language_consonant_vowel.iloc[y_pred == label, :]
+
+    cur_cluster_id = cur_node_id
     
-    cur_cluster_centroids = kmodes.cluster_centroids_[label]
-    for i in range(cur_cluster_centroids.shape[0]):
-        print(keep_features[i] + " : " + inv_feature_maps[keep_features[i]][cur_cluster_centroids[i]])
-    print("==============")
     for i in range(cluster_languages.shape[0]):
-        print('\t' + cluster_languages.iloc[i]['Name'] + ' - ' \
-              + cluster_languages.iloc[i]['macroarea'] + ' - '\
-                  + cluster_languages.iloc[i]['family'])
-    
-    print("==============\n")
-    print("==============")
+        cur_node_id += 1
+        cur_color = get_color_from_geoarea(cluster_languages.iloc[i]['macroarea'])
+        nodes.append({"name":cluster_languages.iloc[i]['Name'], 
+                      "color" : cur_color,
+                      "id" : cur_node_id})
+        edges.append({ "source": cur_cluster_id, "target": cur_node_id })
+
+cluster_output_dict = {'nodes' : nodes, 
+                       'edges' : edges}
+
+with open(output_json_file, 'w') as fp:
+    json.dump(cluster_output_dict, fp, indent = 2)

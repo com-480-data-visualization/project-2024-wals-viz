@@ -1,0 +1,1021 @@
+{
+  "nodes": [
+    {
+      "name": "Cluster 0",
+      "color": 0,
+      "id": 0
+    },
+    {
+      "name": "Acoma",
+      "color": 4,
+      "id": 1
+    },
+    {
+      "name": "Arabic (Egyptian)",
+      "color": 1,
+      "id": 2
+    },
+    {
+      "name": "Ainu",
+      "color": 2,
+      "id": 3
+    },
+    {
+      "name": "Amele",
+      "color": 5,
+      "id": 4
+    },
+    {
+      "name": "Apurin\u00e3",
+      "color": 3,
+      "id": 5
+    },
+    {
+      "name": "Arapesh (Mountain)",
+      "color": 5,
+      "id": 6
+    },
+    {
+      "name": "Asmat",
+      "color": 5,
+      "id": 7
+    },
+    {
+      "name": "Barasano",
+      "color": 3,
+      "id": 8
+    },
+    {
+      "name": "Burushaski",
+      "color": 2,
+      "id": 9
+    },
+    {
+      "name": "Daga",
+      "color": 5,
+      "id": 10
+    },
+    {
+      "name": "Diola-Fogny",
+      "color": 1,
+      "id": 11
+    },
+    {
+      "name": "Dani (Lower Grand Valley)",
+      "color": 5,
+      "id": 12
+    },
+    {
+      "name": "Evenki",
+      "color": 2,
+      "id": 13
+    },
+    {
+      "name": "Fijian",
+      "color": 5,
+      "id": 14
+    },
+    {
+      "name": "Finnish",
+      "color": 2,
+      "id": 15
+    },
+    {
+      "name": "French",
+      "color": 2,
+      "id": 16
+    },
+    {
+      "name": "Georgian",
+      "color": 2,
+      "id": 17
+    },
+    {
+      "name": "Gooniyandi",
+      "color": 6,
+      "id": 18
+    },
+    {
+      "name": "Grebo",
+      "color": 1,
+      "id": 19
+    },
+    {
+      "name": "Greenlandic (West)",
+      "color": 2,
+      "id": 20
+    },
+    {
+      "name": "Guaran\u00ed",
+      "color": 3,
+      "id": 21
+    },
+    {
+      "name": "Hebrew (Modern)",
+      "color": 2,
+      "id": 22
+    },
+    {
+      "name": "Hindi",
+      "color": 2,
+      "id": 23
+    },
+    {
+      "name": "Imonda",
+      "color": 5,
+      "id": 24
+    },
+    {
+      "name": "Japanese",
+      "color": 2,
+      "id": 25
+    },
+    {
+      "name": "Kayardild",
+      "color": 6,
+      "id": 26
+    },
+    {
+      "name": "Kewa",
+      "color": 5,
+      "id": 27
+    },
+    {
+      "name": "Khalkha",
+      "color": 2,
+      "id": 28
+    },
+    {
+      "name": "Kiowa",
+      "color": 4,
+      "id": 29
+    },
+    {
+      "name": "Kannada",
+      "color": 2,
+      "id": 30
+    },
+    {
+      "name": "Kutenai",
+      "color": 4,
+      "id": 31
+    },
+    {
+      "name": "Latvian",
+      "color": 2,
+      "id": 32
+    },
+    {
+      "name": "Lavukaleve",
+      "color": 5,
+      "id": 33
+    },
+    {
+      "name": "Lezgian",
+      "color": 2,
+      "id": 34
+    },
+    {
+      "name": "Lakhota",
+      "color": 4,
+      "id": 35
+    },
+    {
+      "name": "Luvale",
+      "color": 1,
+      "id": 36
+    },
+    {
+      "name": "Mapudungun",
+      "color": 3,
+      "id": 37
+    },
+    {
+      "name": "Maricopa",
+      "color": 4,
+      "id": 38
+    },
+    {
+      "name": "Martuthunira",
+      "color": 6,
+      "id": 39
+    },
+    {
+      "name": "Mangarrayi",
+      "color": 6,
+      "id": 40
+    },
+    {
+      "name": "Nenets",
+      "color": 2,
+      "id": 41
+    },
+    {
+      "name": "Ngiyambaa",
+      "color": 6,
+      "id": 42
+    },
+    {
+      "name": "Nivkh",
+      "color": 2,
+      "id": 43
+    },
+    {
+      "name": "Quechua (Imbabura)",
+      "color": 3,
+      "id": 44
+    },
+    {
+      "name": "Rama",
+      "color": 4,
+      "id": 45
+    },
+    {
+      "name": "Spanish",
+      "color": 2,
+      "id": 46
+    },
+    {
+      "name": "Suena",
+      "color": 5,
+      "id": 47
+    },
+    {
+      "name": "Swahili",
+      "color": 1,
+      "id": 48
+    },
+    {
+      "name": "Tiwi",
+      "color": 6,
+      "id": 49
+    },
+    {
+      "name": "Tukang Besi",
+      "color": 5,
+      "id": 50
+    },
+    {
+      "name": "Wich\u00ed",
+      "color": 3,
+      "id": 51
+    },
+    {
+      "name": "Warao",
+      "color": 3,
+      "id": 52
+    },
+    {
+      "name": "Yaqui",
+      "color": 4,
+      "id": 53
+    },
+    {
+      "name": "Yukaghir (Kolyma)",
+      "color": 2,
+      "id": 54
+    },
+    {
+      "name": "Zulu",
+      "color": 1,
+      "id": 55
+    },
+    {
+      "name": "Zuni",
+      "color": 4,
+      "id": 56
+    },
+    {
+      "name": "Cluster 1",
+      "color": 0,
+      "id": 57
+    },
+    {
+      "name": "Bagirmi",
+      "color": 1,
+      "id": 58
+    },
+    {
+      "name": "Berber (Middle Atlas)",
+      "color": 1,
+      "id": 59
+    },
+    {
+      "name": "Chukchi",
+      "color": 2,
+      "id": 60
+    },
+    {
+      "name": "Cree (Plains)",
+      "color": 4,
+      "id": 61
+    },
+    {
+      "name": "Jakaltek",
+      "color": 4,
+      "id": 62
+    },
+    {
+      "name": "Ket",
+      "color": 2,
+      "id": 63
+    },
+    {
+      "name": "Krongo",
+      "color": 1,
+      "id": 64
+    },
+    {
+      "name": "Lango",
+      "color": 1,
+      "id": 65
+    },
+    {
+      "name": "Makah",
+      "color": 4,
+      "id": 66
+    },
+    {
+      "name": "Malagasy",
+      "color": 1,
+      "id": 67
+    },
+    {
+      "name": "Mandarin",
+      "color": 2,
+      "id": 68
+    },
+    {
+      "name": "Pirah\u00e3",
+      "color": 3,
+      "id": 69
+    },
+    {
+      "name": "Persian",
+      "color": 2,
+      "id": 70
+    },
+    {
+      "name": "Russian",
+      "color": 2,
+      "id": 71
+    },
+    {
+      "name": "Supyire",
+      "color": 1,
+      "id": 72
+    },
+    {
+      "name": "Tagalog",
+      "color": 5,
+      "id": 73
+    },
+    {
+      "name": "Yagua",
+      "color": 3,
+      "id": 74
+    },
+    {
+      "name": "Cluster 2",
+      "color": 0,
+      "id": 75
+    },
+    {
+      "name": "Araona",
+      "color": 3,
+      "id": 76
+    },
+    {
+      "name": "Burmese",
+      "color": 2,
+      "id": 77
+    },
+    {
+      "name": "Canela-Krah\u00f4",
+      "color": 3,
+      "id": 78
+    },
+    {
+      "name": "Hausa",
+      "color": 1,
+      "id": 79
+    },
+    {
+      "name": "Indonesian",
+      "color": 5,
+      "id": 80
+    },
+    {
+      "name": "Khmer",
+      "color": 2,
+      "id": 81
+    },
+    {
+      "name": "Koyraboro Senni",
+      "color": 1,
+      "id": 82
+    },
+    {
+      "name": "Maori",
+      "color": 5,
+      "id": 83
+    },
+    {
+      "name": "Maybrat",
+      "color": 5,
+      "id": 84
+    },
+    {
+      "name": "Meithei",
+      "color": 2,
+      "id": 85
+    },
+    {
+      "name": "Rapanui",
+      "color": 5,
+      "id": 86
+    },
+    {
+      "name": "Sango",
+      "color": 1,
+      "id": 87
+    },
+    {
+      "name": "Sanuma",
+      "color": 3,
+      "id": 88
+    },
+    {
+      "name": "Thai",
+      "color": 2,
+      "id": 89
+    },
+    {
+      "name": "Vietnamese",
+      "color": 2,
+      "id": 90
+    },
+    {
+      "name": "Wari'",
+      "color": 3,
+      "id": 91
+    },
+    {
+      "name": "Yoruba",
+      "color": 1,
+      "id": 92
+    },
+    {
+      "name": "Cluster 3",
+      "color": 0,
+      "id": 93
+    },
+    {
+      "name": "Abkhaz",
+      "color": 2,
+      "id": 94
+    },
+    {
+      "name": "Alamblak",
+      "color": 5,
+      "id": 95
+    },
+    {
+      "name": "Armenian (Eastern)",
+      "color": 2,
+      "id": 96
+    },
+    {
+      "name": "Awa Pit",
+      "color": 3,
+      "id": 97
+    },
+    {
+      "name": "Brahui",
+      "color": 2,
+      "id": 98
+    },
+    {
+      "name": "Basque",
+      "color": 2,
+      "id": 99
+    },
+    {
+      "name": "English",
+      "color": 2,
+      "id": 100
+    },
+    {
+      "name": "German",
+      "color": 2,
+      "id": 101
+    },
+    {
+      "name": "Greek (Modern)",
+      "color": 2,
+      "id": 102
+    },
+    {
+      "name": "Hixkaryana",
+      "color": 3,
+      "id": 103
+    },
+    {
+      "name": "Hungarian",
+      "color": 2,
+      "id": 104
+    },
+    {
+      "name": "Kanuri",
+      "color": 1,
+      "id": 105
+    },
+    {
+      "name": "Korean",
+      "color": 2,
+      "id": 106
+    },
+    {
+      "name": "Maung",
+      "color": 6,
+      "id": 107
+    },
+    {
+      "name": "Oromo (Harar)",
+      "color": 1,
+      "id": 108
+    },
+    {
+      "name": "Turkish",
+      "color": 2,
+      "id": 109
+    },
+    {
+      "name": "Cluster 4",
+      "color": 0,
+      "id": 110
+    },
+    {
+      "name": "Mixtec (Chalcatongo)",
+      "color": 4,
+      "id": 111
+    },
+    {
+      "name": "Oneida",
+      "color": 4,
+      "id": 112
+    },
+    {
+      "name": "Slave",
+      "color": 4,
+      "id": 113
+    },
+    {
+      "name": "Wichita",
+      "color": 4,
+      "id": 114
+    }
+  ],
+  "edges": [
+    {
+      "source": 0,
+      "target": 1
+    },
+    {
+      "source": 0,
+      "target": 2
+    },
+    {
+      "source": 0,
+      "target": 3
+    },
+    {
+      "source": 0,
+      "target": 4
+    },
+    {
+      "source": 0,
+      "target": 5
+    },
+    {
+      "source": 0,
+      "target": 6
+    },
+    {
+      "source": 0,
+      "target": 7
+    },
+    {
+      "source": 0,
+      "target": 8
+    },
+    {
+      "source": 0,
+      "target": 9
+    },
+    {
+      "source": 0,
+      "target": 10
+    },
+    {
+      "source": 0,
+      "target": 11
+    },
+    {
+      "source": 0,
+      "target": 12
+    },
+    {
+      "source": 0,
+      "target": 13
+    },
+    {
+      "source": 0,
+      "target": 14
+    },
+    {
+      "source": 0,
+      "target": 15
+    },
+    {
+      "source": 0,
+      "target": 16
+    },
+    {
+      "source": 0,
+      "target": 17
+    },
+    {
+      "source": 0,
+      "target": 18
+    },
+    {
+      "source": 0,
+      "target": 19
+    },
+    {
+      "source": 0,
+      "target": 20
+    },
+    {
+      "source": 0,
+      "target": 21
+    },
+    {
+      "source": 0,
+      "target": 22
+    },
+    {
+      "source": 0,
+      "target": 23
+    },
+    {
+      "source": 0,
+      "target": 24
+    },
+    {
+      "source": 0,
+      "target": 25
+    },
+    {
+      "source": 0,
+      "target": 26
+    },
+    {
+      "source": 0,
+      "target": 27
+    },
+    {
+      "source": 0,
+      "target": 28
+    },
+    {
+      "source": 0,
+      "target": 29
+    },
+    {
+      "source": 0,
+      "target": 30
+    },
+    {
+      "source": 0,
+      "target": 31
+    },
+    {
+      "source": 0,
+      "target": 32
+    },
+    {
+      "source": 0,
+      "target": 33
+    },
+    {
+      "source": 0,
+      "target": 34
+    },
+    {
+      "source": 0,
+      "target": 35
+    },
+    {
+      "source": 0,
+      "target": 36
+    },
+    {
+      "source": 0,
+      "target": 37
+    },
+    {
+      "source": 0,
+      "target": 38
+    },
+    {
+      "source": 0,
+      "target": 39
+    },
+    {
+      "source": 0,
+      "target": 40
+    },
+    {
+      "source": 0,
+      "target": 41
+    },
+    {
+      "source": 0,
+      "target": 42
+    },
+    {
+      "source": 0,
+      "target": 43
+    },
+    {
+      "source": 0,
+      "target": 44
+    },
+    {
+      "source": 0,
+      "target": 45
+    },
+    {
+      "source": 0,
+      "target": 46
+    },
+    {
+      "source": 0,
+      "target": 47
+    },
+    {
+      "source": 0,
+      "target": 48
+    },
+    {
+      "source": 0,
+      "target": 49
+    },
+    {
+      "source": 0,
+      "target": 50
+    },
+    {
+      "source": 0,
+      "target": 51
+    },
+    {
+      "source": 0,
+      "target": 52
+    },
+    {
+      "source": 0,
+      "target": 53
+    },
+    {
+      "source": 0,
+      "target": 54
+    },
+    {
+      "source": 0,
+      "target": 55
+    },
+    {
+      "source": 0,
+      "target": 56
+    },
+    {
+      "source": 57,
+      "target": 58
+    },
+    {
+      "source": 57,
+      "target": 59
+    },
+    {
+      "source": 57,
+      "target": 60
+    },
+    {
+      "source": 57,
+      "target": 61
+    },
+    {
+      "source": 57,
+      "target": 62
+    },
+    {
+      "source": 57,
+      "target": 63
+    },
+    {
+      "source": 57,
+      "target": 64
+    },
+    {
+      "source": 57,
+      "target": 65
+    },
+    {
+      "source": 57,
+      "target": 66
+    },
+    {
+      "source": 57,
+      "target": 67
+    },
+    {
+      "source": 57,
+      "target": 68
+    },
+    {
+      "source": 57,
+      "target": 69
+    },
+    {
+      "source": 57,
+      "target": 70
+    },
+    {
+      "source": 57,
+      "target": 71
+    },
+    {
+      "source": 57,
+      "target": 72
+    },
+    {
+      "source": 57,
+      "target": 73
+    },
+    {
+      "source": 57,
+      "target": 74
+    },
+    {
+      "source": 75,
+      "target": 76
+    },
+    {
+      "source": 75,
+      "target": 77
+    },
+    {
+      "source": 75,
+      "target": 78
+    },
+    {
+      "source": 75,
+      "target": 79
+    },
+    {
+      "source": 75,
+      "target": 80
+    },
+    {
+      "source": 75,
+      "target": 81
+    },
+    {
+      "source": 75,
+      "target": 82
+    },
+    {
+      "source": 75,
+      "target": 83
+    },
+    {
+      "source": 75,
+      "target": 84
+    },
+    {
+      "source": 75,
+      "target": 85
+    },
+    {
+      "source": 75,
+      "target": 86
+    },
+    {
+      "source": 75,
+      "target": 87
+    },
+    {
+      "source": 75,
+      "target": 88
+    },
+    {
+      "source": 75,
+      "target": 89
+    },
+    {
+      "source": 75,
+      "target": 90
+    },
+    {
+      "source": 75,
+      "target": 91
+    },
+    {
+      "source": 75,
+      "target": 92
+    },
+    {
+      "source": 93,
+      "target": 94
+    },
+    {
+      "source": 93,
+      "target": 95
+    },
+    {
+      "source": 93,
+      "target": 96
+    },
+    {
+      "source": 93,
+      "target": 97
+    },
+    {
+      "source": 93,
+      "target": 98
+    },
+    {
+      "source": 93,
+      "target": 99
+    },
+    {
+      "source": 93,
+      "target": 100
+    },
+    {
+      "source": 93,
+      "target": 101
+    },
+    {
+      "source": 93,
+      "target": 102
+    },
+    {
+      "source": 93,
+      "target": 103
+    },
+    {
+      "source": 93,
+      "target": 104
+    },
+    {
+      "source": 93,
+      "target": 105
+    },
+    {
+      "source": 93,
+      "target": 106
+    },
+    {
+      "source": 93,
+      "target": 107
+    },
+    {
+      "source": 93,
+      "target": 108
+    },
+    {
+      "source": 93,
+      "target": 109
+    },
+    {
+      "source": 110,
+      "target": 111
+    },
+    {
+      "source": 110,
+      "target": 112
+    },
+    {
+      "source": 110,
+      "target": 113
+    },
+    {
+      "source": 110,
+      "target": 114
+    }
+  ]
+}

@@ -13,8 +13,9 @@ function generate_feature_clusters(){
     var parentDiv = document.getElementById('cluster-col');
     var width = parentDiv.clientWidth;
     var height = parentDiv.clientHeight;
+    console.log(width, height)
 
-    d3.json("data/feature_cluster_data.json").then(function (dataset){
+    d3.json("data/feature_cluster_data_verbs.json").then(function (dataset){
         
         //Define drag event functions
         function dragStarted(event) {
@@ -36,9 +37,13 @@ function generate_feature_clusters(){
         
         //Initialize a simple force layout, using the nodes and edges in dataset        
         var force = d3.forceSimulation(dataset.nodes)
+                    .force("link", d3.forceLink(dataset.edges).id(d => d.id))
                     .force("charge", d3.forceManyBody())
-                    .force("link", d3.forceLink(dataset.edges))
-                    .force("center", d3.forceCenter().x(width/2).y(height/2));
+                    .force("x", d3.forceX())
+                    .force("y", d3.forceY());  
+                    // .force("charge", d3.forceManyBody())
+                    // .force("link", d3.forceLink(dataset.edges))
+                    // .force("center", d3.forceCenter().x(width/2).y(height/2));
 
         var colors = d3.scaleOrdinal(d3.schemeCategory10);
 
@@ -46,7 +51,11 @@ function generate_feature_clusters(){
         var svg = d3.select(parentDiv)
                 .append("svg")
                 .attr("width", width)
-                .attr("height", height);
+                .attr("height", height)
+                .attr("viewBox", [-width / 2, -height / 2, width, height])
+                .attr("style", "max-width: 100%; height: auto;");
+                // .attr("width", width)
+                // .attr("height", height);
 
         //Create edges as lines
         var edges = svg.selectAll("line")
