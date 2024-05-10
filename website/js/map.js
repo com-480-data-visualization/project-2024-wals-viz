@@ -1,5 +1,6 @@
 // Reusable d3.js map component
 function map() {
+    var map_id = null;
     var x = 0,
         y = 0;
     var width = 960,
@@ -10,15 +11,15 @@ function map() {
     var color_mapper = function (d) {
         return "steelblue";
     }
-    var onClickBehavior = function (d, i) {}
+    var onClickBehavior = function (d, i) { }
 
     function my() {
         // selection.each( function (data, i) {
         //Define map projection
         var projection = d3.geoWinkel3()
             .fitExtent([[x, y], [x + width, y + height]], json)
-            // .scale(width / 8)
-            // .translate([x + width / 2, y + height / 2]);
+        // .scale(width / 8)
+        // .translate([x + width / 2, y + height / 2]);
 
         //Define path generator
         var path = d3.geoPath()
@@ -41,46 +42,31 @@ function map() {
             }
         }
 
-//         //Merge the ag. data and GeoJSON
-//         //Loop through once for each ag. data value
-//         for (var i = 0; i < data.length; i++) {
-
-//             var dataState = data[i].state;				//Grab state name
-//             var dataValue = parseFloat(data[i].value);	//Grab data value, and convert from string to float
-
-//             //Find the corresponding state inside the GeoJSON
-//             for (var j = 0; j < json.features.length; j++) {
-
-//                 var jsonState = json.features[j].properties.name;
-
-//                 if (dataState == jsonState) {
-
-//                     //Copy the data value into the JSON
-//                     json.features[j].properties.value = dataValue;
-
-//                     //Stop looking through the JSON
-//                     break;
-
-//                 }
-//             }		
-//         }
-
         //Bind data and create one path per GeoJSON feature
         var countriesGroup = svg.append("g")
+            .attr("id", map_id);
         var countries = countriesGroup.selectAll("path")
             .data(json.features)
             .join("path")
-            .attr("id", function(d, i) {
-              return "country" + d.properties.ISO_A2;
-            })
-            .attr("class", "country")
+            // .attr("id", function (d, i) {    // Don't uncomment for now, it will break coloring
+            //     return "country" + d.properties.ISO_A2;
+            // })
+            // .attr("class", "country")
             .attr("fill", color_mapper)
+            .attr("stroke", "black")
+            .attr("stroke-width", 0.5)
             .attr("d", path)
             .on("click", onClickBehavior);
 
         console.log("Map loaded!");
 
         return countriesGroup;
+    };
+
+    my.map_id = function (value) {
+        if (!arguments.length) return map_id;
+        map_id = value;
+        return my;
     };
 
     my.x = function (value) {

@@ -13,10 +13,10 @@ whenDocumentLoaded(() => {
         d3.json("geojson/ne_50m_admin_0_countries.json"),
         d3.csv("data/all_countries_info_alpha2.csv"),
     ]).then(([json, csv]) => {
-        ready(null, json, csv);
+        officallang_ready(null, json, csv);
     });
 
-    function ready(error, json, csv) {
+    function officallang_ready(error, json, csv) {
         // Modifies csv, substituting the languages string with an array of languages
         csv.forEach(function (d) {
             d.Languages = d.Languages.split(",").map(function (lang) {
@@ -31,6 +31,8 @@ whenDocumentLoaded(() => {
             .append("svg")
             .attr("width", officiallang_div.clientWidth)
             .attr("height", officiallang_div.clientHeight);
+
+        var map_id = "officiallang_map";
 
         // Insert text in the top left corner of the svg, 
         // TODO, maybe we do it as embedded HTML in the SVG
@@ -52,10 +54,10 @@ whenDocumentLoaded(() => {
         };
 
         highlightSameLang = function (d) {
-            d3.selectAll(".country").attr("fill", "steelblue");
+            svg.select("#"+map_id).selectAll("path").attr("fill", "steelblue");
             let selectedLang = d3.select(this).datum().properties.languages;
             for (let i = 0; i < selectedLang.length; i++) {
-                d3.selectAll(".country")
+                svg.select("#"+map_id).selectAll("path")
                     .filter(function (d) {
                         return d.properties.languages.includes(selectedLang[i]);
                     })
@@ -66,6 +68,7 @@ whenDocumentLoaded(() => {
 
         // Create map object
         var officiallang_map = map()
+            .map_id(map_id)
             .x(0)
             .y(0)
             .width(officiallang_div.clientWidth)
