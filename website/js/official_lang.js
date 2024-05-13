@@ -43,16 +43,6 @@ whenDocumentLoaded(() => {
         //     .style("font-weight", "bold")
         //     .text("Official Languages of the World")
 
-        let test_color = function (d) {
-            // color red if eng is an official language
-            // if (d.properties.ISO_A2 == "US") {
-            if (d.properties.languages.includes("eng")) {
-                return "orange";
-            } else {
-                return "steelblue";
-            }
-        };
-
         // Function to highlight countries with the same language as the selected country
         let highlightSameLang = function (d, currentCountry) {
             svg.select("#" + map_id).selectAll("path").attr("fill", "steelblue");
@@ -67,9 +57,14 @@ whenDocumentLoaded(() => {
             currentCountry.attr("fill", "red");
         };
 
+        let highlightCountry = function (d, currentCountry) {
+            svg.select("#" + map_id).selectAll("path").attr("fill", "steelblue");
+            currentCountry.attr("fill", "red");
+        };
+
         // Function that creates a group and a rectangle if they haven't been created yet,
         // and updates the text within with country information
-        let createCountryInfo = function (d, currentCountry) {
+        let createCountryInfo = function (d, currentCountry, map_id) {
             let countryInfoGroup = svg.select("#" + map_id).select("#countryInfoGroup");
             let langListGroup = countryInfoGroup.select("#langListGroup");
             let xGroup = officiallang_div.clientWidth / 12;
@@ -105,12 +100,25 @@ whenDocumentLoaded(() => {
             langListGroup.selectAll("text")
                 .data(langList)
                 .join("text")
+                .attr("fill", "black")
                 .attr("x", xGroup + 10)
                 .attr("y", function (d, i) {
                     return yGroup + 40 + 20 * i;
                 })
                 .text(function (d) {
                     return "Language: " + d;
+                })
+                .on("click", function (d) { // Turn selected color to red
+                    langListGroup.selectAll("text").attr("fill", "black");
+                    let currentLanguage = d3.select(this).attr("fill", "red");
+                    // Highlight countries with the same language
+                    svg.select("#" + map_id).selectAll("path").attr("fill", "steelblue");
+                    svg.select("#" + map_id).selectAll("path")
+                        .filter(function (data) {
+                            return data.properties.languages.includes(currentLanguage.datum());
+                        })
+                        .attr("fill", "orange");
+                    currentCountry.attr("fill", "red");
                 });
         }
 
@@ -124,11 +132,11 @@ whenDocumentLoaded(() => {
             .json(json)
             .allCountries(csv)
             .svg(svg)
-            .color_mapper(test_color)
+            .color_mapper(function (d) { return "steelblue"; })
             .onClickBehavior(function (d) {
                 let currentCountry = d3.select(this);
-                createCountryInfo(d, currentCountry);
-                highlightSameLang(d, currentCountry);
+                createCountryInfo(d, currentCountry, map_id);
+                highlightCountry(d, currentCountry);
             });
 
         var officiallang_countriesGroup = officiallang_map();
