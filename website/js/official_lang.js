@@ -43,7 +43,7 @@ whenDocumentLoaded(() => {
         //     .style("font-weight", "bold")
         //     .text("Official Languages of the World")
 
-        test_color = function (d) {
+        let test_color = function (d) {
             // color red if eng is an official language
             // if (d.properties.ISO_A2 == "US") {
             if (d.properties.languages.includes("eng")) {
@@ -53,18 +53,66 @@ whenDocumentLoaded(() => {
             }
         };
 
-        highlightSameLang = function (d) {
-            svg.select("#"+map_id).selectAll("path").attr("fill", "steelblue");
-            let selectedLang = d3.select(this).datum().properties.languages;
+        // Function to highlight countries with the same language as the selected country
+        let highlightSameLang = function (d, currentCountry) {
+            svg.select("#" + map_id).selectAll("path").attr("fill", "steelblue");
+            let selectedLang = currentCountry.datum().properties.languages;
             for (let i = 0; i < selectedLang.length; i++) {
-                svg.select("#"+map_id).selectAll("path")
+                svg.select("#" + map_id).selectAll("path")
                     .filter(function (d) {
                         return d.properties.languages.includes(selectedLang[i]);
                     })
                     .attr("fill", "orange");
             }
-            d3.select(this).attr("fill", "red");
+            currentCountry.attr("fill", "red");
         };
+
+        // Function that creates a group and a rectangle if they haven't been created yet,
+        // and updates the text within with country information
+        let createCountryInfo = function (d, currentCountry) {
+            let countryInfoGroup = svg.select("#" + map_id).select("#countryInfoGroup");
+            let langListGroup = countryInfoGroup.select("#langListGroup");
+            let xGroup = officiallang_div.clientWidth / 12;
+            let yGroup = officiallang_div.clientHeight / 4
+            let widthGroup = officiallang_div.clientWidth / 8;
+            let heightGroup = officiallang_div.clientHeight / 2;
+
+            // If the group doesn't exist, create it
+            if (countryInfoGroup.empty()) {
+                countryInfoGroup = svg.select("#" + map_id).append("g").attr("id", "countryInfoGroup");
+                countryInfoGroup.append("rect")
+                    .attr("x", xGroup)
+                    .attr("y", yGroup)
+                    .attr("width", widthGroup)
+                    .attr("height", heightGroup)
+                    .attr("fill", "none")
+                    .attr("stroke", "black");
+                countryInfoGroup.append("text")
+                    .attr("x", xGroup + 10)
+                    .attr("y", yGroup + 20)
+                    .attr("id", "countryName")
+                    .text("Country: ");
+                langListGroup = countryInfoGroup.append("g")
+                    .attr("id", "langListGroup");
+            }
+            // Update the country name
+            countryInfoGroup.select("#countryName")
+                .attr("x", xGroup + 10)
+                .attr("y", yGroup + 20)
+                .text("Country: " + currentCountry.datum().properties.NAME);
+            // Update the languages
+            let langList = currentCountry.datum().properties.languages;
+            langListGroup.selectAll("text")
+                .data(langList)
+                .join("text")
+                .attr("x", xGroup + 10)
+                .attr("y", function (d, i) {
+                    return yGroup + 40 + 20 * i;
+                })
+                .text(function (d) {
+                    return "Language: " + d;
+                });
+        }
 
         // Create map object
         var officiallang_map = map()
@@ -77,7 +125,11 @@ whenDocumentLoaded(() => {
             .allCountries(csv)
             .svg(svg)
             .color_mapper(test_color)
-            .onClickBehavior(highlightSameLang);
+            .onClickBehavior(function (d) {
+                let currentCountry = d3.select(this);
+                createCountryInfo(d, currentCountry);
+                highlightSameLang(d, currentCountry);
+            });
 
         var officiallang_countriesGroup = officiallang_map();
     };
