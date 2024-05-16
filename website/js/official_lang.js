@@ -12,13 +12,14 @@ whenDocumentLoaded(() => {
     Promise.all([
         d3.json("geojson/ne_50m_admin_0_countries.json"),
         d3.csv("data/all_countries_info_alpha2.csv"),
-    ]).then(([json, csv]) => {
-        officallang_ready(null, json, csv);
+        d3.csv("data/language.csv"),
+    ]).then(([json, official_language_csv, wals_csv]) => {
+        officallang_ready(null, json, official_language_csv, wals_csv);
     });
 
-    function officallang_ready(error, json, csv) {
+    function officallang_ready(error, json, official_language_csv, wals_csv) {
         // Modifies csv, substituting the languages string with an array of languages
-        csv.forEach(function (d) {
+        official_language_csv.forEach(function (d) {
             d.Languages = d.Languages.split(",").map(function (lang) {
                 return lang.trim();
             });
@@ -130,7 +131,7 @@ whenDocumentLoaded(() => {
             .width(officiallang_div.clientWidth)
             .height(officiallang_div.clientHeight)
             .json(json)
-            .allCountries(csv)
+            .allCountries(official_language_csv)
             .svg(svg)
             .color_mapper(function (d) { return "steelblue"; })
             .onClickBehavior(function (d) {
