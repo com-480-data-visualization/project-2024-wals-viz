@@ -26,7 +26,7 @@ function map() {
             .projection(projection);
 
         // Merge the allCountries data and GeoJSON
-        json = merge_countries_geojson(allCountries, json);
+        json = merge_official_lang_geojson(allCountries, json);
 
         //Bind data and create one path per GeoJSON feature
         var countriesGroup = svg.append("g")

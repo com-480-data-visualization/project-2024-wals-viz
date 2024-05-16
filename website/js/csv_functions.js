@@ -1,7 +1,7 @@
 // Functions to handle CSV files
 
 // Merge allCountries data with the GeoJSON data
-function merge_countries_geojson (allCountries, json) {
+function merge_official_lang_geojson (allCountries, json) {
     for (let i = 0; i < json.features.length; i++) {
         json.features[i].properties.languages = [];
     }
@@ -19,6 +19,25 @@ function merge_countries_geojson (allCountries, json) {
     }
 
     return json;
+}
+
+// Color the countries according to the colorFunction
+function color_country (defaultColor = "steelblue", json, colorFunction, ...args) {
+    for (let i = 0; i < json.features.length; i++) {
+        json.features[i].color = defaultColor;
+        json.features[i].color = colorFunction(json.features[i], ...args);
+    }
+    return json;
+}
+
+function wals_get_field (wals, lang, field) {
+    let langData = wals.filter(function (d) {
+        return d.iso_code == lang;
+    });
+    if (langData.length == 0) {
+        return "Unknown";
+    }
+    return langData[0][field];
 }
 
 // Returns the name of a language given its ISO code
