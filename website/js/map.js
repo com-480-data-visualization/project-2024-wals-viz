@@ -26,21 +26,7 @@ function map() {
             .projection(projection);
 
         // Merge the allCountries data and GeoJSON
-        for (let i = 0; i < json.features.length; i++) {
-            json.features[i].properties.languages = [];
-        }
-
-        for (let i = 0; i < allCountries.length; i++) {
-            let dataCountry = allCountries[i].iso_alpha2;
-            let dataLanguages = allCountries[i].Languages;
-            for (let j = 0; j < json.features.length; j++) {
-                let jsonCountry = json.features[j].properties.ISO_A2;
-                if (dataCountry == jsonCountry) {
-                    json.features[j].properties.languages = dataLanguages;
-                    break;
-                }
-            }
-        }
+        json = merge_countries_geojson(allCountries, json);
 
         //Bind data and create one path per GeoJSON feature
         var countriesGroup = svg.append("g")

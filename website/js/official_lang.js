@@ -107,7 +107,7 @@ whenDocumentLoaded(() => {
                     return yGroup + 40 + 20 * i;
                 })
                 .text(function (d) {
-                    return "Language: " + d;
+                    return "Language: " + iso_to_lang(d, wals_csv);
                 })
                 .on("click", function (d) { // Turn selected color to red
                     langListGroup.selectAll("text").attr("fill", "black");
