@@ -12,6 +12,7 @@ function map() {
         return "steelblue";
     }
     var onClickBehavior = function (d, i) { }
+    var onHoverBehavior = function (d, i) { }
 
     function my() {
         // selection.each( function (data, i) {
@@ -42,7 +43,8 @@ function map() {
             .attr("stroke", "black")
             .attr("stroke-width", 0.5)
             .attr("d", path)
-            .on("click", onClickBehavior);
+            .on("click", onClickBehavior)
+            .on("mouseover", onHoverBehavior);
 
         console.log("Map loaded!");
 
@@ -106,6 +108,12 @@ function map() {
     my.onClickBehavior = function (value) {
         if (!arguments.length) return onClickBehavior;
         onClickBehavior = value;
+        return my;
+    }
+
+    my.onHoverBehavior = function (value) {
+        if (!arguments.length) return onHoverBehavior;
+        onHoverBehavior = value;
         return my;
     }
 
