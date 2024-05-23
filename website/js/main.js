@@ -15,15 +15,24 @@ whenDocumentLoaded(() => {
         d3.csv("data/language.csv"),
         d3.json("data/feature_cluster_data_verbs.json")
     ]).then(([json, official_language_csv, wals_csv, json_clusters]) => {
-        // Modifies csv, substituting the languages string with an array of languages
+        // Modifies json, adding a color property to each country
+        json = color_country("steelblue", json, () => "steelblue");
+
+        // Modifies official_language_csv, substituting the languages string with an array of languages
         official_language_csv.forEach(function (d) {
             d.Languages = d.Languages.split(",").map(function (lang) {
                 return lang.trim();
             });
         });
+        // Modifies wals_csv, substituting the country codes string with an array of country codes
+        wals_csv.forEach(function (d) {
+            d.countrycodes = d.countrycodes.split(",").map(function (code) {
+                return code.trim();
+            });
+        });
 
-        officallang_ready(null, json, official_language_csv, wals_csv);
-        color_categories_ready(null, json, official_language_csv, wals_csv);
-        featurecluster_ready(null, json, official_language_csv, json_clusters);
+        officallang_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(wals_csv));
+        color_categories_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(wals_csv));
+        featurecluster_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(json_clusters));
     });
 });

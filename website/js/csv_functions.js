@@ -23,9 +23,10 @@ function merge_official_lang_geojson (allCountries, json) {
 
 // Color the countries according to the colorFunction
 function color_country (defaultColor = "steelblue", json, colorFunction, ...args) {
+
     for (let i = 0; i < json.features.length; i++) {
-        json.features[i].color = defaultColor;
-        json.features[i].color = colorFunction(json.features[i], ...args);
+        json.features[i].properties.color = defaultColor;
+        json.features[i].properties.color = colorFunction(json.features[i].properties, ...args);
     }
     return json;
 }
