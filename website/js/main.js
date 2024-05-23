@@ -1,0 +1,29 @@
+// Run the action when we are sure the DOM has been loaded
+function whenDocumentLoaded(action) {
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", action);
+    } else {
+        // `DOMContentLoaded` already fired
+        action();
+    }
+}
+
+whenDocumentLoaded(() => {
+    Promise.all([
+        d3.json("geojson/ne_50m_admin_0_countries.json"),
+        d3.csv("data/all_countries_info_alpha2.csv"),
+        d3.csv("data/language.csv"),
+        d3.json("data/feature_cluster_data_verbs.json")
+    ]).then(([json, official_language_csv, wals_csv, json_clusters]) => {
+        // Modifies csv, substituting the languages string with an array of languages
+        official_language_csv.forEach(function (d) {
+            d.Languages = d.Languages.split(",").map(function (lang) {
+                return lang.trim();
+            });
+        });
+
+        officallang_ready(null, json, official_language_csv, wals_csv);
+        color_categories_ready(null, json, official_language_csv, wals_csv);
+        featurecluster_ready(null, json, official_language_csv, json_clusters);
+    });
+});

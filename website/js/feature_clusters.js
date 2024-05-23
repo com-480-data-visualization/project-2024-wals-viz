@@ -1,13 +1,3 @@
-// Run the action when we are sure the DOM has been loaded
-function whenDocumentLoaded(action) {
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", action);
-    } else {
-        // `DOMContentLoaded` already fired
-        action();
-    }
-}
-
 const colors = d3.scaleOrdinal(
     [0, 1, 2, 3, 4, 5, 6],
     ["#102C57FF", // Cluster Color
@@ -115,92 +105,74 @@ function get_country_color_from_continent(continent) {
     }
 }
 
-whenDocumentLoaded(() => {
-    Promise.all([
-        d3.json("geojson/ne_50m_admin_0_countries.json"),
-        d3.csv("data/all_countries_info_alpha2.csv"),
-        d3.json("data/feature_cluster_data_verbs.json")
-    ]).then(([json, csv, json_clusters]) => {
-        console.log("promise loaded");
-        featurecluster_ready(null, json, csv, json_clusters);
-    });
+function featurecluster_ready(error, json, csv, json_clusters) {
 
-    function featurecluster_ready(error, json, csv, json_clusters) {
+    console.log(colors(2))
+    console.log(csv);
 
-        console.log(colors(2))
-        // Modifies csv, substituting the languages string with an array of languages
-        csv.forEach(function (d) {
-            d.Languages = d.Languages.split(",").map(function (lang) {
-                return lang.trim();
-            });
-        });
+    var featurecluster_div = document.getElementById('cluster-col');
+    var width = featurecluster_div.clientWidth;
+    var height = featurecluster_div.clientHeight;
 
-        console.log(csv);
+    // var svg = d3.select(parentDiv)
+    //         .append("svg")
+    //         .attr("width", width)
+    //         .attr("height", height)
+    //         .attr("viewBox", [-width / 2, -height / 2, width, height])
+    //         .attr("style", "max-width: 100%; height: auto;");
 
-        var featurecluster_div = document.getElementById('cluster-col');
-        var width = featurecluster_div.clientWidth;
-        var height = featurecluster_div.clientHeight;
+    //Create SVG element
+    var featurecluster_svg = d3.select(featurecluster_div)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [-width / 2, -height / 2, width, height])
+        .attr("style", "max-width: 100%; height: auto;");
 
-        // var svg = d3.select(parentDiv)
-        //         .append("svg")
-        //         .attr("width", width)
-        //         .attr("height", height)
-        //         .attr("viewBox", [-width / 2, -height / 2, width, height])
-        //         .attr("style", "max-width: 100%; height: auto;");
+    const map_width = width / 2.5
+    const map_height = height / 2.5
+    const map_y = -height / 2
+    const map_x = width / 2 - map_width
 
-        //Create SVG element
-        var featurecluster_svg = d3.select(featurecluster_div)
-            .append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .attr("viewBox", [-width / 2, -height / 2, width, height])
-            .attr("style", "max-width: 100%; height: auto;");
+    const text_margin_x = 10
 
-        const map_width = width / 2.5
-        const map_height = height / 2.5
-        const map_y = -height / 2
-        const map_x = width / 2 - map_width
+    featurecluster_svg.append("foreignObject")
+        .attr('transform', 'translate(' + (-width / 2 + text_margin_x) + ',' + -height / 2 + ')')
+        .attr("width", 750)
+        .attr("height", 250)
+        .append("xhtml:div")
+        .style("font", "64px 'Helvetica'")
+        .html("Languages Beyond <b>Borders</b>");
 
-        const text_margin_x = 10
+    featurecluster_svg.append("foreignObject")
+        .attr('transform', 'translate(' + (-width / 2 + text_margin_x) + ',' + (-height / 2 + 200) + ')')
+        .attr("width", 300)
+        .attr("height", 250)
+        .append("xhtml:div")
+        .style("font", "22px 'Helvetica'")
+        .html("Language similarity based on their internal structure of words, <b>Morphology</b>.");
 
-        featurecluster_svg.append("foreignObject")
-            .attr('transform', 'translate(' + (-width / 2 + text_margin_x) + ',' + -height / 2 + ')')
-            .attr("width", 750)
-            .attr("height", 250)
-            .append("xhtml:div")
-            .style("font", "64px 'Helvetica'")
-            .html("Languages Beyond <b>Borders</b>");
+    // Create map object
+    var featurecluster_map = map()
+        .x(map_x)
+        .y(map_y)
+        .width(map_width)
+        .height(map_height)
+        .json(json)
+        .allCountries(csv)
+        .svg(featurecluster_svg)
+        .color_mapper(function (d) {
+            const color_id = get_country_color_from_continent(d.properties.CONTINENT);
+            return colors(color_id);
+        })
+    // .onClickBehavior(function (d, i) {
+    //     d3.selectAll(".country").classed("country-on", false);
+    //     d3.select(this).classed("country-on", true);
+    // });
 
-        featurecluster_svg.append("foreignObject")
-            .attr('transform', 'translate(' + (-width / 2 + text_margin_x) + ',' + (-height / 2 + 200) + ')')
-            .attr("width", 300)
-            .attr("height", 250)
-            .append("xhtml:div")
-            .style("font", "22px 'Helvetica'")
-            .html("Language similarity based on their internal structure of words, <b>Morphology</b>.");
+    var featurecluster_countriesGroup = featurecluster_map();
 
-        // Create map object
-        var featurecluster_map = map()
-            .x(map_x)
-            .y(map_y)
-            .width(map_width)
-            .height(map_height)
-            .json(json)
-            .allCountries(csv)
-            .svg(featurecluster_svg)
-            .color_mapper(function (d) {
-                const color_id = get_country_color_from_continent(d.properties.CONTINENT);
-                return colors(color_id);
-            })
-        // .onClickBehavior(function (d, i) {
-        //     d3.selectAll(".country").classed("country-on", false);
-        //     d3.select(this).classed("country-on", true);
-        // });
+    generate_feature_clusters(featurecluster_svg, json_clusters, width,
+        height, -width / 16, height / 8);
 
-        var featurecluster_countriesGroup = featurecluster_map();
-
-        generate_feature_clusters(featurecluster_svg, json_clusters, width,
-            height, -width / 16, height / 8);
-
-    };
-});
+};
