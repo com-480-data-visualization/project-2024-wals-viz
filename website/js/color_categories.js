@@ -1,4 +1,4 @@
-function color_categories_ready (error, json, official_language_csv, wals_csv) {
+function color_categories_ready(error, json, official_language_csv, wals_csv) {
     var colorcat_div = document.getElementById('colorcategories-col');
 
     //Create SVG element
@@ -35,14 +35,13 @@ function color_categories_ready (error, json, official_language_csv, wals_csv) {
     let highlightCategory = function (d, category) {
 
         let categories = [];
-        
+
         // Run through wals_csv to get the language category, append to color
         let country = d.ISO_A2;
-        for (let i = 0; i < wals_csv.length; i++) {
-            if (wals_csv[i].countrycodes.includes(country)) {
-                categories.push(colorCategoryMapper(wals_csv[i]["134A Green and Blue"], wals_csv[i]["135A Red and Yellow"]));
-            }
-        }
+        wals_csv.filter(lang => lang.countrycodes.includes(country))
+            .forEach(lang => {
+                categories.push(colorCategoryMapper(lang["134A Green and Blue"], lang["135A Red and Yellow"]))
+            });
 
         if (categories.length == 0) {
             return "steelblue";
@@ -75,7 +74,7 @@ function color_categories_ready (error, json, official_language_csv, wals_csv) {
                 .attr("rx", 5)
                 .attr("ry", 5)
                 .on("click", function () {
-                    color_country ("steelblue", json, highlightCategory, buttonNames[i]);
+                    color_country("steelblue", json, highlightCategory, buttonNames[i]);
                     colorcat_map.json(json);
                     colorcat_countriesGroup = colorcat_map();
                 });
@@ -94,15 +93,15 @@ function color_categories_ready (error, json, official_language_csv, wals_csv) {
     // Create map object
     var colorcat_map = map()
         .map_id(map_id)
-        .x(colorcat_div.clientWidth/5)
+        .x(colorcat_div.clientWidth / 5)
         .y(0)
-        .width(4*colorcat_div.clientWidth/5)
+        .width(4 * colorcat_div.clientWidth / 5)
         .height(colorcat_div.clientHeight)
         .json(json)
         .allCountries(official_language_csv)
         .svg(svg)
-        .color_mapper(function (d) { return d.properties.color; }); 
-        
+        .color_mapper(function (d) { return d.properties.color; });
+
     var colorcat_countriesGroup = colorcat_map();
 
     createColorCategoryButtons(svg, json);
