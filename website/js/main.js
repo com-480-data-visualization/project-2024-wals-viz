@@ -34,5 +34,6 @@ whenDocumentLoaded(() => {
         officallang_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(wals_csv));
         color_categories_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(wals_csv));
         featurecluster_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(json_clusters));
+        sentence_order_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(json_clusters));
     });
 });
