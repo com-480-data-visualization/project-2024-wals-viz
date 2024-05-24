@@ -48,6 +48,10 @@ body {
     border-radius: 10px;   
 }
 
+#sentenceorder-col{
+    position: relative;
+}
+
 .word-recipient-area{
     display: table;
     

@@ -21,18 +21,33 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
     var map_id = "sentenceorder_map";
     var sentenceorder_div = document.getElementById('sentenceorder-col');
 
+    const width = sentenceorder_div.clientWidth;
+    const height = sentenceorder_div.clientHeight;
+
+    const text_margin_x = 20;
+
     var svg = d3.select(sentenceorder_div)
         .insert("svg")
         .lower()
-        .attr("width", sentenceorder_div.clientWidth)
-        .attr("height", sentenceorder_div.clientHeight / 2);;
+        .attr("width", width)
+        .attr("height", height);
+
+    svg.append("foreignObject")
+        .attr('transform', 'translate(' + (0+ text_margin_x) + ',' + 0 / 2 + ')')
+        .attr("width", 750)
+        .attr("height", 250)
+        .append("xhtml:div")
+        .style("font", "64px 'Helvetica'")
+        .html("Syntax Puzzles");
+
+    map_width = 4 * width / 5;
 
     var sentenceorder_map = map()
             .map_id(map_id)
-            .x(0)
+            .x(width - map_width)
             .y(0)
-            .width(sentenceorder_div.clientWidth)
-            .height(sentenceorder_div.clientHeight/2)
+            .width(map_width)
+            .height(height)
             .json(json)
             .allCountries(official_language_csv)
             .svg(svg)
@@ -154,3 +169,4 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         }
     }
 }
+
