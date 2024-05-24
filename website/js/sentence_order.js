@@ -67,23 +67,18 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         ev.dataTransfer.setData("Text",ev.target.id);
     }
 
-    function dropWord(ev)
-    {
-        ev.preventDefault();
-        if (ev.target.className === "word-recipient-area") {
-            if (ev.target.children.length === 0){
-                var data=ev.dataTransfer.getData("Text");
-                ev.target.appendChild(document.getElementById(data));
-                checkAnswer();
-            }
-        }
-    }
-
     const element_id_codes = {
         'drop-word-subject' : 'S',
         'drop-word-verb' : 'V',
         'drop-word-object' : 'O'
     };
+
+    const element_id_readable_codes = {
+        'drop-word-subject' : 'Subject',
+        'drop-word-verb' : 'Verb',
+        'drop-word-object' : 'Object'
+    };
+
 
     const order_codes = {
         'SOV': '1 SOV',
@@ -93,6 +88,21 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         'OVS': '5 OVS',
         'OSV': '6 OSV',
     };
+
+    function dropWord(ev)
+    {
+        ev.preventDefault();
+        if (ev.target.className === "word-recipient-area") {
+            if (ev.target.children.length === 0){
+                var data=ev.dataTransfer.getData("Text");
+                ev.target.appendChild(document.getElementById(data));
+                checkAnswer();
+
+                elementReadableName = element_id_readable_codes[document.getElementById(data).id];
+                ev.target.parentNode.children[0].innerText = elementReadableName;
+            }
+        }
+    }
 
     function checkAnswer(){
         let sum = 0;
@@ -107,7 +117,6 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
 
         if (sum === 3){
             query_string = order_codes[query_string];
-            console.log(query_string);
             updateColors(non_highlighted_color, json, highlightCategory, query_string);
         }
     }

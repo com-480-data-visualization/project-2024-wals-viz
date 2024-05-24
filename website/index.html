@@ -74,18 +74,41 @@
   <section class="gjs-grid-row" id="order-row">
     <div class="gjs-grid-column" id="sentenceorder-col">
 
-      <div>
-        <div>
-          <div id="first_word_recepient" class="word-recipient-area"></div>
-          <div id="second_word_recepient" class="word-recipient-area"></div>
-          <div id="third_word_recepient" class="word-recipient-area"></div>
+      <div style="display:table;">
+
+        <div style="display: table-row; vertical-align: middle; text-align: center;">
+          <div style="display: table-cell;">
+            <p id="first_word_recepient_text" style="height: 20px;"></p>
+            <div id="first_word_recepient" class="word-recipient-area"></div>
+          </div>
+
+          <div style="display: table-cell; vertical-align: middle;">
+            <p id="second_word_recepient_text" style="height: 20px;"></p>
+            <div id="second_word_recepient" class="word-recipient-area"></div>
+          </div>
+
+          <div style="display: table-cell; vertical-align: middle;">
+            <p id="third_word_recepient_text" style="height: 20px;"></p>
+            <div id="third_word_recepient" class="word-recipient-area"></div>
+          </div>
         </div>
+
         <br>
-        <div>
-          <span id="drop-word-subject" class="word-test-button" draggable="true">I</span>
-          <span id="drop-word-verb" class="word-test-button" draggable="true">play</span>
-          <span id="drop-word-object" class="word-test-button" draggable="true" >the</span>
+
+        <div style="display: table-row;">
+          <div style="display: table-cell; text-align: center; vertical-align: middle;">
+            <span id="drop-word-subject" class="word-test-button" draggable="true">John</span>
+          </div>
+
+          <div style="display: table-cell;text-align: center; vertical-align: middle;">
+            <span id="drop-word-verb" class="word-test-button" draggable="true">plays</span>
+          </div>
+
+          <div style="display: table-cell;text-align: center; vertical-align: middle;">
+            <span id="drop-word-object" class="word-test-button" draggable="true" >football.</span>
+          </div>          
         </div>
+
       </div>
       
     </div>
