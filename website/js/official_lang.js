@@ -1,4 +1,4 @@
-function officallang_ready(error, json, official_language_csv, wals_csv) {
+function officiallang_ready(error, json, official_language_csv, wals_csv) {
 
     var officiallang_div = document.getElementById('officiallang-col');
 
