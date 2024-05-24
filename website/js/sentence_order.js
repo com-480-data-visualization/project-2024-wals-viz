@@ -1,6 +1,15 @@
 var non_highlighted_color = "#dac0a3ff";
 var highlighted_color = "#102c57ff";
 
+fun_facts = {
+    '1 SOV': 'Subject-Object-Verb is the most frequent syntax, widely distributed across the globe.',
+    '2 SVO': 'English is Subject-Verb-Object',
+    '3 VSO': 'In grammar, the subject is the \'doer\', the verb is the action and the object is the receiver of the action.',
+    '4 VOS': 'There are languages where multiple orders are syntactically correct. These languages have \'flexible order\'.',
+    '5 OVS': 'Some languages, like German, can present multiple syntaxes, like Object-Verb-Subject and Verb-Subject-Object.',
+    '6 OSV': 'The Object-Subject-Verb syntax is quite rare!',
+}
+
 function sentence_order_ready(error, json, official_language_csv, wals_csv){
     document.getElementById("first_word_recepient").addEventListener("drop", dropWord);
     document.getElementById("second_word_recepient").addEventListener("drop", dropWord);
@@ -17,6 +26,8 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
     document.getElementById("drop-word-subject").addEventListener("dblclick", resetWord);
     document.getElementById("drop-word-verb").addEventListener("dblclick", resetWord);
     document.getElementById("drop-word-object").addEventListener("dblclick", resetWord);
+
+    const default_intro_text = document.getElementById("fun-fact-text").innerText;
 
     var map_id = "sentenceorder_map";
     var sentenceorder_div = document.getElementById('sentenceorder-col');
@@ -153,7 +164,17 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         if (sum === 3){
             query_string = order_codes[query_string];
             updateColors(non_highlighted_color, json, highlightCategory, query_string);
+            updateFunFactText(query_string);
         }
+    }
+
+    function getFunFact(current_order){
+        return fun_facts[current_order];
+    }
+
+    function updateFunFactText(current_order){
+        fun_fact = getFunFact(current_order);
+        document.getElementById("fun-fact-text").innerText = fun_fact;
     }
 
     function resetWord(ev){
@@ -167,6 +188,8 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
             recipientElement.appendChild(document.getElementById(ev.target.id));
             resetColors(non_highlighted_color, json, resetCategory);
         }
+
+        document.getElementById("fun-fact-text").innerText = default_intro_text;
     }
 }
 
