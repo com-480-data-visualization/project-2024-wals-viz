@@ -39,7 +39,7 @@ body {
     height: 50px;
 
     padding: 2px; 
-    margin: 10px;
+    margin-right: 10px;
 
     background-color: #fefaf6ff; 
     color: #102c57ff; 
@@ -57,7 +57,7 @@ body {
     background-color: #dac0a3ff; 
     color: aliceblue; 
     padding: 2px; 
-    margin: 10px;
+    margin-right: 10px;
 
     border-radius: 10px;
 

@@ -25,15 +25,14 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         .insert("svg")
         .lower()
         .attr("width", sentenceorder_div.clientWidth)
-        .attr("height", sentenceorder_div.clientHeight / 2);
+        .attr("height", sentenceorder_div.clientHeight / 2);;
 
-    
     var sentenceorder_map = map()
             .map_id(map_id)
-            .x(sentenceorder_div.clientWidth / 5)
+            .x(0)
             .y(0)
-            .width(3 * sentenceorder_div.clientWidth / 5)
-            .height(sentenceorder_div.clientHeight / 2)
+            .width(sentenceorder_div.clientWidth)
+            .height(sentenceorder_div.clientHeight/2)
             .json(json)
             .allCountries(official_language_csv)
             .svg(svg)
