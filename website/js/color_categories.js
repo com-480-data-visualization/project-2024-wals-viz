@@ -4,6 +4,11 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
     var non_highlighted_color = "#dac0a3ff";
     var highlighted_color = "#102c57ff";
 
+    var red_color = "#e74c3cff";
+    var yellow_color = "#f4d03fff";
+    var green_color = "#1e8449ff";
+    var blue_color = "#2980b9ff";
+
     //Create SVG element
     var svg = d3.select(colorcat_div)
         .append("svg")
@@ -34,6 +39,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                         .attr("width", squareSize)
                         .attr("height", squareSize)
                         .attr("fill", color1)
+                        .attr("stroke", (color1 == "white") ? non_highlighted_color : color1);
                     break;
                 case 2:
                     colorcategories_palette.append("rect")
@@ -42,12 +48,14 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                         .attr("width", squareSize / 2)
                         .attr("height", squareSize)
                         .attr("fill", color1)
+                        .attr("stroke", (color1 == "white") ? non_highlighted_color : color1);
                     colorcategories_palette.append("rect")
                         .attr("x", squareX + squareSize / 2)
                         .attr("y", y + (order * (squareSize + squarePadding)))
                         .attr("width", squareSize / 2)
                         .attr("height", squareSize)
                         .attr("fill", color2)
+                        .attr("stroke", (color2 == "white") ? non_highlighted_color : color2);
                     break;
                 case 3:
                     colorcategories_palette.append("rect")
@@ -56,18 +64,21 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                         .attr("width", squareSize / 3)
                         .attr("height", squareSize)
                         .attr("fill", color1)
+                        .attr("stroke", (color1 == "white") ? non_highlighted_color : color1);
                     colorcategories_palette.append("rect")
                         .attr("x", squareX + squareSize / 3)
                         .attr("y", y + (order * (squareSize + squarePadding)))
                         .attr("width", squareSize / 3)
                         .attr("height", squareSize)
                         .attr("fill", color2)
+                        .attr("stroke", (color2 == "white") ? non_highlighted_color : color2);
                     colorcategories_palette.append("rect")
                         .attr("x", squareX + 2 * squareSize / 3)
                         .attr("y", y + (order * (squareSize + squarePadding)))
                         .attr("width", squareSize / 3)
                         .attr("height", squareSize)
                         .attr("fill", color3)
+                        .attr("stroke", (color3 == "white") ? non_highlighted_color : color3);
                     break;
             }
             colorcategories_palette.append("text")
@@ -86,55 +97,55 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         switch (category) {
             case "Category 2":  // 3 squares: White, red/yellow, black/green/blue
                 drawSquare(0, "White", 1, "white");
-                drawSquare(1, "Red/yellow", 2, "red", "yellow");
-                drawSquare(2, "Black/green/blue", 3, "black", "green", "blue");
+                drawSquare(1, "Red/yellow", 2, red_color, yellow_color);
+                drawSquare(2, "Black/green/blue", 3, "black", green_color, blue_color);
                 break;
             case "Category 3A": // 4 squares: White, red, yellow, black/green/blue
                 drawSquare(0, "White", 1, "white");
-                drawSquare(1, "Red", 1, "red");
-                drawSquare(2, "Yellow", 1, "yellow");
-                drawSquare(3, "Black/green/blue", 3, "black", "green", "blue");
+                drawSquare(1, "Red", 1, red_color);
+                drawSquare(2, "Yellow", 1, yellow_color);
+                drawSquare(3, "Black/green/blue", 3, "black", green_color, blue_color);
                 break;
             case "Category 3B": // 4 squares: White, red/yellow, black, green/blue
                 drawSquare(0, "White", 1, "white");
-                drawSquare(1, "Red/yellow", 2, "red", "yellow");
-                drawSquare(2, "Black", 1, "black");
-                drawSquare(3, "Green/blue", 2, "green", "blue");
+                drawSquare(1, "Red/yellow", 2, red_color, yellow_color);
+                drawSquare(2, "Green/blue", 2, green_color, blue_color);
+                drawSquare(3, "Black", 1, "black");
                 break;
             case "Category 3C": // 4 squares: White, red, yellow/green/blue, black
                 drawSquare(0, "White", 1, "white");
-                drawSquare(1, "Red", 1, "red");
-                drawSquare(2, "Yellow/green/blue", 3, "yellow", "green", "blue");
+                drawSquare(1, "Red", 1, red_color);
+                drawSquare(2, "Yellow/green/blue", 3, yellow_color, green_color, blue_color);
                 drawSquare(3, "Black", 1, "black");
                 break;
             case "Category 4A": // 5 squares: White, red, yellow/green, black, blue
                 drawSquare(0, "White", 1, "white");
-                drawSquare(1, "Red", 1, "red");
-                drawSquare(2, "Yellow/green", 2, "yellow", "green");
-                drawSquare(3, "Black", 1, "black");
-                drawSquare(4, "Blue", 1, "blue");
+                drawSquare(1, "Red", 1, red_color);
+                drawSquare(2, "Yellow/green", 2, yellow_color, green_color);
+                drawSquare(3, "Blue", 1, blue_color);
+                drawSquare(4, "Black", 1, "black");
                 break;
             case "Category 4B": // 5 squares: White, red, yellow, black, blue/green
                 drawSquare(0, "White", 1, "white");
-                drawSquare(1, "Red", 1, "red");
-                drawSquare(2, "Yellow", 1, "yellow");
-                drawSquare(3, "Black", 1, "black");
-                drawSquare(4, "Blue/green", 2, "blue", "green");
+                drawSquare(1, "Red", 1, red_color);
+                drawSquare(2, "Yellow", 1, yellow_color);
+                drawSquare(3, "Blue/green", 2, blue_color, green_color);
+                drawSquare(4, "Black", 1, "black");
                 break;
             case "Category 4C": // 5 squares: White, red, yellow, green, black/blue
                 drawSquare(0, "White", 1, "white");
-                drawSquare(1, "Red", 1, "red");
-                drawSquare(2, "Yellow", 1, "yellow");
-                drawSquare(3, "Green", 1, "green");
-                drawSquare(4, "Black/blue", 2, "black", "blue");
+                drawSquare(1, "Red", 1, red_color);
+                drawSquare(2, "Yellow", 1, yellow_color);
+                drawSquare(3, "Green", 1, green_color);
+                drawSquare(4, "Black/blue", 2, "black", blue_color);
                 break;
             case "Category 5": // 6 squares: White, red, yellow, green, black, blue
                 drawSquare(0, "White", 1, "white");
-                drawSquare(1, "Red", 1, "red");
-                drawSquare(2, "Yellow", 1, "yellow");
-                drawSquare(3, "Green", 1, "green");
-                drawSquare(4, "Black", 1, "black");
-                drawSquare(5, "Blue", 1, "blue");
+                drawSquare(1, "Red", 1, red_color);
+                drawSquare(2, "Yellow", 1, yellow_color);
+                drawSquare(3, "Green", 1, green_color);
+                drawSquare(4, "Blue", 1, blue_color);
+                drawSquare(5, "Black", 1, "black");
                 break;
             default: break;
         }
@@ -191,55 +202,64 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         let buttonY = colorcat_div.clientHeight / 20;
         let buttonPadding = colorcat_div.clientHeight / 20;
         let buttonNames = ["Category 2", "Category 3A", "Category 3B", "Category 3C", "Category 4A", "Category 4B", "Category 4C", "Category 5"];
-        let buttonColors = [non_highlighted_color, highlighted_color, "green", "yellow", "purple", "pink", "brown", "black"];
+        let buttonColors = [
+            ["white", red_color, "black"],
+            ["white", red_color, yellow_color, "black"],
+            ["white", red_color, blue_color, "black"],
+            ["white", red_color, green_color, "black"],
+            ["white", red_color, green_color, blue_color, "black"],
+            ["white", red_color, yellow_color, blue_color, "black"],
+            ["white", red_color, yellow_color, green_color, "black"],
+            ["white", red_color, yellow_color, green_color, blue_color, "black"]
+        ];
 
         let paletteX = 17 * colorcat_div.clientWidth / 20;
         let paletteY = colorcat_div.clientHeight / 12;
         let paletteWidth = colorcat_div.clientWidth / 10;
         let paletteHeight = 10 * colorcat_div.clientHeight / 12;
 
-        for (let i = 0; i < buttonNames.length; i++) {
-            let button = buttonGroup.append("rect")
-                .attr("x", buttonX)
-                .attr("y", buttonY + i * (buttonHeight + buttonPadding))
-                .attr("width", buttonWidth)
-                .attr("height", buttonHeight)
-                .attr("fill", buttonColors[i])
-                .attr("stroke", "black")
-                .attr("stroke-width", 1)
-                .attr("rx", 5)
-                .attr("ry", 5)
-                .on("click", function () {
-                    color_country(non_highlighted_color, json, highlightCategory, buttonNames[i]);
-                    colorcat_map.json(json);
-                    colorcat_countriesGroup = colorcat_map();
-                    showColorPalette(paletteX, paletteY, paletteWidth, paletteHeight, buttonNames[i])
-                });
+        let drawButton = function (button, order, colors) {
+                for (let i = 0; i < colors.length; i++) {
+                    button.append("rect")
+                        .attr("x", buttonX + (i * (buttonWidth / colors.length)))
+                        .attr("y", buttonY + order * (buttonHeight + buttonPadding))
+                        .attr("width", buttonWidth / colors.length)
+                        .attr("height", buttonHeight)
+                        .attr("fill", colors[i])
+                        .attr("stroke", (colors[i] == "white") ? non_highlighted_color : colors[i]);
+                }
+            }
 
-            buttonGroup.append("text")
-                .attr("x", buttonX + buttonWidth / 2)
-                .attr("y", buttonY + i * (buttonHeight + buttonPadding) + buttonHeight / 2)
-                .attr("text-anchor", "middle")
-                .attr("dominant-baseline", "middle")
-                .text(buttonNames[i])
-                .attr("fill", "black")
-                .style("font-size", "12px");
+            for (let i = 0; i < buttonNames.length; i++) {
+                let button = buttonGroup.append("g")
+                    .attr("x", buttonX)
+                    .attr("y", buttonY + i * (buttonHeight + buttonPadding))
+                    .attr("width", buttonWidth)
+                    .attr("height", buttonHeight)
+                    .attr("fill", buttonColors[i])
+                    .on("click", function () {
+                        color_country(non_highlighted_color, json, highlightCategory, buttonNames[i]);
+                        colorcat_map.json(json);
+                        colorcat_countriesGroup = colorcat_map();
+                        showColorPalette(paletteX, paletteY, paletteWidth, paletteHeight, buttonNames[i])
+                    });
+                    drawButton(button, i, buttonColors[i]);
+            }
         }
+
+        // Create map object
+        var colorcat_map = map()
+            .map_id(map_id)
+            .x(colorcat_div.clientWidth / 5)
+            .y(0)
+            .width(3 * colorcat_div.clientWidth / 5)
+            .height(colorcat_div.clientHeight)
+            .json(json)
+            .allCountries(official_language_csv)
+            .svg(svg)
+            .color_mapper(function (d) { return d.properties.color; });
+
+        var colorcat_countriesGroup = colorcat_map();
+
+        createColorCategoryButtons(svg, json);
     }
-
-    // Create map object
-    var colorcat_map = map()
-        .map_id(map_id)
-        .x(colorcat_div.clientWidth / 5)
-        .y(0)
-        .width(3 * colorcat_div.clientWidth / 5)
-        .height(colorcat_div.clientHeight)
-        .json(json)
-        .allCountries(official_language_csv)
-        .svg(svg)
-        .color_mapper(function (d) { return d.properties.color; });
-
-    var colorcat_countriesGroup = colorcat_map();
-
-    createColorCategoryButtons(svg, json);
-}
