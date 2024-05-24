@@ -1,3 +1,6 @@
+var non_highlighted_color = "#dac0a3ff";
+var highlighted_color = "#102c57ff";
+
 function sentence_order_ready(error, json, official_language_csv, wals_csv){
     document.getElementById("first_word_recepient").addEventListener("drop", dropWord);
     document.getElementById("second_word_recepient").addEventListener("drop", dropWord);
@@ -10,6 +13,49 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
     document.getElementById("drop-word-subject").addEventListener("dragstart", dragWord);
     document.getElementById("drop-word-verb").addEventListener("dragstart", dragWord);
     document.getElementById("drop-word-object").addEventListener("dragstart", dragWord);
+
+    var map_id = "sentenceorder_map";
+    var sentenceorder_div = document.getElementById('sentenceorder-col');
+
+    var svg = d3.select(sentenceorder_div)
+        .insert("svg")
+        .lower()
+        .attr("width", sentenceorder_div.clientWidth)
+        .attr("height", sentenceorder_div.clientHeight / 2);
+
+    
+    var sentenceorder_map = map()
+            .map_id(map_id)
+            .x(sentenceorder_div.clientWidth / 5)
+            .y(0)
+            .width(3 * sentenceorder_div.clientWidth / 5)
+            .height(sentenceorder_div.clientHeight / 2)
+            .json(json)
+            .allCountries(official_language_csv)
+            .svg(svg)
+            .color_mapper(function (d) { return d.properties.color; });
+
+    var colorcat_countriesGroup = sentenceorder_map();
+
+    let highlightCategory = function (d, category) {
+        let country = d.ISO_A2;
+        
+
+        let languagesInCountry = wals_csv.filter((elem) => {
+            return elem["81A Order of Subject, Object and Verb"] === category;
+        }).filter(lang => lang.countrycodes.includes(country));
+        
+        if (languagesInCountry.length > 0) return highlighted_color;
+        
+        return non_highlighted_color;
+
+    }
+
+    function updateColors(non_highlighted_color, json, highlightCategory, category){
+        color_country(non_highlighted_color, json, highlightCategory,category);
+        sentenceorder_map.json(json);
+        sentenceorder_countriesGroup = sentenceorder_map();
+    }
 
     function allowWordDrop(ev)
     {
@@ -62,9 +108,7 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         if (sum === 3){
             query_string = order_codes[query_string];
             console.log(query_string);
-            wals_csv.filter((elem) => {
-                return elem["81A Order of Subject, Object and Verb"] === query_string;
-            });
+            updateColors(non_highlighted_color, json, highlightCategory, query_string);
         }
     }
 }
