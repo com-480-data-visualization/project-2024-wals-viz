@@ -14,6 +14,10 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
     document.getElementById("drop-word-verb").addEventListener("dragstart", dragWord);
     document.getElementById("drop-word-object").addEventListener("dragstart", dragWord);
 
+    document.getElementById("drop-word-subject").addEventListener("dblclick", resetWord);
+    document.getElementById("drop-word-verb").addEventListener("dblclick", resetWord);
+    document.getElementById("drop-word-object").addEventListener("dblclick", resetWord);
+
     var map_id = "sentenceorder_map";
     var sentenceorder_div = document.getElementById('sentenceorder-col');
 
@@ -49,10 +53,22 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         
         return non_highlighted_color;
 
-    }
+    };
+
+    let resetCategory = function (d, category) {
+        return non_highlighted_color;
+
+    };
+
 
     function updateColors(non_highlighted_color, json, highlightCategory, category){
         color_country(non_highlighted_color, json, highlightCategory,category);
+        sentenceorder_map.json(json);
+        sentenceorder_countriesGroup = sentenceorder_map();
+    }
+
+    function resetColors(non_highlighted_color, json, resetCategory){
+        color_country(non_highlighted_color, json, resetCategory, "");
         sentenceorder_map.json(json);
         sentenceorder_countriesGroup = sentenceorder_map();
     }
@@ -79,6 +95,11 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         'drop-word-object' : 'Object'
     };
 
+    const droppable_initial_container_matches = {
+        'drop-word-subject' : 'subject-original-container',
+        'drop-word-verb' : 'verb-original-container',
+        'drop-word-object' : 'object-original-container'
+    };
 
     const order_codes = {
         'SOV': '1 SOV',
@@ -118,6 +139,19 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         if (sum === 3){
             query_string = order_codes[query_string];
             updateColors(non_highlighted_color, json, highlightCategory, query_string);
+        }
+    }
+
+    function resetWord(ev){
+        matching_original_recipient = droppable_initial_container_matches[ev.target.id];
+
+        if (ev.target.parentNode.id != matching_original_recipient)
+        {
+            ev.target.parentNode.parentNode.children[0].innerText = "";
+            
+            let recipientElement = document.getElementById(matching_original_recipient);
+            recipientElement.appendChild(document.getElementById(ev.target.id));
+            resetColors(non_highlighted_color, json, resetCategory);
         }
     }
 }
