@@ -40,7 +40,7 @@ function map() {
             // })
             // .attr("class", "country")
             .attr("fill", color_mapper)
-            .attr("stroke", "black")
+            .attr("stroke", "white")
             .attr("stroke-width", 0.5)
             .attr("d", path)
             .on("click", onClickBehavior)

@@ -16,7 +16,7 @@ whenDocumentLoaded(() => {
         d3.json("data/feature_cluster_data_verbs.json")
     ]).then(([json, official_language_csv, wals_csv, json_clusters]) => {
         // Modifies json, adding a color property to each country
-        json = color_country("steelblue", json, () => "steelblue");
+        json = color_country("#dac0a3ff", json, () => "#dac0a3ff");
 
         // Modifies official_language_csv, substituting the languages string with an array of languages
         official_language_csv.forEach(function (d) {

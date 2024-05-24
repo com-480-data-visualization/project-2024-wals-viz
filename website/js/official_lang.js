@@ -2,6 +2,10 @@ function officallang_ready(error, json, official_language_csv, wals_csv) {
 
     var officiallang_div = document.getElementById('officiallang-col');
 
+    var non_highlighted_color = "#dac0a3ff";
+    var selected_color = "#102c57ff";
+    var same_language_color = "#102c56bf";
+
     //Create SVG element
     var svg = d3.select(officiallang_div)
         .append("svg")
@@ -21,21 +25,21 @@ function officallang_ready(error, json, official_language_csv, wals_csv) {
 
     // Function to highlight countries with the same language as the selected country
     let highlightSameLang = function (d, currentCountry) {
-        svg.select("#" + map_id).selectAll("path").attr("fill", "steelblue");
+        svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
         let selectedLang = currentCountry.datum().properties.languages;
         for (let i = 0; i < selectedLang.length; i++) {
             svg.select("#" + map_id).selectAll("path")
                 .filter(function (d) {
                     return d.properties.languages.includes(selectedLang[i]);
                 })
-                .attr("fill", "orange");
+                .attr("fill", same_language_color);
         }
-        currentCountry.attr("fill", "red");
+        currentCountry.attr("fill", selected_color);
     };
 
     let highlightCountry = function (d, currentCountry) {
-        svg.select("#" + map_id).selectAll("path").attr("fill", "steelblue");
-        currentCountry.attr("fill", "red");
+        svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
+        currentCountry.attr("fill", selected_color);
     };
 
     // Function that creates a group and a rectangle if they haven't been created yet,
@@ -86,15 +90,15 @@ function officallang_ready(error, json, official_language_csv, wals_csv) {
             })
             .on("click", function (d) { // Turn selected color to red
                 langListGroup.selectAll("text").attr("fill", "black");
-                let currentLanguage = d3.select(this).attr("fill", "red");
+                let currentLanguage = d3.select(this).attr("fill", selected_color);
                 // Highlight countries with the same language
-                svg.select("#" + map_id).selectAll("path").attr("fill", "steelblue");
+                svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
                 svg.select("#" + map_id).selectAll("path")
                     .filter(function (data) {
                         return data.properties.languages.includes(currentLanguage.datum());
                     })
-                    .attr("fill", "orange");
-                currentCountry.attr("fill", "red");
+                    .attr("fill", same_language_color);
+                currentCountry.attr("fill", selected_color);
             });
     }
 
@@ -108,7 +112,7 @@ function officallang_ready(error, json, official_language_csv, wals_csv) {
         .json(json)
         .allCountries(official_language_csv)
         .svg(svg)
-        .color_mapper(function (d) { return "steelblue"; })
+        .color_mapper(function (d) { return non_highlighted_color; })
         .onClickBehavior(function (d) {
             let currentCountry = d3.select(this);
             createCountryInfo(d, currentCountry, map_id);
