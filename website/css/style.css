@@ -109,9 +109,36 @@ a:hover {
     animation: blinker 3s ease-in infinite;
   }
   
+.title_changing_color_text{
+    font-weight: bold;
+    animation: color-changer 4s linear infinite;
+}
+
 @keyframes blinker {
     50% {
         opacity: 0;
+    }
+}
+
+@keyframes color-changer {
+    0% {
+        color: #2980b9ff;
+    }
+    
+    25% {
+        color: #1e8449ff;
+    }
+    
+    50% {
+        color: #f4d03fff;
+    }
+
+    75% {
+        color: #e74c3cff;
+    }
+
+    100% {
+        color: #2980b9ff;
     }
 }
 
