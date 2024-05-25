@@ -24,6 +24,32 @@ body {
     margin: 0;
 }
 
+h1 {
+    color: #102c57ff;
+}
+
+p {
+    color: #102c57ff;
+}
+span {
+    color: #102c57ff;
+}
+
+a:link{
+    color: #102c57ff;
+    font-size: 1.25em;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+  }
+
+  a:visited {
+    color: #102c57ff;
+    text-decoration: none;
+  }
+
 .gjs-grid-column {
     flex: 1 1 0%;
     padding: 5px 0;
@@ -49,6 +75,10 @@ body {
 }
 
 #sentenceorder-col{
+    position: relative;
+}
+
+#welcome-col{
     position: relative;
 }
 
