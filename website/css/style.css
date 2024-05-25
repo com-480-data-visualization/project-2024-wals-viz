@@ -94,6 +94,10 @@ a:hover {
     position: relative;
 }
 
+#cluster-col{
+    position: relative;
+}
+
 .word-recipient-area{
     display: table;
     

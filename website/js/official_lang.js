@@ -14,13 +14,13 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
         .attr("width", officiallang_div.clientWidth)
         .attr("height", officiallang_div.clientHeight);
 
-    svg.append("foreignObject")
-        .attr('transform', 'translate(' + (0 + text_margin_x) + ',' + 0 / 2 + ')')
-        .attr("width", 750)
-        .attr("height", 250)
-        .append("xhtml:div")
-        .style("font", "64px 'Helvetica'")
-        .html("Official Languages");
+    // svg.append("foreignObject")
+    //     .attr('transform', 'translate(' + (0 + text_margin_x) + ',' + 0 / 2 + ')')
+    //     .attr("width", 750)
+    //     .attr("height", 250)
+    //     .append("xhtml:div")
+    //     .style("font", "64px 'Helvetica'")
+    //     .html("Official<br>Languages");
 
     var map_id = "officiallang_map";
 
@@ -195,7 +195,7 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
     // Create map object
     var officiallang_map = map()
         .map_id(map_id)
-        .x(0)
+        .x(60)
         .y(0)
         .width(officiallang_div.clientWidth)
         .height(officiallang_div.clientHeight)

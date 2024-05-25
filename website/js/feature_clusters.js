@@ -136,13 +136,13 @@ function featurecluster_ready(error, json, csv, json_clusters) {
 
     const text_margin_x = 10
 
-    featurecluster_svg.append("foreignObject")
-        .attr('transform', 'translate(' + (-width / 2 + text_margin_x) + ',' + -height / 2 + ')')
-        .attr("width", 750)
-        .attr("height", 250)
-        .append("xhtml:div")
-        .style("font", "64px 'Helvetica'")
-        .html("Languages Beyond <b>Borders</b>");
+    // featurecluster_svg.append("foreignObject")
+    //     .attr('transform', 'translate(' + (-width / 2 + text_margin_x) + ',' + -height / 2 + ')')
+    //     .attr("width", 750)
+    //     .attr("height", 250)
+    //     .append("xhtml:div")
+    //     .style("font", "64px 'Helvetica'")
+    //     .html("Languages Beyond <b>Borders</b>");
 
     featurecluster_svg.append("foreignObject")
         .attr('transform', 'translate(' + (-width / 2 + text_margin_x) + ',' + (-height / 2 + 200) + ')')
