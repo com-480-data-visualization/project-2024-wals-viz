@@ -74,6 +74,10 @@ a:hover {
     border-radius: 10px;   
 }
 
+#colorcategories-intro-col{
+    position: relative;
+}
+
 #colorcategories-col{
     position: relative;
 }
