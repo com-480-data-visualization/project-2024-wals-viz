@@ -21,6 +21,48 @@ function merge_official_lang_geojson (allCountries, json) {
     return json;
 }
 
+// Merge WALS data with the GeoJSON data
+// On matching country codes, add:
+// - languageName
+// - macroarea
+// - genus
+// - family
+// to the properties of the GeoJSON data
+function merge_wals_geojson (wals, json) {
+    // Initialize the arrays in the properties of the GeoJSON data
+    // Remember that 1 country can have multiple languages / macroareas / genuses / families
+    for (let i = 0; i < json.features.length; i++) {
+        json.features[i].properties.languageName = [];
+        json.features[i].properties.macroarea = [];
+        json.features[i].properties.genus = [];
+        json.features[i].properties.family = [];
+    }
+
+    for (let i = 0; i < wals.length; i++) {
+        // Careful to split the country codes string into an array (Multiple country codes can be present in one string!)
+        let dataCountries = wals[i].countrycodes;
+        let dataCountryList = dataCountries[0].split(" ");
+        let languageName = wals[i].Name;
+        let macroarea = wals[i].macroarea;
+        let genus = wals[i].genus;
+        let family = wals[i].family;
+
+        // Careful that we push elements to the arrays of the properties (Not replace them!)
+        // Remember that 1 country can have multiple languages / macroareas / genuses / families
+        for (let j = 0; j < json.features.length; j++) {
+            let jsonCountry = json.features[j].properties.ISO_A2;
+            if (dataCountryList.includes(jsonCountry)) {
+                json.features[j].properties.languageName.push(languageName);
+                json.features[j].properties.macroarea.push(macroarea);
+                json.features[j].properties.genus.push(genus);
+                json.features[j].properties.family.push(family);
+            }
+        }
+    }
+
+    return json;
+}
+
 // Color the countries according to the colorFunction
 function color_country (defaultColor = "steelblue", json, colorFunction, ...args) {
 

@@ -7,6 +7,7 @@ function map() {
         height = 500;
     var json = null;
     var allCountries = null;
+    var mergeWithWals = false;
     var svg = null;
     var color_mapper = function (d) {
         return "steelblue";
@@ -27,7 +28,12 @@ function map() {
             .projection(projection);
 
         // Merge the allCountries data and GeoJSON
-        json = merge_official_lang_geojson(allCountries, json);
+        if (!mergeWithWals) {
+            json = merge_official_lang_geojson(allCountries, json);
+        }
+        else {
+            json = merge_wals_geojson(allCountries, json);
+        }
 
         //Bind data and create one path per GeoJSON feature
         var countriesGroup = svg.append("g")
@@ -90,6 +96,12 @@ function map() {
     my.allCountries = function (value) {
         if (!arguments.length) return allCountries;
         allCountries = value;
+        return my;
+    };
+
+    my.mergeWithWals = function (value) {
+        if (!arguments.length) return mergeWithWals;
+        mergeWithWals = value;
         return my;
     };
 
