@@ -1,6 +1,19 @@
-function genealogies_ready(error, json, official_language_csv, wals_csv) {
+function genealogies_ready(error, json, official_language_csv, wals_csv, hierarchies_json) {
 
     var genealogies_div = document.getElementById('genealogy-col');
+
+    // Dimensions of the map
+    var width = genealogies_div.clientWidth;
+    var height = genealogies_div.clientHeight;
+
+
+    // Section 1: Genealogies
+    console.log(hierarchies_json);
+
+
+    // Section 2: World map
+    var map_height = 3 * height / 5;
+    var map_width = 3 * width / 5;
 
     var non_highlighted_color = "#dac0a3ff";
     var selected_color = "#102c57ff";
@@ -9,8 +22,8 @@ function genealogies_ready(error, json, official_language_csv, wals_csv) {
     //Create SVG element
     var svg = d3.select(genealogies_div)
         .append("svg")
-        .attr("width", genealogies_div.clientWidth)
-        .attr("height", genealogies_div.clientHeight);
+        .attr("width", width)
+        .attr("height", height);
 
     var map_id = "genealogy_map";
 
@@ -24,10 +37,10 @@ function genealogies_ready(error, json, official_language_csv, wals_csv) {
     let createCountryInfo = function (d, currentCountry, map_id) {
         let countryInfoGroup = svg.select("#" + map_id).select("#countryInfoGroup");
         let langListGroup = countryInfoGroup.select("#langListGroup");
-        let xGroup = genealogies_div.clientWidth / 12;
-        let yGroup = genealogies_div.clientHeight / 4
-        let widthGroup = genealogies_div.clientWidth / 8;
-        let heightGroup = genealogies_div.clientHeight / 2;
+        let widthGroup = width / 6;
+        let heightGroup = 0.36 * height;
+        let xGroup = width - map_width/2 - widthGroup/2 + 100;
+        let yGroup = height - map_height/2 - heightGroup/2 + 50;
 
         // If the group doesn't exist, create it
         if (countryInfoGroup.empty()) {
@@ -83,10 +96,10 @@ function genealogies_ready(error, json, official_language_csv, wals_csv) {
     // Create map object
     var genealogies_map = map()
         .map_id(map_id)
-        .x(0)
+        .x(width - map_width)
         .y(0)
-        .width(genealogies_div.clientWidth)
-        .height(genealogies_div.clientHeight)
+        .width(map_width)
+        .height(map_height)
         .json(json)
         .allCountries(official_language_csv)
         .svg(svg)
@@ -98,5 +111,6 @@ function genealogies_ready(error, json, official_language_csv, wals_csv) {
         });
 
     var officiallang_countriesGroup = genealogies_map();
+
 
 }
