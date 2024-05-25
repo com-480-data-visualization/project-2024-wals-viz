@@ -35,7 +35,8 @@ whenDocumentLoaded(() => {
         officiallang_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(wals_csv));
         genealogies_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(wals_csv), structuredClone(hierarchies_json));
         color_categories_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(wals_csv));
-        featurecluster_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(json_clusters));
         sentence_order_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(wals_csv));
+        vowel_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(wals_csv));
+        featurecluster_ready(null, structuredClone(json), structuredClone(official_language_csv), structuredClone(json_clusters));
     });
 });

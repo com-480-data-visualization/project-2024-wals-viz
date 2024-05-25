@@ -27,7 +27,7 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
     document.getElementById("drop-word-verb").addEventListener("dblclick", resetWord);
     document.getElementById("drop-word-object").addEventListener("dblclick", resetWord);
 
-    const default_intro_text = document.getElementById("fun-fact-text").innerText;
+    let default_intro_text = document.getElementById("fun-fact-text").innerText;
 
     var map_id = "sentenceorder_map";
     var sentenceorder_div = document.getElementById('sentenceorder-col');
