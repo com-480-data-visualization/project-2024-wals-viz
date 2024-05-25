@@ -98,6 +98,22 @@ a:hover {
     position: relative;
 }
 
+.scroll_blinking_text {
+    color: #102c57ff;
+    font-size: 1.5em;
+    position: absolute;
+    bottom: 0px; 
+    left: 50%;
+    transform: translate(-50%, 0%);
+    animation: blinker 3s ease-in infinite;
+  }
+  
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
 .word-recipient-area{
     display: table;
     
