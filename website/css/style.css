@@ -90,6 +90,10 @@ a:hover {
     position: relative;
 }
 
+#officiallang-col{
+    position: relative;
+}
+
 .word-recipient-area{
     display: table;
     

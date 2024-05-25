@@ -6,11 +6,21 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
     var selected_color = "#102c57ff";
     var same_language_color = "#102c56bf";
 
+    const text_margin_x = 20;
+
     //Create SVG element
     var svg = d3.select(officiallang_div)
-        .append("svg")
+        .insert("svg")
         .attr("width", officiallang_div.clientWidth)
         .attr("height", officiallang_div.clientHeight);
+
+    svg.append("foreignObject")
+        .attr('transform', 'translate(' + (0 + text_margin_x) + ',' + 0 / 2 + ')')
+        .attr("width", 750)
+        .attr("height", 250)
+        .append("xhtml:div")
+        .style("font", "64px 'Helvetica'")
+        .html("Official Languages");
 
     var map_id = "officiallang_map";
 
@@ -102,6 +112,86 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
             });
     }
 
+    let createCountryParagraphInfo = function(d, currentCountry, map_id){
+        d3.select("#oficiallang-description").selectAll("*").remove();
+
+        const languages = currentCountry.datum().properties.languages;
+        const number_of_languages = languages.length;
+        const country_name = currentCountry.datum().properties.NAME;
+
+        if (number_of_languages == 1){
+            d3.select("#oficiallang-description")
+              .append("text")
+              .text("The official language of " + country_name 
+                    + " is ")
+
+            d3.select("#oficiallang-description")
+              .append("text")
+              .text(iso_to_lang(languages[0], wals_csv) + ".")
+              .style('font-weight', 'bold')
+              .on("mouseover", function(event, datum) {
+                  d3.select(this).style("text-decoration","underline");
+              })
+              .on("mouseout", function(event,datum) {
+                  d3.select(this).style("text-decoration","none");
+              })
+              .on("click", function (d) { // Turn selected color to red
+                svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
+                svg.select("#" + map_id).selectAll("path")
+                    .filter(function (data) {
+                        return data.properties.languages.includes(languages[0]);
+                    })
+                    .attr("fill", same_language_color);
+                currentCountry.attr("fill", selected_color);
+            });
+        }
+        else {
+            let description = country_name + " has " + number_of_languages 
+                                    + " official languages. These are ";
+
+            d3.select("#oficiallang-description")
+              .append("text")
+              .text(description);
+
+            d3.select("#oficiallang-description").selectAll("text")
+              .data(languages)
+              .join("text")
+              .append("text")
+              .text((language, i) => {
+                let tmp = iso_to_lang(language, wals_csv);
+                
+                if (i < number_of_languages - 2) tmp += ", ";
+                else if (i < number_of_languages - 1) tmp += " and ";
+                else tmp += ".";
+                return tmp;
+              })
+            .style('font-weight', 'bold')
+            .on("mouseover", function(event, datum) {
+                d3.select(this).style("text-decoration","underline");
+            })
+            .on("mouseout", function(event,datum) {
+                d3.select(this).style("text-decoration","none");
+             })
+            .on("click", function (d) { // Turn selected color to red
+                // langListGroup.selectAll("text").attr("fill", "black");
+                let currentLanguage = d3.select(this).attr("fill", selected_color);
+                console.log(currentLanguage.datum());
+                // Highlight countries with the same language
+                svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
+                svg.select("#" + map_id).selectAll("path")
+                    .filter(function (data) {
+                        return data.properties.languages.includes(currentLanguage.datum());
+                    })
+                    .attr("fill", same_language_color);
+                currentCountry.attr("fill", selected_color);
+            });
+        }
+
+        d3.select("#oficiallang-description")
+              .append("text")
+              .text(" Click on one of the highlighted official languages to see which other countries have the same official language.");
+    }
+
     // Create map object
     var officiallang_map = map()
         .map_id(map_id)
@@ -115,7 +205,8 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
         .color_mapper(function (d) { return non_highlighted_color; })
         .onClickBehavior(function (d) {
             let currentCountry = d3.select(this);
-            createCountryInfo(d, currentCountry, map_id);
+            // createCountryInfo(d, currentCountry, map_id);
+            createCountryParagraphInfo(d, currentCountry, map_id);
             highlightCountry(d, currentCountry);
         });
 
