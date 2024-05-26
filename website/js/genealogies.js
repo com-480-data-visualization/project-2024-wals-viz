@@ -153,21 +153,24 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
             case 1:
               svg.select("#" + map_id).selectAll("path")
                   .filter(function (data) {
-                    console.log(data);
-                    // Special case for Eurasia - dataset can be misleading with the continents
-                    if (clicked_name == "Eurasia") {
-                      if (data.properties.CONTINENT == "Europe" || data.properties.CONTINENT == "Asia")
-                        return true;
-                      else
-                        return false;
+                    // Special care to match each macroarea to the correct geographical region
+                    // Need to combine the macroarea with the continents of JSON data
+                    switch (clicked_name) {
+                      case "Eurasia":
+                        return data.properties.CONTINENT == "Europe" || data.properties.CONTINENT == "Asia";
+                      case "Africa":
+                        return data.properties.CONTINENT == "Africa";
+                      case "North America":
+                        return data.properties.CONTINENT == "North America";
+                      case "South America":
+                        return data.properties.CONTINENT == "South America";
+                      case "Papunesia":
+                        return data.properties.ADMIN != "Australia" && (data.properties.CONTINENT == "Oceania" || data.properties.CONTINENT == "Asia") && data.properties.macroarea.includes(clicked_name);
+                      case "Australia":
+                        return data.properties.ADMIN == "Australia";
+                      default:
+                        return data.properties.macroarea.includes(clicked_name);
                     }
-                    if (clicked_name == "Africa") {
-                      if (data.properties.CONTINENT == "Africa")
-                        return true;
-                      else
-                        return false;
-                    }
-                    return data.properties.macroarea.includes(clicked_name);  
                   })
                   .attr("fill", selected_color);
               break;
