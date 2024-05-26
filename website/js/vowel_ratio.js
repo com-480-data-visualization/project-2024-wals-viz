@@ -118,13 +118,14 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
 
         for (let i = 0; i < categories.length; i++) {
             let button = buttons.append("g")
+                .attr("opacity", "0.5")
                 .on("mouseover", function () {
-                    d3.select(this).attr("opacity", "0.5");
+                    d3.select(this).attr("opacity", "1");
                 })
                 .on("mouseout", function () { // Back to original color if not selected
                     if (selectedButton !== this) {
-                        d3.select(this).attr("opacity", "1");
-                    }          
+                        d3.select(this).attr("opacity", "0.5");
+                    }
                 })
                 .on("click", function () {
                     colors = d3.scaleOrdinal(
@@ -134,8 +135,8 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
                     vowel_map.json(json);
                     vowel_countriesGroup = vowel_map();
                     drawLegend(legend, 15 * vowel_div.clientWidth / 18, vowel_div.clientHeight / 6, 60, vowel_div.clientHeight / 3, colorsHeat[i], legends[i], 3 * vowel_div.clientWidth / 18 - 70, categories[i]);
-                    d3.select("#buttons").selectAll("*").attr("opacity", "1");
-                    d3.select(this).attr("opacity", "0.5");
+                    d3.select("#buttons").selectAll("g").attr("opacity", "0.5");
+                    d3.select(this).attr("opacity", "1");
                     selectedButton = this;
                 });
 

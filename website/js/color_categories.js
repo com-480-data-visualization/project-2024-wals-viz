@@ -230,6 +230,8 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         let paletteWidth = 4 * colorcat_div.clientWidth / 5;
         let paletteHeight = colorcat_div.clientHeight / 6;
 
+        let selected_button = null;
+
         let drawButton = function (button, order, colors, curButtonX, curButtonY) {
             for (let i = 0; i < colors.length; i++) {
                 button.append("rect")
@@ -251,18 +253,23 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                 .attr("width", buttonWidth)
                 .attr("height", buttonHeight)
                 .attr("fill", buttonColors[i])
+                .attr("opacity", "0.5")
                 .on("click", function () {
                     color_country(non_highlighted_color, json, highlightCategory, buttonNames[i]);
                     colorcat_map.json(json);
                     colorcat_countriesGroup = colorcat_map();
                     showColorPalette(paletteX, paletteY, paletteWidth, paletteHeight, buttonNames[i])
+                    buttonGroup.selectAll("g").attr("opacity", "0.5");
+                    d3.select(this).attr("opacity", "1");
+                    selected_button = this;
                 })
                 .on("mouseover", function (d) {
-                    console.log('Mouseover');
-                    d3.select(this).attr("opacity", "0.5");
+                    d3.select(this).attr("opacity", "1");
                 })
                 .on("mouseout", function () { // Back to original color if not selected
-                    d3.select(this).attr("opacity", "1");
+                    if (selected_button !== this) {
+                        d3.select(this).attr("opacity", "0.5");
+                    }
                 });
             drawButton(button, i, buttonColors[i], curButtonX, curButtonY);
         }
