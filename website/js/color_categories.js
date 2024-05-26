@@ -256,6 +256,13 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                     colorcat_map.json(json);
                     colorcat_countriesGroup = colorcat_map();
                     showColorPalette(paletteX, paletteY, paletteWidth, paletteHeight, buttonNames[i])
+                })
+                .on("mouseover", function (d) {
+                    console.log('Mouseover');
+                    d3.select(this).attr("opacity", "0.5");
+                })
+                .on("mouseout", function () { // Back to original color if not selected
+                    d3.select(this).attr("opacity", "1");
                 });
             drawButton(button, i, buttonColors[i], curButtonX, curButtonY);
         }
