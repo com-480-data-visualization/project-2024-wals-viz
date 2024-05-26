@@ -10,7 +10,7 @@ fun_facts = {
     '6 OSV': 'The Object-Subject-Verb syntax is quite rare!',
 }
 
-function sentence_order_ready(error, json, official_language_csv, wals_csv){
+function sentence_order_ready(error, json, official_language_csv, wals_csv) {
     document.getElementById("first_word_recepient").addEventListener("drop", dropWord);
     document.getElementById("second_word_recepient").addEventListener("drop", dropWord);
     document.getElementById("third_word_recepient").addEventListener("drop", dropWord);
@@ -44,7 +44,7 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         .attr("height", height);
 
     svg.append("foreignObject")
-        .attr('transform', 'translate(' + (0+ text_margin_x) + ',' + 0 / 2 + ')')
+        .attr('transform', 'translate(' + (0 + text_margin_x) + ',' + 0 / 2 + ')')
         .attr("width", 750)
         .attr("height", 250)
         .append("xhtml:div")
@@ -54,28 +54,54 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
     map_width = 4 * width / 5;
 
     var sentenceorder_map = map()
-            .map_id(map_id)
-            .x(width - map_width)
-            .y(0)
-            .width(map_width)
-            .height(height)
-            .json(json)
-            .allCountries(official_language_csv)
-            .svg(svg)
-            .color_mapper(function (d) { return d.properties.color; });
+        .map_id(map_id)
+        .x(width - map_width)
+        .y(0)
+        .width(map_width)
+        .height(height)
+        .json(json)
+        .allCountries(official_language_csv)
+        .svg(svg)
+        .color_mapper(function (d) { return d.properties.color; })
+        .onMouseOverBehavior(function (d) {
+            let currentCountry = d3.select(this);
+            let xPosition = parseFloat(d.clientX);
+            let yPosition = parseFloat(d.clientY);
+            d3.select("#sentenceorder-tooltip")
+                .style("left", xPosition + "px")
+                .style("top", yPosition + "px")
+                .select("#sentenceorder-tooltip-country")
+                .text(currentCountry.datum().properties.NAME);
+
+            d3.select("#sentenceorder-tooltip")
+                .select("#sentenceorder-tooltip-languages")
+                .selectAll("p")
+                .remove();
+            d3.select("#sentenceorder-tooltip")
+                .select("#sentenceorder-tooltip-languages").selectAll("p")
+                .data(get_langs_info(wals_csv, currentCountry.datum().properties.ISO_A2, "81A Order of Subject, Object and Verb"))
+                .join("p")
+                .text(function (d) { return d; });
+
+            console.log(get_langs_info(wals_csv, currentCountry.datum().properties.ISO_A2, "81A Order of Subject, Object and Verb"));
+            d3.select("#sentenceorder-tooltip").classed("hidden", false);
+        })
+        .onMouseOutBehavior(function (d) {
+            d3.select("#sentenceorder-tooltip").classed("hidden", true);
+        });
 
     var colorcat_countriesGroup = sentenceorder_map();
 
     let highlightCategory = function (d, category) {
         let country = d.ISO_A2;
-        
+
 
         let languagesInCountry = wals_csv.filter((elem) => {
             return elem["81A Order of Subject, Object and Verb"] === category;
         }).filter(lang => lang.countrycodes.includes(country));
-        
+
         if (languagesInCountry.length > 0) return highlighted_color;
-        
+
         return non_highlighted_color;
 
     };
@@ -86,44 +112,42 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
     };
 
 
-    function updateColors(non_highlighted_color, json, highlightCategory, category){
-        color_country(non_highlighted_color, json, highlightCategory,category);
+    function updateColors(non_highlighted_color, json, highlightCategory, category) {
+        color_country(non_highlighted_color, json, highlightCategory, category);
         sentenceorder_map.json(json);
         sentenceorder_countriesGroup = sentenceorder_map();
     }
 
-    function resetColors(non_highlighted_color, json, resetCategory){
+    function resetColors(non_highlighted_color, json, resetCategory) {
         color_country(non_highlighted_color, json, resetCategory, "");
         sentenceorder_map.json(json);
         sentenceorder_countriesGroup = sentenceorder_map();
     }
 
-    function allowWordDrop(ev)
-    {
+    function allowWordDrop(ev) {
         ev.preventDefault();
     }
-    
-    function dragWord(ev)
-    {
-        ev.dataTransfer.setData("Text",ev.target.id);
+
+    function dragWord(ev) {
+        ev.dataTransfer.setData("Text", ev.target.id);
     }
 
     const element_id_codes = {
-        'drop-word-subject' : 'S',
-        'drop-word-verb' : 'V',
-        'drop-word-object' : 'O'
+        'drop-word-subject': 'S',
+        'drop-word-verb': 'V',
+        'drop-word-object': 'O'
     };
 
     const element_id_readable_codes = {
-        'drop-word-subject' : 'Subject',
-        'drop-word-verb' : 'Verb',
-        'drop-word-object' : 'Object'
+        'drop-word-subject': 'Subject',
+        'drop-word-verb': 'Verb',
+        'drop-word-object': 'Object'
     };
 
     const droppable_initial_container_matches = {
-        'drop-word-subject' : 'subject-original-container',
-        'drop-word-verb' : 'verb-original-container',
-        'drop-word-object' : 'object-original-container'
+        'drop-word-subject': 'subject-original-container',
+        'drop-word-verb': 'verb-original-container',
+        'drop-word-object': 'object-original-container'
     };
 
     const order_codes = {
@@ -135,12 +159,11 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         'OSV': '6 OSV',
     };
 
-    function dropWord(ev)
-    {
+    function dropWord(ev) {
         ev.preventDefault();
         if (ev.target.className === "word-recipient-area") {
-            if (ev.target.children.length === 0){
-                var data=ev.dataTransfer.getData("Text");
+            if (ev.target.children.length === 0) {
+                var data = ev.dataTransfer.getData("Text");
                 ev.target.appendChild(document.getElementById(data));
                 checkAnswer();
 
@@ -150,40 +173,39 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv){
         }
     }
 
-    function checkAnswer(){
+    function checkAnswer() {
         let sum = 0;
         let query_string = "";
-        for (const droparea of document.getElementsByClassName("word-recipient-area")){
+        for (const droparea of document.getElementsByClassName("word-recipient-area")) {
             sum += droparea.children.length;
-            
-            if (droparea.children.length >= 1){
+
+            if (droparea.children.length >= 1) {
                 query_string += element_id_codes[droparea.children[0].id];
             }
         }
 
-        if (sum === 3){
+        if (sum === 3) {
             query_string = order_codes[query_string];
             updateColors(non_highlighted_color, json, highlightCategory, query_string);
             updateFunFactText(query_string);
         }
     }
 
-    function getFunFact(current_order){
+    function getFunFact(current_order) {
         return fun_facts[current_order];
     }
 
-    function updateFunFactText(current_order){
+    function updateFunFactText(current_order) {
         fun_fact = getFunFact(current_order);
         document.getElementById("fun-fact-text").innerText = fun_fact;
     }
 
-    function resetWord(ev){
+    function resetWord(ev) {
         matching_original_recipient = droppable_initial_container_matches[ev.target.id];
 
-        if (ev.target.parentNode.id != matching_original_recipient)
-        {
+        if (ev.target.parentNode.id != matching_original_recipient) {
             ev.target.parentNode.parentNode.children[0].innerText = "";
-            
+
             let recipientElement = document.getElementById(matching_original_recipient);
             recipientElement.appendChild(document.getElementById(ev.target.id));
             resetColors(non_highlighted_color, json, resetCategory);

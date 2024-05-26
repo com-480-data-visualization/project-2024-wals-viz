@@ -471,7 +471,7 @@ a:visited {
 .tooltip {
     position: absolute;
     width: 200px;
-    height: auto;
+    height: 150px;
     padding: 10px;
     background-color: #edddcc;
     -webkit-border-radius: 10px;
@@ -480,6 +480,7 @@ a:visited {
     -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    overflow-y: scroll;
 }
 
 .hidden {

@@ -291,7 +291,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         .svg(svg)
         .color_mapper(function (d) { return d.properties.color; })
         .onMouseOverBehavior(function (d) {
-            currentCountry = d3.select(this);
+            let currentCountry = d3.select(this);
             let xPosition = parseFloat(d.clientX);
             let yPosition = parseFloat(d.clientY);
             d3.select("#colorcategories-tooltip")

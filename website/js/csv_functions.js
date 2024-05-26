@@ -83,6 +83,41 @@ function wals_get_field (wals, lang, field) {
     return langData[0][field];
 }
 
+function get_langs_info (wals, country_iso, field) {
+    // Get the languages of a country
+    let langs = wals.filter(function (d) {
+        return d.countrycodes.includes(country_iso);
+    });
+
+    // Get the name and field of the languages
+    let langs_info = langs.map(function (d) {
+        return {
+            name: d.Name,
+            field: d[field]
+        };
+    });
+
+    // Remove languages with no field
+    langs_info = langs_info.filter(function (d) {
+        return d.field != "";
+    });
+
+    // Trim the field to remove the number
+    langs_info = langs_info.map(function (d) {
+        return {
+            name: d.name,
+            field: d.field.substring(2)
+        };
+    });
+
+    // Parse array to string with line breaks
+    langs_info = langs_info.map(function (d) {
+        return d.name + ": " + d.field;
+    });
+
+    return langs_info;
+}
+
 // Returns the name of a language given its ISO code
 function iso_to_lang (iso, wals) {
     let lang = wals.filter(function (d) {
