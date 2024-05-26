@@ -136,11 +136,41 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
                         [0, 1, 2, 3, 4, 5],
                         colorsHeat[i]);
                     color_country(colors(0), json, applyHeatmapColor, category_index[i], colors);
-                    vowel_map.json(json);
+                    vowel_map
+                        .json(json)
+                        .onClickBehavior(function (d) {
+                            let currentCountry = d3.select(this);
+                            let xPosition = parseFloat(d.clientX);
+                            let yPosition = parseFloat(d.clientY);
+                            d3.select("#vowel-tooltip")
+                                .style("left", xPosition + "px")
+                                .style("top", yPosition + "px")
+                                .select("#vowel-tooltip-country")
+                                .text(currentCountry.datum().properties.NAME);
+
+                            d3.select("#vowel-tooltip")
+                                .select("#vowel-tooltip-languages")
+                                .selectAll("p")
+                                .remove();
+                            d3.select("#vowel-tooltip")
+                                .select("#vowel-tooltip-languages").selectAll("p")
+                                .data(get_langs_info(wals_csv, currentCountry.datum().properties.ISO_A2, category_index[i]))
+                                .join("p")
+                                .text(function (d) { return d; });
+
+                            d3.select("#vowel-tooltip").classed("hidden", false);
+                        })
+                        .onMouseOverBehavior(function (d) {
+                            d3.select(this).attr("opacity", "0.5");
+                        })
+                        .onMouseOutBehavior(function (d) {
+                            d3.select(this).attr("opacity", "1");
+                        });
                     vowel_countriesGroup = vowel_map();
                     drawLegend(legend, 15 * vowel_div.clientWidth / 18, vowel_div.clientHeight / 6, 60, vowel_div.clientHeight / 3, colorsHeat[i], legends[i], 3 * vowel_div.clientWidth / 18 - 70, categories[i]);
                     d3.select("#buttons").selectAll("g").attr("opacity", "0.5");
                     d3.select(this).attr("opacity", "1");
+                    d3.select("#vowel-tooltip").classed("hidden", true);
                     selectedButton = this;
                 });
 
@@ -172,7 +202,24 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
         .json(json)
         .allCountries(official_language_csv)
         .svg(svg)
-        .color_mapper(function (d) { return d.properties.color; });
+        .color_mapper(function (d) { return d.properties.color; })
+        .onClickBehavior(function (d) {
+            let currentCountry = d3.select(this);
+            let xPosition = parseFloat(d.clientX);
+            let yPosition = parseFloat(d.clientY);
+            d3.select("#vowel-tooltip")
+                .style("left", xPosition + "px")
+                .style("top", yPosition + "px")
+                .select("#vowel-tooltip-country")
+                .text(currentCountry.datum().properties.NAME);
+            d3.select("#vowel-tooltip").classed("hidden", false);
+        })
+        .onMouseOverBehavior(function (d) {
+            d3.select(this).attr("opacity", "0.5");
+        })
+        .onMouseOutBehavior(function (d) {
+            d3.select(this).attr("opacity", "1");
+        });
 
     console.log("vowel map ready");
 
