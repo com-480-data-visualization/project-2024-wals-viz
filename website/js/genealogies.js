@@ -153,7 +153,21 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
             case 1:
               svg.select("#" + map_id).selectAll("path")
                   .filter(function (data) {
-                    return data.properties.macroarea.includes(clicked_name);
+                    console.log(data);
+                    // Special case for Eurasia - dataset can be misleading with the continents
+                    if (clicked_name == "Eurasia") {
+                      if (data.properties.CONTINENT == "Europe" || data.properties.CONTINENT == "Asia")
+                        return true;
+                      else
+                        return false;
+                    }
+                    if (clicked_name == "Africa") {
+                      if (data.properties.CONTINENT == "Africa")
+                        return true;
+                      else
+                        return false;
+                    }
+                    return data.properties.macroarea.includes(clicked_name);  
                   })
                   .attr("fill", selected_color);
               break;
