@@ -19,11 +19,10 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
         [0, 1, 2, 3, 4, 5],
         color_5);
 
-        // TODO
     let numConsonantsTexts = ["Unknown", "Small: 6 to 14", "Moderately small: 15 to 18", "Average: 19 to 25", "Moderately large: 26 to 33", "Large: More than 34"];
-    let numVowelsTexts = ["Unknown", "Low: V < 5", "Average: 7 < V < 10", "High: V > 13"];
+    let numVowelsTexts = ["Unknown", "Small: 2 to 4", "Average: 5 to 6", "Large: 7 to 14"];
     let vowelRatioTexts = ["Unknown", "Low: C/V < 2", "Moderately low: 2 < C/V < 2.75", "Average: 2.75 < C/V < 4.5", "Moderately high: 4.5 < C/V < 6.5", "High: C/V > 6.5"];
-    let toneTexts = ["Unknown", "No tones", "1-2 tones", "3-4 tones"];
+    let toneTexts = ["Unknown", "No tones", "Simple tones (2)", "Complex tones (3 or more)"];
 
     var vowel_div = document.getElementById('vowel-col');
     var width = vowel_div.clientWidth;
@@ -57,7 +56,7 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
         }
     };
 
-    let drawLegend = function (legend, x, y, width, height, colors, legends) {
+    let drawLegend = function (legend, x, y, width, height, colors, legends, legend_title) {
 
         legend.selectAll("*").remove();
         rectHeight = height / legends.length;
@@ -80,6 +79,16 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
                 .text(legends[i]);
         }
 
+        legend.append("text")
+            .attr("x", x + width / 2)
+            .attr("y", y - 20)
+            .attr("text-anchor", "Start")
+            .attr("alignment-baseline", "middle")
+            .attr("fill", highlighted_color)
+            .attr("font-weight", "bold")
+            .attr("font-size", "20px")
+            .text(legend_title);
+
         return legend;
     };
 
@@ -93,8 +102,20 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
         elementHeight = 2 * height / (2 * categories.length - 1);
         elementPadding = height / (2 * categories.length - 1);
 
+        buttons = svg.append("g").attr("id", "buttons");
+
+        selectedButton = null
+
         for (let i = 0; i < categories.length; i++) {
-            let button = svg.append("g")
+            let button = buttons.append("g")
+                .on("mouseover", function () {
+                    d3.select(this).attr("opacity", "0.5");
+                })
+                .on("mouseout", function () { // Back to original color if not selected
+                    if (selectedButton !== this) {
+                        d3.select(this).attr("opacity", "1");
+                    }          
+                })
                 .on("click", function () {
                     colors = d3.scaleOrdinal(
                         [0, 1, 2, 3, 4, 5],
@@ -102,7 +123,10 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
                     color_country(colors(0), json, applyHeatmapColor, category_index[i], colors);
                     vowel_map.json(json);
                     vowel_countriesGroup = vowel_map();
-                    drawLegend(legend, 8 * vowel_div.clientWidth / 9, vowel_div.clientHeight / 3, 60, vowel_div.clientHeight / 3, colorsHeat[i], legends[i]);
+                    drawLegend(legend, 15 * vowel_div.clientWidth / 18, vowel_div.clientHeight / 6, 60, vowel_div.clientHeight / 3, colorsHeat[i], legends[i], categories[i]);
+                    d3.select("#buttons").selectAll("*").attr("opacity", "1");
+                    d3.select(this).attr("opacity", "0.5");
+                    selectedButton = this;
                 });
 
             button.append("rect")
@@ -126,9 +150,9 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
 
     var vowel_map = map()
         .map_id(map_id)
-        .x(60)
+        .x(vowel_div.clientWidth / 9)
         .y(0)
-        .width(8 * vowel_div.clientWidth / 9)
+        .width(7 * vowel_div.clientWidth / 9)
         .height(height)
         .json(json)
         .allCountries(official_language_csv)
@@ -138,8 +162,6 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
     console.log("vowel map ready");
 
     var vowel_countriesGroup = vowel_map();
-    drawButtons(svg, 60, 0, vowel_div.clientWidth / 9, vowel_div.clientHeight / 3, vowel_map);
+    drawButtons(svg, vowel_div.clientWidth / 100, vowel_div.clientHeight / 3, vowel_div.clientWidth / 10, vowel_div.clientHeight / 3, vowel_map);
     let legend = svg.append("g").attr("id", "legend");
-    drawLegend(legend, 8 * vowel_div.clientWidth / 9, vowel_div.clientHeight / 3, 60, vowel_div.clientHeight / 3, color_5, numConsonantsTexts);
-    color_country(colors(0), json, applyHeatmapColor, "1A Consonant Inventories", colors);
 }
