@@ -8,7 +8,7 @@ function whenDocumentLoaded(action) {
     }
 }
 
-let doAnimation = true;
+var doAnimation = true;
 
 const alternativeTitles = ['Syntax Puzzles',
                            'Puzzling Syntax',
