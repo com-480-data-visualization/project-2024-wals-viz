@@ -92,6 +92,16 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
             d3.select(this).attr("opacity", "1");
         });
 
+    function equalToEventTarget() {
+        return this == d3.event.target;
+    }
+
+    svg.on("click", function(d){
+        if (d.target.tagName === "svg"){
+            d3.select("#sentenceorder-tooltip").classed("hidden", true);
+        }
+    })
+
     var colorcat_countriesGroup = sentenceorder_map();
 
     function updateColors(category) {
