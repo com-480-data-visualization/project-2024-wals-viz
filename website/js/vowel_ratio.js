@@ -114,16 +114,20 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
 
         buttons = svg.append("g").attr("id", "buttons");
 
-        selectedButton = null
+        let selectedButton = null
 
         for (let i = 0; i < categories.length; i++) {
             let button = buttons.append("g")
-                .attr("opacity", "0.5")
                 .on("mouseover", function () {
+                    if (selectedButton == null) {
+                        d3.select("#buttons").selectAll("g").attr("opacity", "0.5");
+                    }
                     d3.select(this).attr("opacity", "1");
                 })
                 .on("mouseout", function () { // Back to original color if not selected
-                    if (selectedButton !== this) {
+                    if (selectedButton == null) {
+                        d3.select("#buttons").selectAll("g").attr("opacity", "1");
+                    } else if (selectedButton !== this) {
                         d3.select(this).attr("opacity", "0.5");
                     }
                 })

@@ -230,7 +230,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         let paletteWidth = 4 * colorcat_div.clientWidth / 5;
         let paletteHeight = colorcat_div.clientHeight / 6;
 
-        let selected_button = null;
+        let selectedButton = null;
 
         let drawButton = function (button, order, colors, curButtonX, curButtonY) {
             for (let i = 0; i < colors.length; i++) {
@@ -260,18 +260,18 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                     showColorPalette(paletteX, paletteY, paletteWidth, paletteHeight, buttonNames[i])
                     buttonGroup.selectAll("g").attr("opacity", "0.5");
                     d3.select(this).attr("opacity", "1");
-                    selected_button = this;
+                    selectedButton = this;
                 })
                 .on("mouseover", function (d) {
-                    if (selected_button == null) {
+                    if (selectedButton == null) {
                         buttonGroup.selectAll("g").attr("opacity", "0.5");
                     }
                     d3.select(this).attr("opacity", "1");
                 })
                 .on("mouseout", function () { // Back to original color if not selected
-                    if (selected_button == null) {
+                    if (selectedButton == null) {
                         buttonGroup.selectAll("g").attr("opacity", "1");
-                    } else if (selected_button !== this) {
+                    } else if (selectedButton !== this) {
                         d3.select(this).attr("opacity", "0.5");
                     }
                 });
