@@ -85,8 +85,9 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
                 return d.source.name === currentClusterName;
             });
 
+            svg.sel
             for (d of tmp){
-                console.log(d.target.iso_name);
+                // console.log(d.target.iso_name);
 
                 svg.select("#" + map_id).selectAll("path")
                 .filter(function (data) {
@@ -96,7 +97,11 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
             }
         })
         .on("mouseout", function () { // Back to original color if not selected
-            console.log("Mouseout");         
+            svg.select("#" + map_id).selectAll("path")
+                .attr("fill", function (d) {
+                    const color_id = get_country_color_from_continent(d.properties.CONTINENT);
+                    return colors(color_id);
+                });
         });
 
     //Every time the simulation "ticks", this will be called
