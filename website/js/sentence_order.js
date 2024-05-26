@@ -94,36 +94,22 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
 
     var colorcat_countriesGroup = sentenceorder_map();
 
-    let highlightCategory = function (d, category) {
-        let country = d.ISO_A2;
+    function updateColors(category) {
+        svg.select("#" + map_id).selectAll("path")
+        .filter(function (data) {
+            let country = data.properties.ISO_A2;
 
+            let languagesInCountry = wals_csv.filter((elem) => {
+                return elem["81A Order of Subject, Object and Verb"] === category;
+            }).filter(lang => lang.countrycodes.includes(country));
 
-        let languagesInCountry = wals_csv.filter((elem) => {
-            return elem["81A Order of Subject, Object and Verb"] === category;
-        }).filter(lang => lang.countrycodes.includes(country));
-
-        if (languagesInCountry.length > 0) return highlighted_color;
-
-        return non_highlighted_color;
-
-    };
-
-    let resetCategory = function (d, category) {
-        return non_highlighted_color;
-
-    };
-
-
-    function updateColors(non_highlighted_color, json, highlightCategory, category) {
-        color_country(non_highlighted_color, json, highlightCategory, category);
-        sentenceorder_map.json(json);
-        sentenceorder_countriesGroup = sentenceorder_map();
+            if (languagesInCountry.length > 0) return true;
+            return false;
+        }).attr("fill", highlighted_color);
     }
 
-    function resetColors(non_highlighted_color, json, resetCategory) {
-        color_country(non_highlighted_color, json, resetCategory, "");
-        sentenceorder_map.json(json);
-        sentenceorder_countriesGroup = sentenceorder_map();
+    function resetColors(non_highlighted_color) {
+        svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
     }
 
     function allowWordDrop(ev) {
@@ -188,7 +174,7 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
 
         if (sum === 3) {
             query_string = order_codes[query_string];
-            updateColors(non_highlighted_color, json, highlightCategory, query_string);
+            updateColors(query_string);
             updateFunFactText(query_string);
         }
     }
@@ -210,7 +196,7 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
 
             let recipientElement = document.getElementById(matching_original_recipient);
             recipientElement.appendChild(document.getElementById(ev.target.id));
-            resetColors(non_highlighted_color, json, resetCategory);
+            resetColors(non_highlighted_color);
         }
 
         document.getElementById("fun-fact-text").innerText = default_intro_text;
