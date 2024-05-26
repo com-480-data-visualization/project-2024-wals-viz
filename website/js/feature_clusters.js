@@ -81,18 +81,23 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
     nodes.on("mouseover", function (d) {
             let currentClusterName = d3.select(this).datum().name;
             
-            let tmp = dataset.edges.filter((d) => {
-                return d.source.name === currentClusterName;
-            });
-
-            for (d of tmp){
-                // console.log(d.target.iso_name);
+            if (currentClusterName.includes('Cluster')){
+                let tmp = dataset.edges.filter((d) => {
+                    return d.source.name === currentClusterName;
+                });
 
                 svg.select("#" + map_id).selectAll("path")
-                .filter(function (data) {
-                    return data.properties.languages.includes(d.target.iso_name);
-                })
-                .attr("fill", same_language_color);
+                    .attr("fill", non_highlighted_color);
+
+                for (d of tmp){
+                    // console.log(d.target.iso_name);
+
+                    svg.select("#" + map_id).selectAll("path")
+                    .filter(function (data) {
+                        return data.properties.languages.includes(d.target.iso_name);
+                    })
+                    .attr("fill", same_language_color);
+                }
             }
         })
         .on("mouseout", function () { // Back to original color if not selected
