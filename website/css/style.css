@@ -471,7 +471,8 @@ a:visited {
 .tooltip {
     position: absolute;
     width: 200px;
-    height: 150px;
+    height: auto;
+    max-height: 150px;
     padding: 10px;
     background-color: #edddcc;
     -webkit-border-radius: 10px;
