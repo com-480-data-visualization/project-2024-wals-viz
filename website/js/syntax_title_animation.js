@@ -56,7 +56,6 @@ whenDocumentLoaded(() => {
                         }
 
                         if ((pauseFrameCounter % 4) == 0) showCursor = !showCursor;
-                        console.log(pauseFrameCounter % 4, showCursor)
                     } else {
                         titleElement.innerText = alternativeTitles[index].slice(0, letterIndex);
                         titleElement.innerHTML += '<b> | <b>';
