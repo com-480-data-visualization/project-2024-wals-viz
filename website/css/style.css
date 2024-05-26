@@ -32,11 +32,12 @@ h1 {
 p {
     color: #102c57ff;
 }
+
 span {
     color: #102c57ff;
 }
 
-a:link{
+a:link {
     color: #102c57ff;
     font-size: 1.25em;
     text-decoration: none;
@@ -44,12 +45,12 @@ a:link{
 
 a:hover {
     text-decoration: underline;
-  }
+}
 
-  a:visited {
+a:visited {
     color: #102c57ff;
     text-decoration: none;
-  }
+}
 
 .gjs-grid-column {
     flex: 1 1 0%;
@@ -65,41 +66,41 @@ a:hover {
     width: 100px;
     height: 50px;
 
-    padding: 2px; 
+    padding: 2px;
     margin-right: 10px;
 
-    background-color: #fefaf6ff; 
-    color: #102c57ff; 
-    border-style:solid;
+    background-color: #fefaf6ff;
+    color: #102c57ff;
+    border-style: solid;
     border-color: #dac0a3ff;
-    border-radius: 10px;   
+    border-radius: 10px;
 }
 
-#colorcategories-intro-col{
+#colorcategories-intro-col {
     position: relative;
 }
 
-#colorcategories-col{
+#colorcategories-col {
     position: relative;
 }
 
-#sentenceorder-col{
+#sentenceorder-col {
     position: relative;
 }
 
-#welcome-col{
+#welcome-col {
     position: relative;
 }
 
-#officiallang-col{
+#officiallang-col {
     position: relative;
 }
 
-#vowel-col{
+#vowel-col {
     position: relative;
 }
 
-#cluster-col{
+#cluster-col {
     position: relative;
 }
 
@@ -107,13 +108,13 @@ a:hover {
     color: #102c57ff;
     font-size: 1.5em;
     position: absolute;
-    bottom: 0px; 
+    bottom: 0px;
     left: 50%;
     transform: translate(-50%, 0%);
     animation: blinker 3s ease-in infinite;
-  }
-  
-.title_changing_color_text{
+}
+
+.title_changing_color_text {
     font-weight: bold;
     animation: color-changer 4s linear infinite;
 }
@@ -128,11 +129,11 @@ a:hover {
     0% {
         color: #2980b9ff;
     }
-    
+
     25% {
         color: #1e8449ff;
     }
-    
+
     50% {
         color: #f4d03fff;
     }
@@ -146,15 +147,15 @@ a:hover {
     }
 }
 
-.word-recipient-area{
+.word-recipient-area {
     display: table;
-    
+
     width: 100px;
     height: 60px;
 
-    background-color: #dac0a3ff; 
-    color: aliceblue; 
-    padding: 2px; 
+    background-color: #dac0a3ff;
+    color: aliceblue;
+    padding: 2px;
     margin-right: 10px;
 
     border-radius: 10px;
@@ -313,6 +314,7 @@ a:hover {
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
 }
+
 /* 
 #genealogy-head {
     font-size: 3rem;
@@ -464,4 +466,29 @@ a:hover {
     .gjs-grid-row {
         flex-direction: column;
     }
+}
+
+.tooltip {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    padding: 10px;
+    background-color: #edddcc;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    -moz-box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.hidden {
+    display: none;
+}
+
+.tooltip p {
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 20px;
 }

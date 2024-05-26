@@ -64,13 +64,12 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
         }) //10
         .style("fill", function (d, i) {
             return colors(d.color);
-        }
-        )
+        })
         .call(d3.drag()  //Define what to do on drag events
             .on("start", dragStarted)
             .on("drag", dragging)
             .on("end", dragEnded));
-        
+
 
     //Add a simple tooltip
     nodes.append("title")
@@ -79,33 +78,33 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
         });
 
     nodes.on("mouseover", function (d) {
-            let currentClusterName = d3.select(this).datum().name;
-            
-            if (currentClusterName.includes('Cluster')){
-                let tmp = dataset.edges.filter((d) => {
-                    return d.source.name === currentClusterName;
-                });
+        let currentClusterName = d3.select(this).datum().name;
+
+        if (currentClusterName.includes('Cluster')) {
+            let tmp = dataset.edges.filter((d) => {
+                return d.source.name === currentClusterName;
+            });
+
+            svg.select("#" + map_id).selectAll("path")
+                .attr("fill", non_highlighted_color);
+
+            for (d of tmp) {
+                // console.log(d.target.iso_name);
 
                 svg.select("#" + map_id).selectAll("path")
-                    .attr("fill", non_highlighted_color);
-
-                for (d of tmp){
-                    // console.log(d.target.iso_name);
-
-                    svg.select("#" + map_id).selectAll("path")
                     .filter(function (data) {
                         return data.properties.languages.includes(d.target.iso_name);
                     })
                     .attr("fill", same_language_color);
-                }
             }
-        })
+        }
+    })
         .on("mouseout", function () { // Back to original color if not selected
             svg.select("#" + map_id).selectAll("path")
                 .attr("fill", function (d) {
                     const color_id = get_country_color_from_continent(d.properties.CONTINENT);
                     return colors(color_id);
-            });
+                });
         });
 
     //Every time the simulation "ticks", this will be called
