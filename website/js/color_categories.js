@@ -108,56 +108,56 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         // using rectangles of the corresponding colors. Also, label the category
         switch (category) {
             case "Category 2":  // 3 squares: White, red/yellow, black/green/blue
-                drawSquare(0, centerX - 3*squareSize/2 - squarePadding, "White", 1, "white");
-                drawSquare(1, centerX - squareSize/2, "Red/yellow", 2, red_color, yellow_color);
-                drawSquare(2, centerX + squareSize/2 + squarePadding, "Black/green/blue", 3, "black", green_color, blue_color);
+                drawSquare(0, centerX - 3 * squareSize / 2 - squarePadding, "White", 1, "white");
+                drawSquare(1, centerX - squareSize / 2, "Red/yellow", 2, red_color, yellow_color);
+                drawSquare(2, centerX + squareSize / 2 + squarePadding, "Black/green/blue", 3, "black", green_color, blue_color);
                 break;
             case "Category 3A": // 4 squares: White, red, yellow, black/green/blue
-                drawSquare(0, centerX - 2*squareSize - 3*squarePadding/2, "White", 1, "white");
-                drawSquare(1, centerX - squareSize - squarePadding/2, "Red", 1, red_color);
-                drawSquare(2, centerX + squarePadding/2, "Yellow", 1, yellow_color);
-                drawSquare(3, centerX + squareSize + 3*squarePadding/2, "Black/green/blue", 3, "black", green_color, blue_color);
+                drawSquare(0, centerX - 2 * squareSize - 3 * squarePadding / 2, "White", 1, "white");
+                drawSquare(1, centerX - squareSize - squarePadding / 2, "Red", 1, red_color);
+                drawSquare(2, centerX + squarePadding / 2, "Yellow", 1, yellow_color);
+                drawSquare(3, centerX + squareSize + 3 * squarePadding / 2, "Black/green/blue", 3, "black", green_color, blue_color);
                 break;
             case "Category 3B": // 4 squares: White, red/yellow, black, green/blue
-                drawSquare(0, centerX - 2*squareSize - 3*squarePadding/2, "White", 1, "white");
-                drawSquare(1, centerX - squareSize - squarePadding/2, "Red/yellow", 2, red_color, yellow_color);
-                drawSquare(2, centerX + squarePadding/2, "Green/blue", 2, green_color, blue_color);
-                drawSquare(3, centerX + squareSize + 3*squarePadding/2, "Black", 1, "black");
+                drawSquare(0, centerX - 2 * squareSize - 3 * squarePadding / 2, "White", 1, "white");
+                drawSquare(1, centerX - squareSize - squarePadding / 2, "Red/yellow", 2, red_color, yellow_color);
+                drawSquare(2, centerX + squarePadding / 2, "Green/blue", 2, green_color, blue_color);
+                drawSquare(3, centerX + squareSize + 3 * squarePadding / 2, "Black", 1, "black");
                 break;
             case "Category 3C": // 4 squares: White, red, yellow/green/blue, black
-                drawSquare(0, centerX - 2*squareSize - 3*squarePadding/2, "White", 1, "white");
-                drawSquare(1, centerX - squareSize - squarePadding/2, "Red", 1, red_color);
-                drawSquare(2, centerX + squarePadding/2, "Yellow/green/blue", 3, yellow_color, green_color, blue_color);
-                drawSquare(3, centerX + squareSize + 3*squarePadding/2, "Black", 1, "black");
+                drawSquare(0, centerX - 2 * squareSize - 3 * squarePadding / 2, "White", 1, "white");
+                drawSquare(1, centerX - squareSize - squarePadding / 2, "Red", 1, red_color);
+                drawSquare(2, centerX + squarePadding / 2, "Yellow/green/blue", 3, yellow_color, green_color, blue_color);
+                drawSquare(3, centerX + squareSize + 3 * squarePadding / 2, "Black", 1, "black");
                 break;
             case "Category 4A": // 5 squares: White, red, yellow/green, black, blue
-                drawSquare(0, centerX - 5*squareSize/2 - 2*squarePadding, "White", 1, "white");
-                drawSquare(1, centerX - 3*squareSize/2 - squarePadding, "Red", 1, red_color);
-                drawSquare(2, centerX - squareSize/2, "Yellow/green", 2, yellow_color, green_color);
-                drawSquare(3, centerX + squareSize/2 + squarePadding, "Blue", 1, blue_color);
-                drawSquare(4, centerX + 3*squareSize/2 + 2*squarePadding, "Black", 1, "black");
+                drawSquare(0, centerX - 5 * squareSize / 2 - 2 * squarePadding, "White", 1, "white");
+                drawSquare(1, centerX - 3 * squareSize / 2 - squarePadding, "Red", 1, red_color);
+                drawSquare(2, centerX - squareSize / 2, "Yellow/green", 2, yellow_color, green_color);
+                drawSquare(3, centerX + squareSize / 2 + squarePadding, "Blue", 1, blue_color);
+                drawSquare(4, centerX + 3 * squareSize / 2 + 2 * squarePadding, "Black", 1, "black");
                 break;
             case "Category 4B": // 5 squares: White, red, yellow, black, blue/green
-                drawSquare(0, centerX - 5*squareSize/2 - 2*squarePadding, "White", 1, "white");
-                drawSquare(1, centerX - 3*squareSize/2 - squarePadding, "Red", 1, red_color);
-                drawSquare(2, centerX - squareSize/2, "Yellow", 1, yellow_color);
-                drawSquare(3, centerX + squareSize/2 + squarePadding, "Blue/green", 2, blue_color, green_color);
-                drawSquare(4, centerX + 3*squareSize/2 + 2*squarePadding, "Black", 1, "black");
+                drawSquare(0, centerX - 5 * squareSize / 2 - 2 * squarePadding, "White", 1, "white");
+                drawSquare(1, centerX - 3 * squareSize / 2 - squarePadding, "Red", 1, red_color);
+                drawSquare(2, centerX - squareSize / 2, "Yellow", 1, yellow_color);
+                drawSquare(3, centerX + squareSize / 2 + squarePadding, "Blue/green", 2, blue_color, green_color);
+                drawSquare(4, centerX + 3 * squareSize / 2 + 2 * squarePadding, "Black", 1, "black");
                 break;
             case "Category 4C": // 5 squares: White, red, yellow, green, black/blue
-                drawSquare(0, centerX - 5*squareSize/2 - 2*squarePadding, "White", 1, "white");
-                drawSquare(1, centerX - 3*squareSize/2 - squarePadding, "Red", 1, red_color);
-                drawSquare(2, centerX - squareSize/2, "Yellow", 1, yellow_color);
-                drawSquare(3, centerX + squareSize/2 + squarePadding, "Green", 1, green_color);
-                drawSquare(4, centerX + 3*squareSize/2 + 2*squarePadding, "Black/blue", 2, "black", blue_color);
+                drawSquare(0, centerX - 5 * squareSize / 2 - 2 * squarePadding, "White", 1, "white");
+                drawSquare(1, centerX - 3 * squareSize / 2 - squarePadding, "Red", 1, red_color);
+                drawSquare(2, centerX - squareSize / 2, "Yellow", 1, yellow_color);
+                drawSquare(3, centerX + squareSize / 2 + squarePadding, "Green", 1, green_color);
+                drawSquare(4, centerX + 3 * squareSize / 2 + 2 * squarePadding, "Black/blue", 2, "black", blue_color);
                 break;
             case "Category 5": // 6 squares: White, red, yellow, green, black, blue
-                drawSquare(0, centerX - 3*squareSize - 5*squarePadding/2, "White", 1, "white");
-                drawSquare(1, centerX - 2*squareSize - 3*squarePadding/2, "Red", 1, red_color);
-                drawSquare(2, centerX - squareSize - squarePadding/2, "Yellow", 1, yellow_color);
-                drawSquare(3, centerX + squarePadding/2, "Green", 1, green_color);
-                drawSquare(4, centerX + squareSize + 3*squarePadding/2, "Blue", 1, blue_color);
-                drawSquare(5, centerX + 2*squareSize + 5*squarePadding/2, "Black", 1, "black");
+                drawSquare(0, centerX - 3 * squareSize - 5 * squarePadding / 2, "White", 1, "white");
+                drawSquare(1, centerX - 2 * squareSize - 3 * squarePadding / 2, "Red", 1, red_color);
+                drawSquare(2, centerX - squareSize - squarePadding / 2, "Yellow", 1, yellow_color);
+                drawSquare(3, centerX + squarePadding / 2, "Green", 1, green_color);
+                drawSquare(4, centerX + squareSize + 3 * squarePadding / 2, "Blue", 1, blue_color);
+                drawSquare(5, centerX + 2 * squareSize + 5 * squarePadding / 2, "Black", 1, "black");
                 break;
             default: break;
         }
@@ -253,7 +253,6 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                 .attr("width", buttonWidth)
                 .attr("height", buttonHeight)
                 .attr("fill", buttonColors[i])
-                .attr("opacity", "0.5")
                 .on("click", function () {
                     color_country(non_highlighted_color, json, highlightCategory, buttonNames[i]);
                     colorcat_map.json(json);
@@ -264,10 +263,15 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                     selected_button = this;
                 })
                 .on("mouseover", function (d) {
+                    if (selected_button == null) {
+                        buttonGroup.selectAll("g").attr("opacity", "0.5");
+                    }
                     d3.select(this).attr("opacity", "1");
                 })
                 .on("mouseout", function () { // Back to original color if not selected
-                    if (selected_button !== this) {
+                    if (selected_button == null) {
+                        buttonGroup.selectAll("g").attr("opacity", "1");
+                    } else if (selected_button !== this) {
                         d3.select(this).attr("opacity", "0.5");
                     }
                 });
