@@ -211,7 +211,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         let buttonWidth = colorcat_div.clientWidth / 10;
         let buttonHeight = colorcat_div.clientHeight / 18;
         let buttonX = colorcat_div.clientWidth / 20;
-        let buttonY = 6 * colorcat_div.clientHeight / 20;
+        let buttonY = colorcat_div.clientHeight - 8 * colorcat_div.clientHeight / 20;
         let buttonPadding = colorcat_div.clientHeight / 36;
         let buttonNames = ["Category 2", "Category 3A", "Category 3B", "Category 3C", "Category 4A", "Category 4B", "Category 4C", "Category 5"];
         let buttonColors = [
@@ -230,11 +230,11 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         let paletteWidth = 4 * colorcat_div.clientWidth / 5;
         let paletteHeight = colorcat_div.clientHeight / 6;
 
-        let drawButton = function (button, order, colors) {
+        let drawButton = function (button, order, colors, curButtonX, curButtonY) {
             for (let i = 0; i < colors.length; i++) {
                 button.append("rect")
-                    .attr("x", buttonX + (i * (buttonWidth / colors.length)))
-                    .attr("y", buttonY + order * (buttonHeight + buttonPadding))
+                    .attr("x", curButtonX + (i * (buttonWidth / colors.length)))
+                    .attr("y", curButtonY)
                     .attr("width", buttonWidth / colors.length)
                     .attr("height", buttonHeight)
                     .attr("fill", colors[i])
@@ -243,9 +243,11 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         }
 
         for (let i = 0; i < buttonNames.length; i++) {
+            let curButtonX = buttonX + (Math.floor(i / 4) * (buttonWidth + buttonPadding));
+            let curButtonY = buttonY + (i % 4) * (buttonHeight + buttonPadding);
             let button = buttonGroup.append("g")
-                .attr("x", buttonX)
-                .attr("y", buttonY + i * (buttonHeight + buttonPadding))
+                .attr("x", curButtonX)
+                .attr("y", curButtonY)
                 .attr("width", buttonWidth)
                 .attr("height", buttonHeight)
                 .attr("fill", buttonColors[i])
@@ -255,7 +257,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                     colorcat_countriesGroup = colorcat_map();
                     showColorPalette(paletteX, paletteY, paletteWidth, paletteHeight, buttonNames[i])
                 });
-            drawButton(button, i, buttonColors[i]);
+            drawButton(button, i, buttonColors[i], curButtonX, curButtonY);
         }
     }
 
