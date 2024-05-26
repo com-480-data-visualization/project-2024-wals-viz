@@ -56,7 +56,7 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
         }
     };
 
-    let drawLegend = function (legend, x, y, width, height, colors, legends, legend_title) {
+    let drawLegend = function (legend, x, y, width, height, colors, legends, legend_width, legend_title) {
 
         legend.selectAll("*").remove();
         rectHeight = height / legends.length;
@@ -69,14 +69,24 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
                 .attr("height", rectHeight)
                 .attr("fill", colors[i]);
 
-            legend.append("text")
-                .attr("id", "legend-text" + i)
+            legend.append("foreignObject")
                 .attr("x", x + width + 10)
-                .attr("y", y + rectHeight * i + rectHeight / 2)
-                .attr("anchor", "start")
+                .attr("y", y + rectHeight * i + rectHeight / 4)
+                .attr("width", legend_width)
+                .attr("height", rectHeight)
                 .attr("alignment-baseline", "middle")
-                .attr("fill", highlighted_color)
-                .text(legends[i]);
+                .append("xhtml:div")
+                .style("font", "0.8em 'Helvetica'")
+                .html(legends[i]);
+
+            // legend.append("text")
+            //     .attr("id", "legend-text" + i)
+            //     .attr("x", x + width + 10)
+            //     .attr("y", y + rectHeight * i + rectHeight / 2)
+            //     .attr("anchor", "start")
+            //     .attr("alignment-baseline", "middle")
+            //     .attr("fill", highlighted_color)
+            //     .text(legends[i]);
         }
 
         legend.append("text")
@@ -123,7 +133,7 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
                     color_country(colors(0), json, applyHeatmapColor, category_index[i], colors);
                     vowel_map.json(json);
                     vowel_countriesGroup = vowel_map();
-                    drawLegend(legend, 15 * vowel_div.clientWidth / 18, vowel_div.clientHeight / 6, 60, vowel_div.clientHeight / 3, colorsHeat[i], legends[i], categories[i]);
+                    drawLegend(legend, 15 * vowel_div.clientWidth / 18, vowel_div.clientHeight / 6, 60, vowel_div.clientHeight / 3, colorsHeat[i], legends[i], 3 * vowel_div.clientWidth / 18 - 70, categories[i]);
                     d3.select("#buttons").selectAll("*").attr("opacity", "1");
                     d3.select(this).attr("opacity", "0.5");
                     selectedButton = this;
