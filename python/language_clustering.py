@@ -109,6 +109,7 @@ for label in np.unique(kmodes.labels_):
         cur_node_id += 1
         cur_color = get_color_from_geoarea(cluster_languages.iloc[i]['macroarea'])
         nodes.append({"name":cluster_languages.iloc[i]['Name'], 
+                      "iso_name":cluster_languages.iloc[i]['iso_code'],
                       "color" : cur_color,
                       "id" : cur_node_id})
         edges.append({ "source": cur_cluster_id, "target": cur_node_id })

@@ -8,10 +8,14 @@ const colors = d3.scaleOrdinal(
         "#A1CCD1FF", // Papunesia
         "#A1CCD1FF"]); //Australia
 
-function generate_feature_clusters(svg, dataset, width, height,
+var map_id = "clusters_map";
+
+function generate_feature_clusters(svg, dataset, map_id, width, height,
     x, y) {
 
-    console.log(width, height)
+    var non_highlighted_color = "#dac0a3ff";
+    var selected_color = "#102c57ff";
+    var same_language_color = "#102c56bf";
 
     //Define drag event functions
     function dragStarted(event) {
@@ -65,12 +69,34 @@ function generate_feature_clusters(svg, dataset, width, height,
         .call(d3.drag()  //Define what to do on drag events
             .on("start", dragStarted)
             .on("drag", dragging)
-            .on("end", dragEnded));;
+            .on("end", dragEnded));
+        
 
     //Add a simple tooltip
     nodes.append("title")
         .text(function (d) {
             return d.name;
+        });
+
+    nodes.on("mouseover", function (d) {
+            let currentClusterName = d3.select(this).datum().name;
+            
+            let tmp = dataset.edges.filter((d) => {
+                return d.source.name === currentClusterName;
+            });
+
+            for (d of tmp){
+                console.log(d.target.iso_name);
+
+                svg.select("#" + map_id).selectAll("path")
+                .filter(function (data) {
+                    return data.properties.languages.includes(d.target.iso_name);
+                })
+                .attr("fill", same_language_color);
+            }
+        })
+        .on("mouseout", function () { // Back to original color if not selected
+            console.log("Mouseout");         
         });
 
     //Every time the simulation "ticks", this will be called
@@ -105,7 +131,7 @@ function get_country_color_from_continent(continent) {
     }
 }
 
-function featurecluster_ready(error, json, csv, json_clusters) {
+function featurecluster_ready(error, map_json, csv, json_clusters) {
 
     console.log(colors(2))
     console.log(csv);
@@ -154,11 +180,12 @@ function featurecluster_ready(error, json, csv, json_clusters) {
 
     // Create map object
     var featurecluster_map = map()
+        .map_id(map_id)
         .x(map_x)
         .y(map_y)
         .width(map_width)
         .height(map_height)
-        .json(json)
+        .json(map_json)
         .allCountries(csv)
         .svg(featurecluster_svg)
         .color_mapper(function (d) {
@@ -172,7 +199,7 @@ function featurecluster_ready(error, json, csv, json_clusters) {
 
     var featurecluster_countriesGroup = featurecluster_map();
 
-    generate_feature_clusters(featurecluster_svg, json_clusters, width,
+    generate_feature_clusters(featurecluster_svg, json_clusters, map_id, width,
         height, -width / 16, height / 8);
 
 };

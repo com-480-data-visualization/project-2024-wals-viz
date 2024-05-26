@@ -7,281 +7,337 @@
     },
     {
       "name": "Acoma",
+      "iso_name": "kjq",
       "color": 4,
       "id": 1
     },
     {
       "name": "Arabic (Egyptian)",
+      "iso_name": "arz",
       "color": 1,
       "id": 2
     },
     {
       "name": "Ainu",
+      "iso_name": "ain",
       "color": 2,
       "id": 3
     },
     {
       "name": "Amele",
+      "iso_name": "aey",
       "color": 5,
       "id": 4
     },
     {
       "name": "Apurin\u00e3",
+      "iso_name": "apu",
       "color": 3,
       "id": 5
     },
     {
       "name": "Arapesh (Mountain)",
+      "iso_name": "ape",
       "color": 5,
       "id": 6
     },
     {
       "name": "Asmat",
+      "iso_name": "tml",
       "color": 5,
       "id": 7
     },
     {
       "name": "Barasano",
+      "iso_name": "bsn",
       "color": 3,
       "id": 8
     },
     {
       "name": "Burushaski",
+      "iso_name": "bsk",
       "color": 2,
       "id": 9
     },
     {
       "name": "Daga",
+      "iso_name": "dgz",
       "color": 5,
       "id": 10
     },
     {
       "name": "Diola-Fogny",
+      "iso_name": "dyo",
       "color": 1,
       "id": 11
     },
     {
       "name": "Dani (Lower Grand Valley)",
+      "iso_name": "dni",
       "color": 5,
       "id": 12
     },
     {
       "name": "Evenki",
+      "iso_name": "evn",
       "color": 2,
       "id": 13
     },
     {
       "name": "Fijian",
+      "iso_name": "fij",
       "color": 5,
       "id": 14
     },
     {
       "name": "Finnish",
+      "iso_name": "fin",
       "color": 2,
       "id": 15
     },
     {
       "name": "French",
+      "iso_name": "fra",
       "color": 2,
       "id": 16
     },
     {
       "name": "Georgian",
+      "iso_name": "kat",
       "color": 2,
       "id": 17
     },
     {
       "name": "Gooniyandi",
+      "iso_name": "gni",
       "color": 6,
       "id": 18
     },
     {
       "name": "Grebo",
+      "iso_name": "grj",
       "color": 1,
       "id": 19
     },
     {
       "name": "Greenlandic (West)",
+      "iso_name": "kal",
       "color": 2,
       "id": 20
     },
     {
       "name": "Guaran\u00ed",
+      "iso_name": "grn",
       "color": 3,
       "id": 21
     },
     {
       "name": "Hebrew (Modern)",
+      "iso_name": "heb",
       "color": 2,
       "id": 22
     },
     {
       "name": "Hindi",
+      "iso_name": "hin",
       "color": 2,
       "id": 23
     },
     {
       "name": "Imonda",
+      "iso_name": "imn",
       "color": 5,
       "id": 24
     },
     {
       "name": "Japanese",
+      "iso_name": "jpn",
       "color": 2,
       "id": 25
     },
     {
       "name": "Kayardild",
+      "iso_name": "gyd",
       "color": 6,
       "id": 26
     },
     {
       "name": "Kewa",
+      "iso_name": "kjs",
       "color": 5,
       "id": 27
     },
     {
       "name": "Khalkha",
+      "iso_name": "khk",
       "color": 2,
       "id": 28
     },
     {
       "name": "Kiowa",
+      "iso_name": "kio",
       "color": 4,
       "id": 29
     },
     {
       "name": "Kannada",
+      "iso_name": "kan",
       "color": 2,
       "id": 30
     },
     {
       "name": "Kutenai",
+      "iso_name": "kut",
       "color": 4,
       "id": 31
     },
     {
       "name": "Latvian",
+      "iso_name": "lav",
       "color": 2,
       "id": 32
     },
     {
       "name": "Lavukaleve",
+      "iso_name": "lvk",
       "color": 5,
       "id": 33
     },
     {
       "name": "Lezgian",
+      "iso_name": "lez",
       "color": 2,
       "id": 34
     },
     {
       "name": "Lakhota",
+      "iso_name": "lkt",
       "color": 4,
       "id": 35
     },
     {
       "name": "Luvale",
+      "iso_name": "lue",
       "color": 1,
       "id": 36
     },
     {
       "name": "Mapudungun",
+      "iso_name": "arn",
       "color": 3,
       "id": 37
     },
     {
       "name": "Maricopa",
+      "iso_name": "mrc",
       "color": 4,
       "id": 38
     },
     {
       "name": "Martuthunira",
+      "iso_name": "vma",
       "color": 6,
       "id": 39
     },
     {
       "name": "Mangarrayi",
+      "iso_name": "mpc",
       "color": 6,
       "id": 40
     },
     {
       "name": "Nenets",
+      "iso_name": "yrk",
       "color": 2,
       "id": 41
     },
     {
       "name": "Ngiyambaa",
+      "iso_name": "wyb",
       "color": 6,
       "id": 42
     },
     {
       "name": "Nivkh",
+      "iso_name": "niv",
       "color": 2,
       "id": 43
     },
     {
       "name": "Quechua (Imbabura)",
+      "iso_name": "qvi",
       "color": 3,
       "id": 44
     },
     {
       "name": "Rama",
+      "iso_name": "rma",
       "color": 4,
       "id": 45
     },
     {
       "name": "Spanish",
+      "iso_name": "spa",
       "color": 2,
       "id": 46
     },
     {
       "name": "Suena",
+      "iso_name": "sue",
       "color": 5,
       "id": 47
     },
     {
       "name": "Swahili",
+      "iso_name": "swa",
       "color": 1,
       "id": 48
     },
     {
       "name": "Tiwi",
+      "iso_name": "tiw",
       "color": 6,
       "id": 49
     },
     {
       "name": "Tukang Besi",
+      "iso_name": "bhq",
       "color": 5,
       "id": 50
     },
     {
       "name": "Wich\u00ed",
+      "iso_name": "mzh",
       "color": 3,
       "id": 51
     },
     {
       "name": "Warao",
+      "iso_name": "wba",
       "color": 3,
       "id": 52
     },
     {
       "name": "Yaqui",
+      "iso_name": "yaq",
       "color": 4,
       "id": 53
     },
     {
       "name": "Yukaghir (Kolyma)",
+      "iso_name": "yux",
       "color": 2,
       "id": 54
     },
     {
       "name": "Zulu",
+      "iso_name": "zul",
       "color": 1,
       "id": 55
     },
     {
       "name": "Zuni",
+      "iso_name": "zun",
       "color": 4,
       "id": 56
     },
@@ -292,86 +348,103 @@
     },
     {
       "name": "Bagirmi",
+      "iso_name": "bmi",
       "color": 1,
       "id": 58
     },
     {
       "name": "Berber (Middle Atlas)",
+      "iso_name": "tzm",
       "color": 1,
       "id": 59
     },
     {
       "name": "Chukchi",
+      "iso_name": "ckt",
       "color": 2,
       "id": 60
     },
     {
       "name": "Cree (Plains)",
+      "iso_name": "crk",
       "color": 4,
       "id": 61
     },
     {
       "name": "Jakaltek",
+      "iso_name": "jac",
       "color": 4,
       "id": 62
     },
     {
       "name": "Ket",
+      "iso_name": "ket",
       "color": 2,
       "id": 63
     },
     {
       "name": "Krongo",
+      "iso_name": "kgo",
       "color": 1,
       "id": 64
     },
     {
       "name": "Lango",
+      "iso_name": "laj",
       "color": 1,
       "id": 65
     },
     {
       "name": "Makah",
+      "iso_name": "myh",
       "color": 4,
       "id": 66
     },
     {
       "name": "Malagasy",
+      "iso_name": "plt",
       "color": 1,
       "id": 67
     },
     {
       "name": "Mandarin",
+      "iso_name": "cmn",
       "color": 2,
       "id": 68
     },
     {
       "name": "Pirah\u00e3",
+      "iso_name": "myp",
       "color": 3,
       "id": 69
     },
     {
       "name": "Persian",
+      "iso_name": "pes",
       "color": 2,
       "id": 70
     },
     {
       "name": "Russian",
+      "iso_name": "rus",
       "color": 2,
       "id": 71
     },
     {
       "name": "Supyire",
+      "iso_name": "spp",
       "color": 1,
       "id": 72
     },
     {
       "name": "Tagalog",
+      "iso_name": "tgl",
       "color": 5,
       "id": 73
     },
     {
       "name": "Yagua",
+      "iso_name": "yad",
       "color": 3,
       "id": 74
     },
@@ -382,86 +455,103 @@
     },
     {
       "name": "Araona",
+      "iso_name": "aro",
       "color": 3,
       "id": 76
     },
     {
       "name": "Burmese",
+      "iso_name": "mya",
       "color": 2,
       "id": 77
     },
     {
       "name": "Canela-Krah\u00f4",
+      "iso_name": "xra",
       "color": 3,
       "id": 78
     },
     {
       "name": "Hausa",
+      "iso_name": "hau",
       "color": 1,
       "id": 79
     },
     {
       "name": "Indonesian",
+      "iso_name": "ind",
       "color": 5,
       "id": 80
     },
     {
       "name": "Khmer",
+      "iso_name": "khm",
       "color": 2,
       "id": 81
     },
     {
       "name": "Koyraboro Senni",
+      "iso_name": "ses",
       "color": 1,
       "id": 82
     },
     {
       "name": "Maori",
+      "iso_name": "mri",
       "color": 5,
       "id": 83
     },
     {
       "name": "Maybrat",
+      "iso_name": "ayz",
       "color": 5,
       "id": 84
     },
     {
       "name": "Meithei",
+      "iso_name": "mni",
       "color": 2,
       "id": 85
     },
     {
       "name": "Rapanui",
+      "iso_name": "rap",
       "color": 5,
       "id": 86
     },
     {
       "name": "Sango",
+      "iso_name": "sag",
       "color": 1,
       "id": 87
     },
     {
       "name": "Sanuma",
+      "iso_name": "xsu",
       "color": 3,
       "id": 88
     },
     {
       "name": "Thai",
+      "iso_name": "tha",
       "color": 2,
       "id": 89
     },
     {
       "name": "Vietnamese",
+      "iso_name": "vie",
       "color": 2,
       "id": 90
     },
     {
       "name": "Wari'",
+      "iso_name": "pav",
       "color": 3,
       "id": 91
     },
     {
       "name": "Yoruba",
+      "iso_name": "yor",
       "color": 1,
       "id": 92
     },
@@ -472,81 +562,97 @@
     },
     {
       "name": "Abkhaz",
+      "iso_name": "abk",
       "color": 2,
       "id": 94
     },
     {
       "name": "Alamblak",
+      "iso_name": "amp",
       "color": 5,
       "id": 95
     },
     {
       "name": "Armenian (Eastern)",
+      "iso_name": "hye",
       "color": 2,
       "id": 96
     },
     {
       "name": "Awa Pit",
+      "iso_name": "kwi",
       "color": 3,
       "id": 97
     },
     {
       "name": "Brahui",
+      "iso_name": "brh",
       "color": 2,
       "id": 98
     },
     {
       "name": "Basque",
+      "iso_name": "eus",
       "color": 2,
       "id": 99
     },
     {
       "name": "English",
+      "iso_name": "eng",
       "color": 2,
       "id": 100
     },
     {
       "name": "German",
+      "iso_name": "deu",
       "color": 2,
       "id": 101
     },
     {
       "name": "Greek (Modern)",
+      "iso_name": "ell",
       "color": 2,
       "id": 102
     },
     {
       "name": "Hixkaryana",
+      "iso_name": "hix",
       "color": 3,
       "id": 103
     },
     {
       "name": "Hungarian",
+      "iso_name": "hun",
       "color": 2,
       "id": 104
     },
     {
       "name": "Kanuri",
+      "iso_name": "knc",
       "color": 1,
       "id": 105
     },
     {
       "name": "Korean",
+      "iso_name": "kor",
       "color": 2,
       "id": 106
     },
     {
       "name": "Maung",
+      "iso_name": "mph",
       "color": 6,
       "id": 107
     },
     {
       "name": "Oromo (Harar)",
+      "iso_name": "hae",
       "color": 1,
       "id": 108
     },
     {
       "name": "Turkish",
+      "iso_name": "tur",
       "color": 2,
       "id": 109
     },
@@ -557,21 +663,25 @@
     },
     {
       "name": "Mixtec (Chalcatongo)",
+      "iso_name": "mig",
       "color": 4,
       "id": 111
     },
     {
       "name": "Oneida",
+      "iso_name": "one",
       "color": 4,
       "id": 112
     },
     {
       "name": "Slave",
+      "iso_name": "xsl",
       "color": 4,
       "id": 113
     },
     {
       "name": "Wichita",
+      "iso_name": "wic",
       "color": 4,
       "id": 114
     }
