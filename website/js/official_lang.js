@@ -3,6 +3,7 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
     var officiallang_div = document.getElementById('officiallang-col');
 
     var non_highlighted_color = "#dac0a3ff";
+    var hovered_color = "#BE8B5FFF";
     var selected_color = "#102c57ff";
     var same_language_color = "#102c56bf";
 
@@ -208,6 +209,13 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
             // createCountryInfo(d, currentCountry, map_id);
             createCountryParagraphInfo(d, currentCountry, map_id);
             highlightCountry(d, currentCountry);
+            currentCountry.attr("opacity", "1");
+        })
+        .onMouseOverBehavior(function (d) {
+            d3.select(this).attr("opacity", "0.5");
+        })
+        .onMouseOutBehavior(function (d) {
+            d3.select(this).attr("opacity", "1");
         });
 
     var officiallang_countriesGroup = officiallang_map();
