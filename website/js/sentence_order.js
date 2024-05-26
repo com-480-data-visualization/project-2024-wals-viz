@@ -63,7 +63,7 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
         .allCountries(official_language_csv)
         .svg(svg)
         .color_mapper(function (d) { return d.properties.color; })
-        .onMouseOverBehavior(function (d) {
+        .onClickBehavior(function (d) {
             let currentCountry = d3.select(this);
             let xPosition = parseFloat(d.clientX);
             let yPosition = parseFloat(d.clientY);
@@ -83,11 +83,13 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
                 .join("p")
                 .text(function (d) { return d; });
 
-            console.log(get_langs_info(wals_csv, currentCountry.datum().properties.ISO_A2, "81A Order of Subject, Object and Verb"));
             d3.select("#sentenceorder-tooltip").classed("hidden", false);
         })
+        .onMouseOverBehavior(function (d) {
+            d3.select(this).attr("opacity", "0.5");
+        })
         .onMouseOutBehavior(function (d) {
-            d3.select("#sentenceorder-tooltip").classed("hidden", true);
+            d3.select(this).attr("opacity", "1");
         });
 
     var colorcat_countriesGroup = sentenceorder_map();
