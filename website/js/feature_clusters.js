@@ -85,7 +85,6 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
                 return d.source.name === currentClusterName;
             });
 
-            svg.sel
             for (d of tmp){
                 // console.log(d.target.iso_name);
 
@@ -101,7 +100,7 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
                 .attr("fill", function (d) {
                     const color_id = get_country_color_from_continent(d.properties.CONTINENT);
                     return colors(color_id);
-                });
+            });
         });
 
     //Every time the simulation "ticks", this will be called
