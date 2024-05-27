@@ -302,6 +302,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                     buttonGroup.selectAll("g").attr("opacity", "0.5");
                     d3.select(this).attr("opacity", "1");
                     selectedButton = this;
+                    d3.select("#colorcategories-tooltip").classed("hidden", true);
                 })
                 .on("mouseover", function (d) {
                     if (selectedButton == null) {
