@@ -87,33 +87,32 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
 
             legend.append("foreignObject")
                 .attr("x", x + width + 10)
-                .attr("y", y + rectHeight * i + rectHeight / 4)
+                .attr("y", y + rectHeight * i)
                 .attr("width", legend_width)
                 .attr("height", rectHeight)
-                .attr("alignment-baseline", "middle")
+                .style("position", "relative")
                 .append("xhtml:div")
                 .style("font", "0.8em 'Helvetica'")
+                .style("position", "absolute")
+                .style("top", "50%")
+                .style("transform", "translateY(-50%)")
                 .html(legends[i]);
-
-            // legend.append("text")
-            //     .attr("id", "legend-text" + i)
-            //     .attr("x", x + width + 10)
-            //     .attr("y", y + rectHeight * i + rectHeight / 2)
-            //     .attr("anchor", "start")
-            //     .attr("alignment-baseline", "middle")
-            //     .attr("fill", highlighted_color)
-            //     .text(legends[i]);
         }
 
-        legend.append("text")
-            .attr("x", x + width / 2)
-            .attr("y", y - 20)
-            .attr("text-anchor", "Start")
-            .attr("alignment-baseline", "middle")
-            .attr("fill", highlighted_color)
-            .attr("font-weight", "bold")
-            .attr("font-size", "20px")
-            .text(legend_title);
+        legend.append("foreignObject")
+            .attr("x", x)
+            .attr("y", y - 80)
+            .attr("width", width + legend_width)
+            .attr("height", 80)
+            .style("position", "relative")
+            .append("xhtml:div")
+            .style("font", "1.5em 'Helvetica'")
+            .style("font-weight", "bold")
+            .style("position", "absolute")
+            .style("top", "50%")
+            .style("transform", "translateY(-50%)")
+            .style("color", highlighted_color)
+            .html(legend_title);
 
         return legend;
     };
@@ -197,13 +196,29 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
                 .attr("ry", 10)
                 .attr("fill", highlighted_color)
 
-            button.append("text")
-                .attr("x", x + width / 2)
-                .attr("y", y + (elementHeight + elementPadding) * i + elementHeight / 2)
-                .attr("text-anchor", "middle")
-                .attr("alignment-baseline", "middle")
-                .attr("fill", "white")
-                .text(categories[i]);
+            button.append("foreignObject")
+                .attr("x", x + 5)
+                .attr("y", y + (elementHeight + elementPadding) * i + 5)
+                .attr("width", width - 10)
+                .attr("height", elementHeight - 10)
+                .style("position", "relative")
+                .append("xhtml:div")
+                .style("font", "1.5em 'Helvetica'")
+                .style("text-align", "center")
+                .style("position", "absolute")
+                .style("top", "50%")
+                .style("left", "50%")
+                .style("transform", "translate(-50%, -50%)")
+                .style("color", "white")
+                .html(categories[i]);
+
+            // button.append("text")
+            //     .attr("x", x + width / 2)
+            //     .attr("y", y + (elementHeight + elementPadding) * i + elementHeight / 2)
+            //     .attr("text-anchor", "middle")
+            //     .attr("alignment-baseline", "middle")
+            //     .attr("fill", "white")
+            //     .text(categories[i]);
         }
     }
 
