@@ -33,6 +33,12 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
         .attr("width", width)
         .attr("height", height);
 
+    svg.on("click", function (d) {
+        if (d.target.tagName === "svg") {
+            d3.select("#vowel-tooltip").classed("hidden", true);
+        }
+    })
+
     var map_id = "vowel_map";
 
     let selectHeatmapColor = function (country_iso, category, colors) {
