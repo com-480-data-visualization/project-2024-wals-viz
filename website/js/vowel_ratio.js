@@ -35,11 +35,14 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
 
     var map_id = "vowel_map";
 
-    let applyHeatmapColor = function (d, category, colors) {
+    let selectHeatmapColor = function (country_iso, category, colors) {
         let categories = [];
 
         // Run through wals_csv to get the language category, append to categories
-        let country = d.ISO_A2;
+        let country = country_iso;
+        console.log(country);
+        console.log(category);
+        console.log(colors);
         wals_csv.filter(lang => lang.countrycodes.includes(country))
             .forEach(lang => {
                 if (lang[category] != "") { categories.push(lang[category]); }
@@ -55,6 +58,13 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
             return colors(parseInt(mostFrequent.substring(0, 1)));
         }
     };
+
+    let applyHeatmapColor = function (category, colors) {
+        svg.select("#" + map_id).selectAll("path")
+            .attr("fill", function (d) {
+                return selectHeatmapColor(d.properties.ISO_A2, category, colors);
+            })
+    }
 
     let drawLegend = function (legend, x, y, width, height, colors, legends, legend_width, legend_title) {
 
@@ -135,10 +145,8 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
                     colors = d3.scaleOrdinal(
                         [0, 1, 2, 3, 4, 5],
                         colorsHeat[i]);
-                    color_country(colors(0), json, applyHeatmapColor, category_index[i], colors);
-                    vowel_map
-                        .json(json)
-                        .onClickBehavior(function (d) {
+                    d3.select("#" + map_id).selectAll("path")
+                        .on("click", function (d) {
                             let currentCountry = d3.select(this);
                             let xPosition = parseFloat(d.clientX);
                             let yPosition = parseFloat(d.clientY);
@@ -160,13 +168,13 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
 
                             d3.select("#vowel-tooltip").classed("hidden", false);
                         })
-                        .onMouseOverBehavior(function (d) {
+                        .on("mouseover", function (d) {
                             d3.select(this).attr("opacity", "0.5");
                         })
-                        .onMouseOutBehavior(function (d) {
+                        .on("mouseout", function (d) {
                             d3.select(this).attr("opacity", "1");
                         });
-                    vowel_countriesGroup = vowel_map();
+                    applyHeatmapColor(category_index[i], colors);
                     drawLegend(legend, 15 * vowel_div.clientWidth / 18, vowel_div.clientHeight / 6, 60, vowel_div.clientHeight / 3, colorsHeat[i], legends[i], 3 * vowel_div.clientWidth / 18 - 70, categories[i]);
                     d3.select("#buttons").selectAll("g").attr("opacity", "0.5");
                     d3.select(this).attr("opacity", "1");
