@@ -43,13 +43,13 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
         .attr("width", width)
         .attr("height", height);
 
-    svg.append("foreignObject")
-        .attr('transform', 'translate(' + (0 + text_margin_x) + ',' + 0 / 2 + ')')
-        .attr("width", 750)
-        .attr("height", 250)
-        .append("xhtml:div")
-        .style("font", "64px 'Helvetica'")
-        .html("Syntax Puzzles");
+    // svg.append("foreignObject")
+    //     .attr('transform', 'translate(' + (0 + text_margin_x) + ',' + 0 / 2 + ')')
+    //     .attr("width", 750)
+    //     .attr("height", 250)
+    //     .append("xhtml:div")
+    //     .style("font", "64px 'Helvetica'")
+    //     .html("Syntax Puzzles");
 
     map_width = 4 * width / 5;
 

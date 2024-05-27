@@ -148,13 +148,6 @@ function featurecluster_ready(error, map_json, csv, json_clusters) {
     var width = featurecluster_div.clientWidth;
     var height = featurecluster_div.clientHeight;
 
-    // var svg = d3.select(parentDiv)
-    //         .append("svg")
-    //         .attr("width", width)
-    //         .attr("height", height)
-    //         .attr("viewBox", [-width / 2, -height / 2, width, height])
-    //         .attr("style", "max-width: 100%; height: auto;");
-
     //Create SVG element
     var featurecluster_svg = d3.select(featurecluster_div)
         .append("svg")
@@ -178,13 +171,13 @@ function featurecluster_ready(error, map_json, csv, json_clusters) {
     //     .style("font", "64px 'Helvetica'")
     //     .html("Languages Beyond <b>Borders</b>");
 
-    featurecluster_svg.append("foreignObject")
-        .attr('transform', 'translate(' + (-width / 2 + text_margin_x) + ',' + (-height / 2 + 200) + ')')
-        .attr("width", 300)
-        .attr("height", 250)
-        .append("xhtml:div")
-        .style("font", "22px 'Helvetica'")
-        .html("Language similarity based on their internal structure of words, <b>Morphology</b>.");
+    // featurecluster_svg.append("foreignObject")
+    //     .attr('transform', 'translate(' + (-width / 2 + text_margin_x) + ',' + (-height / 2 + 200) + ')')
+    //     .attr("width", 300)
+    //     .attr("height", 250)
+    //     .append("xhtml:div")
+    //     .style("font", "1.5em 'Helvetica'")
+    //     .html("Language similarity based on their internal structure of words, <b>Morphology</b>.");
 
     // Create map object
     var featurecluster_map = map()

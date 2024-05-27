@@ -125,11 +125,13 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
               .append("text")
               .text("The official language of " + country_name 
                     + " is ")
+              .style('font-size', '1.5em');
 
             d3.select("#oficiallang-description")
               .append("text")
               .text(iso_to_lang(languages[0], wals_csv) + ".")
               .style('font-weight', 'bold')
+              .style('font-size', '1.5em')
               .on("mouseover", function(event, datum) {
                   d3.select(this).style("text-decoration","underline");
               })
@@ -152,7 +154,8 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
 
             d3.select("#oficiallang-description")
               .append("text")
-              .text(description);
+              .text(description)
+              .style('font-size', '1.5em');
 
             d3.select("#oficiallang-description").selectAll("text")
               .data(languages)
@@ -167,6 +170,10 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
                 return tmp;
               })
             .style('font-weight', 'bold')
+            .style('font-size', (language, i) => {
+                if (i == 0) return null;
+                else return '1.5em';
+            })
             .on("mouseover", function(event, datum) {
                 d3.select(this).style("text-decoration","underline");
             })
@@ -190,7 +197,8 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
 
         d3.select("#oficiallang-description")
               .append("text")
-              .text(" Click on one of the highlighted official languages to see which other countries have the same official language.");
+              .html("<br><br>Click on one of the highlighted official languages to see which other countries have the same official language.")
+              .style('font-size', '1.5em');
     }
 
     // Create map object
