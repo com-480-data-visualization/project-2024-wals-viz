@@ -3,6 +3,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
 
     var non_highlighted_color = "#dac0a3ff";
     var highlighted_color = "#102c57ff";
+    var unknown_color = "#AAAAAAFF";
 
     var red_color = "#e74c3cff";
     var yellow_color = "#f4d03fff";
@@ -186,24 +187,66 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         }
     };
 
-    let highlightCategory = function (d, category) {
+    let highlightCategory = function (country_iso, category) {
 
         let categories = [];
 
         // Run through wals_csv to get the language category, append to color
-        let country = d.ISO_A2;
+        let country = country_iso;
         wals_csv.filter(lang => lang.countrycodes.includes(country))
             .forEach(lang => {
                 categories.push(colorCategoryMapper(lang["134A Green and Blue"], lang["135A Red and Yellow"]))
             });
 
-        if (categories.length == 0) {
-            return non_highlighted_color;
+        // If no languages in the country or all with No category, return unknown color
+        if (categories.length == 0 || categories.every(cat => cat == "No category")) {
+            return unknown_color;
         } else if (categories.includes(category)) {
             return highlighted_color;
         } else {
             return non_highlighted_color;
         }
+    }
+
+    let describeCategory = function (country_iso) {
+
+        // Map the categories to the color description
+        let catToColor = new Map([
+            ["Category 2", "W, R/Y, Bk/G/Bu"],
+            ["Category 3A", "W, R, Y, Bk/G/Bu"],
+            ["Category 3B", "W, R/Y, G/Bu, Bk"],
+            ["Category 3C", "W, R, Y/G/Bu, Bk"],
+            ["Category 4A", "W, R, Y/G, Bu, Bk"],
+            ["Category 4B", "W, R, Y, Bu/G, Bk"],
+            ["Category 4C", "W, R, Y, G, Bk/Bu"],
+            ["Category 5", "W, R, Y, G, Bu, Bk"]
+        ]);
+
+        // Get the name and the colorCategory of the languages
+        let categories = wals_csv.filter(lang => lang.countrycodes.includes(country_iso))
+            .map(lang => {
+                return {
+                    name: lang.Name,
+                    field: colorCategoryMapper(lang["134A Green and Blue"], lang["135A Red and Yellow"])
+                };
+            });
+
+        // Remove No category
+        categories = categories.filter(cat => cat.field != "No category");
+
+        // Transform the categories to the color description
+        categories = categories.map(cat => {
+            return cat.name + ": " + catToColor.get(cat.field);
+        });
+
+        return categories;
+    }
+
+    let applyHighlight = function (category) {
+        svg.select("#" + map_id).selectAll("path")
+            .attr("fill", function (d) {
+                return highlightCategory(d.properties.ISO_A2, category);
+            });
     }
 
     let createColorCategoryButtons = function (svg, json) {
@@ -254,9 +297,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                 .attr("height", buttonHeight)
                 .attr("fill", buttonColors[i])
                 .on("click", function () {
-                    color_country(non_highlighted_color, json, highlightCategory, buttonNames[i]);
-                    colorcat_map.json(json);
-                    colorcat_countriesGroup = colorcat_map();
+                    applyHighlight(buttonNames[i]);
                     showColorPalette(paletteX, paletteY, paletteWidth, paletteHeight, buttonNames[i])
                     buttonGroup.selectAll("g").attr("opacity", "0.5");
                     d3.select(this).attr("opacity", "1");
@@ -290,7 +331,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         .allCountries(official_language_csv)
         .svg(svg)
         .color_mapper(function (d) { return d.properties.color; })
-        .onMouseOverBehavior(function (d) {
+        .onClickBehavior(function (d) {
             let currentCountry = d3.select(this);
             let xPosition = parseFloat(d.clientX);
             let yPosition = parseFloat(d.clientY);
@@ -298,12 +339,25 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                 .style("left", xPosition + "px")
                 .style("top", yPosition + "px")
                 .select("#colorcategories-tooltip-country")
-                .text(currentCountry.datum().properties.NAME)
+                .text(currentCountry.datum().properties.NAME);
+
+            d3.select("#colorcategories-tooltip")
+                .select("#colorcategories-tooltip-languages")
+                .selectAll("p")
+                .remove();
+            d3.select("#colorcategories-tooltip")
+                .select("#colorcategories-tooltip-languages").selectAll("p")
+                .data(describeCategory(currentCountry.datum().properties.ISO_A2))
+                .join("p")
+                .text(function (d) { return d; });
 
             d3.select("#colorcategories-tooltip").classed("hidden", false);
         })
+        .onMouseOverBehavior(function (d) {
+            d3.select(this).attr("opacity", "0.5");
+        })
         .onMouseOutBehavior(function (d) {
-            d3.select("#colorcategories-tooltip").classed("hidden", true);
+            d3.select(this).attr("opacity", "1");
         });
 
     var colorcat_countriesGroup = colorcat_map();
