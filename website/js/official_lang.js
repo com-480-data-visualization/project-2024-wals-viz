@@ -49,8 +49,12 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
     };
 
     let highlightCountry = function (d, currentCountry) {
-        svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
-        currentCountry.attr("fill", selected_color);
+        svg.select("#" + map_id).selectAll("path")
+            .transition()
+            .attr("fill", non_highlighted_color);
+        currentCountry
+            .transition()
+            .attr("fill", selected_color);
     };
 
     // Function that creates a group and a rectangle if they haven't been created yet,
@@ -113,92 +117,96 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
             });
     }
 
-    let createCountryParagraphInfo = function(d, currentCountry, map_id){
+    let createCountryParagraphInfo = function (d, currentCountry, map_id) {
         d3.select("#oficiallang-description").selectAll("*").remove();
 
         const languages = currentCountry.datum().properties.languages;
         const number_of_languages = languages.length;
         const country_name = currentCountry.datum().properties.NAME;
 
-        if (number_of_languages == 1){
+        if (number_of_languages == 1) {
             d3.select("#oficiallang-description")
-              .append("text")
-              .text("The official language of " + country_name 
+                .append("text")
+                .text("The official language of " + country_name
                     + " is ")
               .style('font-size', '1.5em');
 
             d3.select("#oficiallang-description")
-              .append("text")
-              .text(iso_to_lang(languages[0], wals_csv) + ".")
-              .style('font-weight', 'bold')
-              .style('font-size', '1.5em')
-              .on("mouseover", function(event, datum) {
-                  d3.select(this).style("text-decoration","underline");
-              })
-              .on("mouseout", function(event,datum) {
-                  d3.select(this).style("text-decoration","none");
-              })
-              .on("click", function (d) { // Turn selected color to red
-                svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
-                svg.select("#" + map_id).selectAll("path")
-                    .filter(function (data) {
-                        return data.properties.languages.includes(languages[0]);
-                    })
-                    .attr("fill", same_language_color);
-                currentCountry.attr("fill", selected_color);
-            });
+                .append("text")
+                .text(iso_to_lang(languages[0], wals_csv) + ".")
+                .style('font-weight', 'bold')
+                .style('font-size', '1.5em')
+                .on("mouseover", function (event, datum) {
+                    d3.select(this).style("text-decoration", "underline");
+                })
+                .on("mouseout", function (event, datum) {
+                    d3.select(this).style("text-decoration", "none");
+                })
+                .on("click", function (d) { // Turn selected color to red
+                    svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
+                    svg.select("#" + map_id).selectAll("path")
+                        .filter(function (data) {
+                            return (data.properties.languages.includes(languages[0]) &&
+                                data.properties.NAME != currentCountry.datum().properties.NAME);
+                        })
+                        .transition()
+                        .attr("fill", same_language_color);
+                    currentCountry.attr("fill", selected_color);
+                });
         }
         else {
-            let description = country_name + " has " + number_of_languages 
-                                    + " official languages. These are ";
+            let description = country_name + " has " + number_of_languages
+                + " official languages. These are ";
 
             d3.select("#oficiallang-description")
-              .append("text")
-              .text(description)
-              .style('font-size', '1.5em');
+                .append("text")
+                .text(description);
 
             d3.select("#oficiallang-description").selectAll("text")
-              .data(languages)
-              .join("text")
-              .append("text")
-              .text((language, i) => {
-                let tmp = iso_to_lang(language, wals_csv);
-                
-                if (i < number_of_languages - 2) tmp += ", ";
-                else if (i < number_of_languages - 1) tmp += " and ";
-                else tmp += ".";
-                return tmp;
-              })
-            .style('font-weight', 'bold')
-            .style('font-size', (language, i) => {
-                if (i == 0) return null;
-                else return '1.5em';
-            })
-            .on("mouseover", function(event, datum) {
-                d3.select(this).style("text-decoration","underline");
-            })
-            .on("mouseout", function(event,datum) {
-                d3.select(this).style("text-decoration","none");
-             })
-            .on("click", function (d) { // Turn selected color to red
-                // langListGroup.selectAll("text").attr("fill", "black");
-                let currentLanguage = d3.select(this).attr("fill", selected_color);
-                console.log(currentLanguage.datum());
-                // Highlight countries with the same language
-                svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
-                svg.select("#" + map_id).selectAll("path")
-                    .filter(function (data) {
-                        return data.properties.languages.includes(currentLanguage.datum());
-                    })
-                    .attr("fill", same_language_color);
-                currentCountry.attr("fill", selected_color);
-            });
+                .data(languages)
+                .join("text")
+                .append("text")
+                .text((language, i) => {
+                    let tmp = iso_to_lang(language, wals_csv);
+
+                    if (i < number_of_languages - 2) tmp += ", ";
+                    else if (i < number_of_languages - 1) tmp += " and ";
+                    else tmp += ".";
+                    return tmp;
+                })
+                .style('font-weight', 'bold')
+                .style('font-size', (language, i) => {
+                    if (i == 0) return null;
+                    else return '1.5em';
+                })
+                .on("mouseover", function (event, datum) {
+                    d3.select(this).style("text-decoration", "underline");
+                })
+                .on("mouseout", function (event, datum) {
+                    d3.select(this).style("text-decoration", "none");
+                })
+                .on("click", function (d) { // Turn selected color to red
+                    // langListGroup.selectAll("text").attr("fill", "black");
+                    let currentLanguage = d3.select(this).attr("fill", selected_color);
+                        console.log(currentLanguage.datum());
+                    // Highlight countries with the same language
+                    svg.select("#" + map_id).selectAll("path")
+                        .attr("fill", non_highlighted_color);
+                    svg.select("#" + map_id).selectAll("path")
+                        .filter(function (data) {
+                            return (data.properties.languages.includes(languages[0]) &&
+                                data.properties.NAME != currentCountry.datum().properties.NAME);
+                        })
+                        .transition()
+                        .attr("fill", same_language_color);
+                    currentCountry.attr("fill", selected_color);
+                });
         }
 
         d3.select("#oficiallang-description")
-              .append("text")
-              .html("<br><br>Click on one of the highlighted official languages to see which other countries have the same official language.")
-              .style('font-size', '1.5em');
+            .append("text")
+            .html("<br><br>Click on one of the highlighted official languages to see which other countries have the same official language.")
+            .style('font-size', '1.5em');
     }
 
     // Create map object
