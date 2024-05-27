@@ -275,11 +275,38 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
   var map_width = 0.63 * width;
 
   let languageInfo = function (d) {
-    let info = "";
-    info += "Language families: " + d.properties.family + "<br>";
-    info += "Language genuses: " + d.properties.genus + "<br>";
-    info += "Languages: " + d.properties.languageName + "<br>";
-    return info;
+    let infoArray = [];
+    // put a space in front of each element in d.properties.family
+
+    // traverse the family array and add each element to the infoArray
+    infoArray.push("--------------------")
+    infoArray.push("Families:")
+    temp = " "
+    for (let i = 0; i < d.properties.family.length; i++) {
+      temp += d.properties.family[i] + ", ";
+    }
+    infoArray.push(temp);
+    
+
+    // traverse the genus array and add each element to the infoArray
+    infoArray.push("--------------------")
+    infoArray.push("Genuses:")
+    temp = " "
+    for (let i = 0; i < d.properties.genus.length; i++) {
+      temp += d.properties.genus[i] + ", ";
+    }
+    infoArray.push(temp);
+
+    // traverse the languageName array and add each element to the infoArray
+    infoArray.push("--------------------")
+    infoArray.push("Languages:")
+    temp = " "
+    for (let i = 0; i < d.properties.languageName.length; i++) {
+      temp += d.properties.languageName[i] + ", ";
+    }
+    infoArray.push(temp);
+    
+    return infoArray;
   }
 
 
@@ -312,26 +339,42 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
           .remove();
       d3.select("#genealogy-tooltip")
           .select("#genealogy-tooltip-languages").selectAll("p")
-          .text(languageInfo(currentCountry.datum()));
+          .data(languageInfo(currentCountry.datum()))
+          .join("p")
+          .text(function (d) { return d; });
 
       d3.select("#genealogy-tooltip").classed("hidden", false);
+    })
+    // Add hover opacity effects - Careful to change the opacity based on the current opacity
+    .onMouseOverBehavior(function (d) {
+      currentCountry = d3.select(this);
+      // Change opacity based on current opacity
+      if (currentCountry.attr("fill-opacity") == 1) {
+        currentCountry.attr("fill-opacity", 0.7);
+      }
+      else if (currentCountry.attr("fill-opacity") == 0.8) {
+        currentCountry.attr("fill-opacity", 0.5);
+      }
+    })
+    .onMouseOutBehavior(function (d) {
+      currentCountry = d3.select(this);
+      // Change opacity based on current opacity
+      if (currentCountry.attr("fill-opacity") == 0.7) {
+        currentCountry.attr("fill-opacity", 1);
+      }
+      else if (currentCountry.attr("fill-opacity") == 0.5) {
+        currentCountry.attr("fill-opacity", 0.8);
+      }
     });
     
-    // WARNING: The opacity values are tricky now because they are handled by the sunburst chart
-    // We have different opacity values for (default map, highlighted countries with children and highlighted countries without children)
-    // .onMouseOverBehavior(function (d) {
-    //   d3.select(this).attr("fill-opacity", 0.7);
-    // })
-    // .onMouseOutBehavior(function (d) {
-    //   d3.select(this).attr("fill-opacity", 1);
-    // });
+    
 
   // // Remember to hide the tooltip when clicking outside of it
-  // svg.on("click", function(d) {
-  //   if (d.target.tagName === "svg"){
-  //       d3.select("#colorcategories-tooltip").classed("hidden", true);
-  //   }
-  // })
+  svg.on("click", function(d) {
+    if (d.target.tagName === "svg"){
+        d3.select("#genealogy-tooltip").classed("hidden", true);
+    }
+  })
 
   genealogies_map();
   d3.select("#" + map_id).selectAll("path").attr("fill-opacity", 1);

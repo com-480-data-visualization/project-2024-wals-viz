@@ -52,10 +52,19 @@ function merge_wals_geojson (wals, json) {
         for (let j = 0; j < json.features.length; j++) {
             let jsonCountry = json.features[j].properties.ISO_A2;
             if (dataCountryList.includes(jsonCountry)) {
-                json.features[j].properties.languageName.push(languageName);
-                json.features[j].properties.macroarea.push(macroarea);
-                json.features[j].properties.genus.push(genus);
-                json.features[j].properties.family.push(family);
+                // Check if it exists to avoid duplicates
+                if (!json.features[j].properties.languageName.includes(languageName)) {
+                    json.features[j].properties.languageName.push(languageName);
+                }
+                if (!json.features[j].properties.macroarea.includes(macroarea)) {
+                    json.features[j].properties.macroarea.push(macroarea);
+                }
+                if (!json.features[j].properties.genus.includes(genus)) {
+                    json.features[j].properties.genus.push(genus);
+                }
+                if (!json.features[j].properties.family.includes(family)) {
+                    json.features[j].properties.family.push(family);
+                }
             }
         }
     }
