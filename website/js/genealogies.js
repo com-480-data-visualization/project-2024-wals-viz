@@ -376,7 +376,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
 
   // Create first the map to hide west islands overlapping with the sunburst chart
   genealogies_map();
+  d3.select("#" + map_id).selectAll("path").attr("fill-opacity", 1);  // Solves blinking problem
   sunburst_chart(hierarchies_json);
-  // d3.select("#" + map_id).selectAll("path").attr("fill-opacity", 1);
 
 }
