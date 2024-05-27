@@ -144,8 +144,8 @@ function get_country_color_from_continent(continent) {
 
 function featurecluster_ready(error, map_json, csv, json_clusters) {
 
-    console.log(colors(2))
-    console.log(csv);
+    // console.log(colors(2))
+    // console.log(csv);
 
     var featurecluster_div = document.getElementById('cluster-col');
     var width = featurecluster_div.clientWidth;

@@ -54,7 +54,7 @@ function map() {
             .on("mouseover", onMouseOverBehavior)
             .on("mouseout", onMouseOutBehavior);
 
-        console.log("Map loaded!");
+        // console.log("Map loaded!");
 
         return countriesGroup;
     };

@@ -189,7 +189,7 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
                 .on("click", function (d) { // Turn selected color to red
                     // langListGroup.selectAll("text").attr("fill", "black");
                     let currentLanguage = d3.select(this).attr("fill", selected_color);
-                        console.log(currentLanguage.datum());
+                        // console.log(currentLanguage.datum());
                     // Highlight countries with the same language
                     svg.select("#" + map_id).selectAll("path")
                         .attr("fill", non_highlighted_color);

@@ -85,7 +85,7 @@ whenDocumentLoaded(() => {
             } else {
                 doAnimation = false;
                 clearInterval(id);
-                console.log("Inactive")
+                // console.log("Inactive")
             }
         })
     }, options)

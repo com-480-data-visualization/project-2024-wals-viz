@@ -46,9 +46,9 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
 
         // Run through wals_csv to get the language category, append to categories
         let country = country_iso;
-        console.log(country);
-        console.log(category);
-        console.log(colors);
+        // console.log(country);
+        // console.log(category);
+        // console.log(colors);
         wals_csv.filter(lang => lang.countrycodes.includes(country))
             .forEach(lang => {
                 if (lang[category] != "") { categories.push(lang[category]); }
@@ -251,7 +251,7 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
             d3.select(this).attr("opacity", "1");
         });
 
-    console.log("vowel map ready");
+    // console.log("vowel map ready");
 
     var vowel_countriesGroup = vowel_map();
     drawButtons(svg, vowel_div.clientWidth / 100, vowel_div.clientHeight / 3, vowel_div.clientWidth / 10, vowel_div.clientHeight / 3, vowel_map);

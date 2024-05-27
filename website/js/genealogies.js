@@ -175,7 +175,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
       while (p.depth > 1)
         p = p.parent;
       let clicked_color = color(p.data.name);
-      console.log("Clicked arc color: " + clicked_color);
+      // console.log("Clicked arc color: " + clicked_color);
 
       svg.select("#" + map_id).selectAll("path")
         .transition()
