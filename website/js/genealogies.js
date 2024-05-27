@@ -175,8 +175,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
 
       svg.select("#" + map_id).selectAll("path")
         .transition()
-        .attr("fill", non_highlighted_color)
-        .attr("fill-opacity", 0.8); // Reset the colors on the map
+        .attr("fill", non_highlighted_color); // Reset the colors on the map
       // Language case:
       switch (depth) {
         // Macroarea - Highlight countries with the same macroarea
@@ -352,5 +351,6 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
     .color_mapper(function (d) { return non_highlighted_color; });
 
   genealogies_map();
+  d3.select("#" + map_id).selectAll("path").attr("fill-opacity", 1);
 
 }
