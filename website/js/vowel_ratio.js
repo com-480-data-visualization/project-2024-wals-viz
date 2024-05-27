@@ -203,7 +203,7 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
                 .attr("height", elementHeight - 10)
                 .style("position", "relative")
                 .append("xhtml:div")
-                .style("font", "1.5em 'Helvetica'")
+                .style("font", "1em 'Helvetica'")
                 .style("text-align", "center")
                 .style("position", "absolute")
                 .style("top", "50%")
