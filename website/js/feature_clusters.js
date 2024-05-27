@@ -86,6 +86,7 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
             });
 
             svg.select("#" + map_id).selectAll("path")
+                .transition()
                 .attr("fill", non_highlighted_color);
 
             for (d of tmp) {
@@ -95,12 +96,14 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
                     .filter(function (data) {
                         return data.properties.languages.includes(d.target.iso_name);
                     })
+                    .transition()
                     .attr("fill", same_language_color);
             }
         }
     })
         .on("mouseout", function () { // Back to original color if not selected
             svg.select("#" + map_id).selectAll("path")
+                .transition()
                 .attr("fill", function (d) {
                     const color_id = get_country_color_from_continent(d.properties.CONTINENT);
                     return colors(color_id);

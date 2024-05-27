@@ -244,6 +244,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
 
     let applyHighlight = function (category) {
         svg.select("#" + map_id).selectAll("path")
+            .transition()
             .attr("fill", function (d) {
                 return highlightCategory(d.properties.ISO_A2, category);
             });

@@ -67,6 +67,7 @@ function vowel_ready(error, json, official_language_csv, wals_csv) {
 
     let applyHeatmapColor = function (category, colors) {
         svg.select("#" + map_id).selectAll("path")
+            .transition()
             .attr("fill", function (d) {
                 return selectHeatmapColor(d.properties.ISO_A2, category, colors);
             })

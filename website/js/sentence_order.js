@@ -96,8 +96,8 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
         return this == d3.event.target;
     }
 
-    svg.on("click", function(d){
-        if (d.target.tagName === "svg"){
+    svg.on("click", function (d) {
+        if (d.target.tagName === "svg") {
             d3.select("#sentenceorder-tooltip").classed("hidden", true);
         }
     })
@@ -106,20 +106,23 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
 
     function updateColors(category) {
         svg.select("#" + map_id).selectAll("path")
-        .filter(function (data) {
-            let country = data.properties.ISO_A2;
+            .filter(function (data) {
+                let country = data.properties.ISO_A2;
 
-            let languagesInCountry = wals_csv.filter((elem) => {
-                return elem["81A Order of Subject, Object and Verb"] === category;
-            }).filter(lang => lang.countrycodes.includes(country));
+                let languagesInCountry = wals_csv.filter((elem) => {
+                    return elem["81A Order of Subject, Object and Verb"] === category;
+                }).filter(lang => lang.countrycodes.includes(country));
 
-            if (languagesInCountry.length > 0) return true;
-            return false;
-        }).attr("fill", highlighted_color);
+                if (languagesInCountry.length > 0) return true;
+                return false;
+            }).transition()
+            .attr("fill", highlighted_color);
     }
 
     function resetColors(non_highlighted_color) {
-        svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
+        svg.select("#" + map_id).selectAll("path")
+            .transition()
+            .attr("fill", non_highlighted_color);
     }
 
     function allowWordDrop(ev) {
