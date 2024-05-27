@@ -195,7 +195,7 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
                         .attr("fill", non_highlighted_color);
                     svg.select("#" + map_id).selectAll("path")
                         .filter(function (data) {
-                            return (data.properties.languages.includes(languages[0]) &&
+                            return (data.properties.languages.includes(currentLanguage.datum()) &&
                                 data.properties.NAME != currentCountry.datum().properties.NAME);
                         })
                         .transition()
