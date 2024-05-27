@@ -160,7 +160,8 @@ function officiallang_ready(error, json, official_language_csv, wals_csv) {
 
             d3.select("#oficiallang-description")
                 .append("text")
-                .text(description);
+                .text(description)
+                .style('font-size', '1.5em');
 
             d3.select("#oficiallang-description").selectAll("text")
                 .data(languages)
