@@ -163,5 +163,7 @@ function iso_to_lang (iso, wals) {
         }
         return lang_name;
     }
+    // Remove from lang[0].Name whatever is inside parentheses
+    lang[0].Name = lang[0].Name.replace(/\s*\(.*?\)\s*/g, '');
     return lang[0].Name;
 }
