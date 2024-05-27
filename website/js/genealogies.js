@@ -20,7 +20,8 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", [-viewBox_multiplier * viewBox_width, -viewBox_multiplier * viewBox_height, viewBox_multiplier * width, viewBox_multiplier * height])
-    .style("font", "10px sans-serif");
+    .style("font", "0.7em helvetica")
+    .attr("fill", "00002aff");
 
 
   // Section 1: Genealogies
