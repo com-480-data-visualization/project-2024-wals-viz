@@ -28,7 +28,8 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
 
     var map_id = "colorcategories_map";
 
-    var colorcategories_palette = svg.append("g").attr("id", "colorcategories_palette");
+    var colorcategories_palette = svg.append("g")
+        .attr("id", "colorcategories_palette");
 
     // Show the color palette for the selected category in the given position and size
     let showColorPalette = function (x, y, width, height, category) {
@@ -40,7 +41,7 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
         let squarePadding = squareSize / 2;
         let textPadding = squareSize / 3;
         let centerX = x + width / 2;
-        let textY = y + squareSize + textPadding / 2;
+        let textY = y + squareSize;// + textPadding / 2;
 
         // Same as drawSquare1, but with a starting X position and in horizontal order
         let drawSquare = function (order, x, text, numColors, color1, color2 = null, color3 = null) {
@@ -95,14 +96,24 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                     break;
                 default: break;
             }
-            colorcategories_palette.append("text")
-                .attr("x", x + squareSize / 2)
-                .attr("y", textY)
-                .attr("text-anchor", "middle")
-                .attr("dominant-baseline", "middle")
-                .text(text)
-                .attr("fill", highlighted_color)
-                .style("font-size", "24px 'Helvetica'");
+            colorcategories_palette.append("foreignObject")
+                .attr("x", x)
+                .attr("y", textY + textPadding/4)
+                .attr("width", squareSize)
+                .attr("height", 3*textPadding/4)
+                .append("xhtml:div")
+                .style("font", "1em 'Helvetica'")
+                .style("text-align", "center")
+                .html(text);
+
+            // colorcategories_palette.append("text")
+            //     .attr("x", x + squareSize / 2)
+            //     .attr("y", textY)
+            //     .attr("text-anchor", "middle")
+            //     .attr("dominant-baseline", "middle")
+            //     .text(text)
+            //     .attr("fill", highlighted_color)
+            //     .style("font-size", "24px 'Helvetica'");
         }
 
         // Draw the squares forming the palette. If formed by more than one color, form the square
@@ -364,8 +375,8 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
 
     var colorcat_countriesGroup = colorcat_map();
 
-    svg.on("click", function(d){
-        if (d.target.tagName === "svg"){
+    svg.on("click", function (d) {
+        if (d.target.tagName === "svg") {
             d3.select("#colorcategories-tooltip").classed("hidden", true);
         }
     })
