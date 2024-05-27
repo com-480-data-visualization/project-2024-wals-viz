@@ -137,7 +137,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
                 .attrTween("d", d => () => arc(d.current));
         
             label.filter(function(d) {
-                return +this.getAttribute("fill-opacity") || labelVisible(d.target);
+                return + this.getAttribute("fill-opacity") || labelVisible(d.target);
               }).transition(t)
                 .attr("fill-opacity", d => +labelVisible(d.target))
                 .attrTween("transform", d => () => labelTransform(d.current));
@@ -146,6 +146,12 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
 
           // Part 2: Highlight countries of the same family, genus or language as the clicked node
           let clicked_name = p.data.name; // This can be a family, genus or language name (depends on the depth of the clicked node)
+          // Get color of clicked node (Same logic as arc fill in sunburst chart)
+          while (p.depth > 1)
+            p = p.parent;
+          let clicked_color = color(p.data.name);
+          console.log("Clicked arc color: " + clicked_color);
+
           svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color); // Reset the colors on the map
           // Language case:
           switch (depth) {
@@ -172,7 +178,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
                         return data.properties.macroarea.includes(clicked_name);
                     }
                   })
-                  .attr("fill", selected_color);
+                  .attr("fill", clicked_color);
               break;
 
             // Family - Highlight countries with the same family
@@ -181,7 +187,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
                   .filter(function (data) {
                     return data.properties.family.includes(clicked_name);
                   })
-                  .attr("fill", selected_color);
+                  .attr("fill", clicked_color);
               break;
 
             // Genus - Highlight countries with the same genus
@@ -190,7 +196,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
                   .filter(function (data) {
                     return data.properties.genus.includes(clicked_name);
                   })
-                  .attr("fill", selected_color);
+                  .attr("fill", clicked_color);
               break;
 
             // Language - Highlight countries with the same language
@@ -199,7 +205,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
                   .filter(function (data) {
                     return data.properties.languageName.includes(clicked_name);
                   })
-                  .attr("fill", selected_color);
+                  .attr("fill", clicked_color);
               break;
             default:
               break;
