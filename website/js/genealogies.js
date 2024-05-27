@@ -6,7 +6,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
   var width = genealogies_div.clientWidth;
   var height = genealogies_div.clientHeight;
   // ViewBox dimensions
-  var viewBox_width = width / 4 - 0.02 * width;
+  var viewBox_width = width / 4 + 0.12 * width;
   var viewBox_height = height / 2;
   var viewBox_multiplier = 1.1;
 
@@ -265,14 +265,11 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
     return svg.node();
   }
 
-  // Call the sunburst chart
-  sunburst_chart(hierarchies_json);
-
 
 
   // *** Section 2: World map ***
   var map_height = 1.1 * height;
-  var map_width = 0.63 * width;
+  var map_width = 0.55 * width;
 
   let languageInfo = function (d) {
     let infoArray = [];
@@ -314,7 +311,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
   // Careful to pass the Wals csv and set mergeWithWals to true (Since we care about original languages - not about official languages)
   var genealogies_map = map()
     .map_id(map_id)
-    .x(viewBox_multiplier * (width - 0.9 * map_width - viewBox_width))
+    .x(viewBox_multiplier * (width - 0.88 * map_width - viewBox_width))
     .y(viewBox_multiplier * (-viewBox_height))
     .width(map_width)
     .height(map_height)
@@ -376,7 +373,9 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
     }
   })
 
+  // Create first the map to hide west islands overlapping with the sunburst chart
   genealogies_map();
-  d3.select("#" + map_id).selectAll("path").attr("fill-opacity", 1);
+  sunburst_chart(hierarchies_json);
+  // d3.select("#" + map_id).selectAll("path").attr("fill-opacity", 1);
 
 }
