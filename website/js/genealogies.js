@@ -6,13 +6,11 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
   var width = genealogies_div.clientWidth;
   var height = genealogies_div.clientHeight;
   // ViewBox dimensions
-  var viewBox_width = width / 4;
+  var viewBox_width = width / 4 - 0.02 * width;
   var viewBox_height = height / 2;
   var viewBox_multiplier = 1.1;
 
   var non_highlighted_color = "#dac0a3ff";
-  var selected_color = "#102c57ff";
-  var same_language_color = "#102c56bf";
 
   var map_id = "genealogy_map";
 
@@ -29,12 +27,28 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
   // console.log(hierarchies_json);
   let sunburst_chart = function (data) {
     // Specify the chart’s dimensions.
-    const width = 928;
-    const height = width;
-    const radius = width / 6;
+    const radius = height / 6;
 
     // Create the color scale.
-    const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1));
+    // const color = d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1));
+    let color = function(name)  {
+      switch (name) {
+        case "Eurasia":
+          return "#9C581CFF";
+        case "Africa":
+          return "#7C9D96FF";
+        case "North America":
+          return "#E9B384FF";
+        case "South America":
+          return "#E9B384FF";
+        case "Australia":
+          return "#A1CCD1FF";
+        case "Papunesia":
+          return "#A1CCD1FF";
+        default:
+          return d3.scaleOrdinal(d3.quantize(d3.interpolateRainbow, data.children.length + 1));
+      }
+    };
 
     // Compute the layout.
     const hierarchy = d3.hierarchy(data)
@@ -65,7 +79,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
       .data(root.descendants().slice(1))
       .join("path")
       .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
-      .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.8 : 0.6) : 0)
+      .attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 1 : 0.8) : 0)
       .attr("pointer-events", d => arcVisible(d.current) ? "auto" : "none")
       .attr("d", d => arc(d.current));
 
@@ -73,10 +87,10 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
     path.style("cursor", "pointer")
       .on("click", clicked)
       .on("mouseover", function (event, d) {
-        d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.5 : 0.3) : 0)
+        d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.7 : 0.5) : 0)
       })
       .on("mouseout", function (event, d) {
-        d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 0.8 : 0.6) : 0)
+        d3.select(this).attr("fill-opacity", d => arcVisible(d.current) ? (d.children ? 1 : 0.8) : 0)
       });
     // .on("click", clickedHighlightMap);
 
@@ -137,7 +151,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
           .filter(function (d) {
             return +this.getAttribute("fill-opacity") || arcVisible(d.target);
           })
-          .attr("fill-opacity", d => arcVisible(d.target) ? (d.children ? 0.8 : 0.6) : 0)
+          .attr("fill-opacity", d => arcVisible(d.target) ? (d.children ? 1 : 0.8) : 0)
           .attr("pointer-events", d => arcVisible(d.target) ? "auto" : "none")
 
           .attrTween("d", d => () => arc(d.current));
@@ -162,7 +176,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
       svg.select("#" + map_id).selectAll("path")
         .transition()
         .attr("fill", non_highlighted_color)
-        .attr("fill-opacity", 1); // Reset the colors on the map
+        .attr("fill-opacity", 0.8); // Reset the colors on the map
       // Language case:
       switch (depth) {
         // Macroarea - Highlight countries with the same macroarea
@@ -190,7 +204,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
             })
             .transition()
             .attr("fill", clicked_color)
-            .attr("fill-opacity", has_children ? 0.8 : 0.6);
+            .attr("fill-opacity", has_children ? 1 : 0.8);
           break;
 
         // Family - Highlight countries with the same family
@@ -201,7 +215,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
             })
             .transition()
             .attr("fill", clicked_color)
-            .attr("fill-opacity", has_children ? 0.8 : 0.6);
+            .attr("fill-opacity", has_children ? 1 : 0.8);
           break;
 
         // Genus - Highlight countries with the same genus
@@ -212,7 +226,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
             })
             .transition()
             .attr("fill", clicked_color)
-            .attr("fill-opacity", has_children ? 0.8 : 0.6);
+            .attr("fill-opacity", has_children ? 1 : 0.8);
           break;
 
         // Language - Highlight countries with the same language
@@ -223,7 +237,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
             })
             .transition()
             .attr("fill", clicked_color)
-            .attr("fill-opacity", has_children ? 0.8 : 0.6);
+            .attr("fill-opacity", has_children ? 1 : 0.8);
           break;
         default:
           break;
@@ -254,8 +268,8 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
 
 
   // *** Section 2: World map ***
-  var map_height = 0.9 * height;
-  var map_width = 0.6 * width;
+  var map_height = 1.1 * height;
+  var map_width = 0.63 * width;
 
   // let highlightCountry = function (d, currentCountry) {
   //     svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
@@ -328,7 +342,7 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
   var genealogies_map = map()
     .map_id(map_id)
     .x(viewBox_multiplier * (width - 0.9 * map_width - viewBox_width))
-    .y(viewBox_multiplier * (0.1 * height - viewBox_height))
+    .y(viewBox_multiplier * (-viewBox_height))
     .width(map_width)
     .height(map_height)
     .json(json)
