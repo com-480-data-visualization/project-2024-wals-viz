@@ -100,7 +100,8 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
 
     const format = d3.format(",d");
     path.append("title")
-      .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
+      .text(d => d.data.name);
+      // .text(d => `${d.ancestors().map(d => d.data.name).reverse().join("/")}\n${format(d.value)}`);
 
     const label = svg.append("g")
       .attr("pointer-events", "none")
@@ -126,6 +127,9 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
 
       // This is the most important clue for deciding how to act on the click!
       depth = p.depth;
+
+      // Remove the tooltip from the map
+      d3.select("#genealogy-tooltip").classed("hidden", true);
 
       // Part 1: Transitions for the sunburst chart
       if (p.depth !== 4) {
@@ -270,70 +274,13 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
   var map_height = 1.1 * height;
   var map_width = 0.63 * width;
 
-  // let highlightCountry = function (d, currentCountry) {
-  //     svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
-  //     currentCountry.attr("fill", selected_color);
-  // };
-
-  // Function that creates a group and a rectangle if they haven't been created yet,
-  // and updates the text within with country information
-  // let createCountryInfo = function (d, currentCountry, map_id) {
-  //     let countryInfoGroup = svg.select("#" + map_id).select("#countryInfoGroup");
-  //     let langListGroup = countryInfoGroup.select("#langListGroup");
-  //     let widthGroup = width / 6;
-  //     let heightGroup = 0.36 * height;
-  //     let xGroup = viewBox_multiplier * (width - map_width/2 - widthGroup/2 - viewBox_width);
-  //     let yGroup = viewBox_multiplier * (height - map_height/2 - heightGroup/2 + 50 - viewBox_height);
-
-  //     // If the group doesn't exist, create it
-  //     if (countryInfoGroup.empty()) {
-  //         countryInfoGroup = svg.select("#" + map_id).append("g").attr("id", "countryInfoGroup");
-  //         countryInfoGroup.append("rect")
-  //             .attr("x", xGroup)
-  //             .attr("y", yGroup)
-  //             .attr("width", widthGroup)
-  //             .attr("height", heightGroup)
-  //             .attr("fill", "none")
-  //             .attr("stroke", "black");
-  //         countryInfoGroup.append("text")
-  //             .attr("x", xGroup + 10)
-  //             .attr("y", yGroup + 20)
-  //             .attr("id", "countryName")
-  //             .text("Country: ");
-  //         langListGroup = countryInfoGroup.append("g")
-  //             .attr("id", "langListGroup");
-  //     }
-  //     // Update the country name
-  //     countryInfoGroup.select("#countryName")
-  //         .attr("x", xGroup + 10)
-  //         .attr("y", yGroup + 20)
-  //         .text("Country: " + currentCountry.datum().properties.NAME);
-  //     // Update the languages
-  //     let langList = currentCountry.datum().properties.languages;
-  //     langListGroup.selectAll("text")
-  //         .data(langList)
-  //         .join("text")
-  //         .attr("fill", "black")
-  //         .attr("x", xGroup + 10)
-  //         .attr("y", function (d, i) {
-  //             return yGroup + 40 + 20 * i;
-  //         })
-  //         .text(function (d) {
-  //             return "Language: " + iso_to_lang(d, wals_csv);
-  //         })
-  //         .on("click", function (d) { // Turn selected color to red
-  //             langListGroup.selectAll("text").attr("fill", "black");
-  //             let currentLanguage = d3.select(this).attr("fill", selected_color);
-  //             // Highlight countries with the same language
-  //             svg.select("#" + map_id).selectAll("path").attr("fill", non_highlighted_color);
-  //             svg.select("#" + map_id).selectAll("path")
-  //                 .filter(function (data) {
-  //                     return data.properties.languages.includes(currentLanguage.datum());
-  //                 })
-  //                 .attr("fill", same_language_color);
-  //             currentCountry.attr("fill", selected_color);
-  //         });
-  // }
+  let languageInfo = function (d) {
+    let info = "";
+    info += "Language families: " + d.properties.family + "<br>";
+    info += "Language genuses: " + d.properties.genus + "<br>";
+    info += "Languages: " + d.properties.languageName + "<br>";
+    return info;
+  }
 
 
   // Create map object
@@ -348,7 +295,43 @@ function genealogies_ready(error, json, official_language_csv, wals_csv, hierarc
     .allCountries(wals_csv)
     .mergeWithWals(true)
     .svg(svg)
-    .color_mapper(function (d) { return non_highlighted_color; });
+    .color_mapper(function (d) { return non_highlighted_color; })
+    .onClickBehavior(function (d) {
+      let currentCountry = d3.select(this);
+      let xPosition = parseFloat(d.clientX);
+      let yPosition = parseFloat(d.clientY);
+      d3.select("#genealogy-tooltip")
+          .style("left", xPosition + "px")
+          .style("top", yPosition + "px")
+          .select("#genealogy-tooltip-country")
+          .text(currentCountry.datum().properties.NAME);
+
+      d3.select("#genealogy-tooltip")
+          .select("#genealogy-tooltip-languages")
+          .selectAll("p")
+          .remove();
+      d3.select("#genealogy-tooltip")
+          .select("#genealogy-tooltip-languages").selectAll("p")
+          .text(languageInfo(currentCountry.datum()));
+
+      d3.select("#genealogy-tooltip").classed("hidden", false);
+    });
+    
+    // WARNING: The opacity values are tricky now because they are handled by the sunburst chart
+    // We have different opacity values for (default map, highlighted countries with children and highlighted countries without children)
+    // .onMouseOverBehavior(function (d) {
+    //   d3.select(this).attr("fill-opacity", 0.7);
+    // })
+    // .onMouseOutBehavior(function (d) {
+    //   d3.select(this).attr("fill-opacity", 1);
+    // });
+
+  // // Remember to hide the tooltip when clicking outside of it
+  // svg.on("click", function(d) {
+  //   if (d.target.tagName === "svg"){
+  //       d3.select("#colorcategories-tooltip").classed("hidden", true);
+  //   }
+  // })
 
   genealogies_map();
   d3.select("#" + map_id).selectAll("path").attr("fill-opacity", 1);
