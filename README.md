@@ -8,9 +8,4 @@
 
 [Milestone 1](./milestones/milestone1.md) • [Milestone 2](./milestones/milestone2.pdf) • [Milestone 3](./milestones/milestone3.pdf)
 
-# Development branch
-
-### First template website from GrapeJS (18 April 11:40)
-
-Mimis and Rafa learn how to crawl inside GrapeJS! Skeleton for Milestone 2 ready - now we need to do the sketches for each section - graph!
-
+This projects aims to show the similarities among languages with different visualizations. Chcek it out in the [website](https://com-480-data-visualization.github.io/project-2024-wals-viz/)!
