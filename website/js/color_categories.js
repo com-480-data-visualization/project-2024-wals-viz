@@ -97,9 +97,9 @@ function color_categories_ready(error, json, official_language_csv, wals_csv) {
                 default: break;
             }
             colorcategories_palette.append("foreignObject")
-                .attr("x", x)
+                .attr("x", x-textPadding/2)
                 .attr("y", textY + textPadding/4)
-                .attr("width", squareSize)
+                .attr("width", squareSize + textPadding)
                 .attr("height", 3*textPadding/4)
                 .append("xhtml:div")
                 .style("font", "1em 'Helvetica'")
