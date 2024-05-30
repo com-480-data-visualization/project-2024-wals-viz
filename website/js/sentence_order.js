@@ -1,5 +1,6 @@
 var non_highlighted_color = "#dac0a3ff";
 var highlighted_color = "#102c57ff";
+var unknown_color = "#AAAAAAFF";
 
 fun_facts = {
     '1 SOV': 'Subject-Object-Verb is the most frequent syntax, widely distributed across the globe.',
@@ -117,6 +118,23 @@ function sentence_order_ready(error, json, official_language_csv, wals_csv) {
                 return false;
             }).transition()
             .attr("fill", highlighted_color);
+            
+        svg.select("#" + map_id).selectAll("path")
+            .filter(function (data) {
+                let country = data.properties.ISO_A2;
+
+                let languagesInCountry = wals_csv.filter((elem) => elem.countrycodes.includes(country))
+                    .map(lang => lang["81A Order of Subject, Object and Verb"]);
+
+                // Remove empty strings
+                languagesInCountry = languagesInCountry.filter(function (value, index, arr) {
+                    return value != "";
+                });
+
+                if (languagesInCountry.length === 0) return true;
+                return false;
+            }).transition()
+            .attr("fill", unknown_color);
     }
 
     function resetColors(non_highlighted_color) {
