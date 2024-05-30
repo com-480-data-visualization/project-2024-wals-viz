@@ -53,7 +53,7 @@
 
       <div style="position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 50%;">
-        <div id="officiallang-intro-title" style="font: 4em 'Helvetica';">
+        <div id="officiallang-intro-title" class="intro-section-title">
           Official Languages
         </div>
         <p style="font-size: 1.5em;" align="justify">
@@ -76,11 +76,11 @@
   <section id="officiallang-row" class="gjs-grid-row">
     <div id="officiallang-col" class="gjs-grid-column">
 
-      <div style="font: 64px 'Helvetica'; position: absolute; top: 10px; left: 10px">
+      <div id="officiallang-title">
         Official<br>Languages
       </div>
 
-      <div style="position: absolute; left: 10px; top:25%; width: 15em; font-size: 1.5em">
+      <div style="position: absolute; left: 10px; top:25%; width: 15em; font-size: 1.5em; color: #102c57ff">
         <em>Click on a country to explore its official language(s).</em>
       </div>
 
@@ -97,7 +97,7 @@
 
       <div style="position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 50%;">
-        <div style="font: 4em 'Helvetica';">
+        <div class="intro-section-title">
           Language genealogy
         </div>
         <p style="font-size: 1.5em;" align="justify">
@@ -130,10 +130,10 @@
 
   <section id="genealogy-row" class="gjs-grid-row">
     <div id="genealogy-col" class="gjs-grid-column">
-      <div style="font: 64px 'Helvetica'; position: absolute; top: 10px; left: 3%">
+      <div id="genealogy-title">
         Language <br> genealogy
       </div>
-      <div style="font-size: 1.7em; position: absolute; bottom: 20px; left: 3%">
+      <div style="font-size: 1.7em; position: absolute; bottom: 20px; left: 3%; color:#102c57ff">
         <em> Click on the sunburst! <br>
           Click on the map for country details! </em> 
       </div>
@@ -153,14 +153,20 @@
 
       <div style="position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 50%;">
-        <div style="font: 4em 'Helvetica';">
+        <div class="intro-section-title">
           What Color <br> is <text class="title_changing_color_text">this?</text>
         </div>
         <p style="font-size: 1.5em;" align="justify">
-          Languages progressively add color terms until reaching the list of 6 basic colors:
-          white, red, yellow, green, blue and black, starting by a simple distinction between light and dark colors.
-          In the next section, you can explore some of the languages which show from 3 to 6 categories, and the specific
-          agroupation of colors in those.
+          In English, we use White, Red, Yellow, Green, Blue and Black to refer to
+          the six basic colors. But not all languages describe colors this way.
+          For example, in Australia the Warlpiri language merges Blue and Green
+          together.
+          <br>
+          <br>
+          <em>
+            Scroll to the next section to explore what are the basic color terms of 
+            different languages across the world.
+          </em>
         </p>
 
       </div>
@@ -177,7 +183,7 @@
         <span id="colorcategories-tooltip-languages"></span></p>
       </div>
 
-      <div style="font: 64px 'Helvetica'; position: absolute; top: 10px; left: 5%">
+      <div id="colorcategories-title">
         What Color <br> is <text class="title_changing_color_text">this?</text>
       </div>
 
@@ -200,7 +206,7 @@
 
       <div style="position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 50%;">
-        <div id="syntax-puzzles-title" style="font: 4em 'Helvetica';">
+        <div id="syntax-puzzles-title" class="intro-section-title">
           Syntax Puzzles
         </div>
         <p style="font-size: 1.5em;" align="justify">
@@ -229,7 +235,7 @@
         <span id="sentenceorder-tooltip-languages"></span></p>
       </div>
 
-      <div style="font: 4em 'Helvetica'; position: absolute; top: 10px; left: 5%;">
+      <div id="order-title">
         Syntax Puzzles
       </div>
 
@@ -309,7 +315,7 @@
 
       <div style="position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);
       width: 50%;">
-        <div style="font: 4em 'Helvetica';">
+        <div class="intro-section-title">
           The sounds of a<br>Language
         </div>
         <p style="font-size: 1.5em;" align="justify">
@@ -333,28 +339,59 @@
         <span id="vowel-tooltip-languages"></span></p>
       </div>
 
-      <div style="font: 4em 'Helvetica'; position: absolute; top: 10px; left: 10px">
+      <div id="vowel-title">
         The sounds of a<br>Language
       </div>
 
-      <div style="position: absolute; left: 10px; top:25%; width: 20em;">
-        <em>Click in the buttons to explore the sound chaaaracteristics of the languages.</em>
+      <div style="position: absolute; left: 10px; top:17.5%; width: 20em;">
+        <p style="font-size: 1.5em;">
+          <em>Click in the buttons to explore the sound characteristics of the languages.</em>
+        </p>
       </div>
     </div>
-
   </section>
+
   <div class="gjs-divider" id="ixjor"></div>
+
+  <section id="cluster-row-intro" class="gjs-grid-row">
+    <div id="cluster-col-intro" class="gjs-grid-column">
+
+      <div style="position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 50%;">
+        <div id="cluster-intro-title" class="intro-section-title">
+          Languages Beyond<br><b>Borders</b>
+        </div>
+        <p style="font-size: 1.5em;" align="justify">
+          Languages may be separated by large geographical distances.
+          But how close are they based on their <b>Morphology</b>?
+
+          <br>
+          <br>
+          <em>Scroll down to explore the morphological similarity 
+            between languages.</em>
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
   <section id="cluster-row" class="gjs-grid-row">
     <div id="cluster-col" class="gjs-grid-column">
 
-      <div style="font: 64px 'Helvetica'; position: absolute; top: 10px; left: 5%">
+      <div id="cluster-title">
         Languages Beyond<br><b>Borders</b>
       </div>
 
       <div style="position: absolute; top: 25%; width: 350px; left:5%;">
         <p id="fun-fact-text" style="font-size: 1.5em;">
           Language similarity based on their internal structure of words,
-          <b>Morphology</b>
+          <b>Morphology.</b>
+          <br>
+          <br>
+          <em>Interact with the groups' central node to unveal the geographical areas
+            of the group's languages.
+          </em>
         </p>
       </div>
 

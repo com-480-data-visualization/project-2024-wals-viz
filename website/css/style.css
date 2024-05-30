@@ -52,6 +52,59 @@ a:visited {
     text-decoration: none;
 }
 
+.intro-section-title{
+    font: 4em Helvetica;
+    color: #102c57ff;
+}
+
+#officiallang-title{
+    position: absolute;
+    top: 10px; 
+    left: 10px;
+    font: 64px Helvetica;
+    color: #102c57ff;
+}
+
+#genealogy-title{
+    font: 64px Helvetica; 
+    position: absolute; 
+    top: 10px; 
+    left: 3%;
+    color: #102c57ff;
+}
+
+#colorcategories-title{
+    font: 64px Helvetica; 
+    position: absolute; 
+    top: 10px; 
+    left: 5%;
+    color: #102c57ff;
+}
+
+#order-title{
+    font: 4em Helvetica; 
+    position: absolute; 
+    top: 10px; 
+    left: 5%;
+    color: #102c57ff;
+}
+
+#vowel-title{
+    font: 4em Helvetica; 
+    position: absolute; 
+    top: 10px;
+    left: 10px;
+    color: #102c57ff;
+}
+
+#cluster-title{
+    font: 64px Helvetica; 
+    position: absolute; 
+    top: 10px; 
+    left: 5%;
+    color: #102c57ff;
+}
+
 .gjs-grid-column {
     flex: 1 1 0%;
     padding: 5px 0;
