@@ -56,14 +56,21 @@ data_folder = '../website/data/'
 output_json_file = '../website/data/feature_cluster_data_verbs.json'
 language = pd.read_csv(data_folder + 'language.csv')
 
+# keep_features = [
+# '65A Perfective/Imperfective Aspect',
+# '66A The Past Tense',
+# '67A The Future Tense',
+# '68A The Perfect',
+# '69A Position of Tense-Aspect Affixes',
+# '79A Suppletion According to Tense and Aspect',
+# '102A Verbal Person Marking']
 keep_features = [
-'65A Perfective/Imperfective Aspect',
-'66A The Past Tense',
-'67A The Future Tense',
-'68A The Perfect',
-'69A Position of Tense-Aspect Affixes',
-'79A Suppletion According to Tense and Aspect',
-'102A Verbal Person Marking']
+'26A Prefixing vs. Suffixing in Inflectional Morphology',
+'27A Reduplication',
+'25A Locus of Marking: Whole-language Typology',
+'24A Locus of Marking in Possessive Noun Phrases',
+'23A Locus of Marking in the Clause',
+]
 
 keep_features_extended = basic_features + keep_features
 
