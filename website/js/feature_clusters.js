@@ -34,11 +34,11 @@ function generate_feature_clusters(svg, dataset, map_id, width, height,
         event.subject.fx = null;
         event.subject.fy = null;
     }
-
+    console.log(height)
     //Initialize a simple force layout, using the nodes and edges in dataset        
     var force = d3.forceSimulation(dataset.nodes)
-        .force("link", d3.forceLink(dataset.edges).id(d => d.id).strength(0.2))
-        .force("charge", d3.forceManyBody().strength(-25))
+        .force("link", d3.forceLink(dataset.edges).id(d => d.id).strength(width / 3705))
+        .force("charge", d3.forceManyBody().strength(- width / 29.64))
         .force("x", d3.forceX(x).strength(0.05))
         .force("y", d3.forceY(y));
 
